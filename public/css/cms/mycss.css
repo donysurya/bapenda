@@ -1,0 +1,47 @@
+.user_info {
+    width: 100%;
+    background-image: linear-gradient(rgb(86 226 255),rgb(101 166 180));
+    border-radius: 10px;
+    color:white;
+    font-size: 16px;
+    /* box-shadow: 2px 2px 10px #707070; */
+    height: 200px;
+}
+
+.info-block {
+    display: inline-block;
+    width:100%;
+}
+
+.info {
+    float:left;
+    margin: 20px;
+    position:relative;
+}
+
+.card-info {
+    font-weight:700;
+    font-size: 22px;
+}
+
+.card-icon-info {
+    float:right;
+    margin: 0 20px 0 0;
+    width: 120px;
+}
+
+.card-icon-info img {
+    width: 100%;
+}
+
+.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.scrollmenu a {
+    display: inline-block;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}

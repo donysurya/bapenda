@@ -1,0 +1,31 @@
+.scrollmenu {
+    background-color: #ffffff;
+    overflow: auto;
+    white-space: nowrap;
+    border-radius: 7px;
+}
+  
+.scrollmenu a {
+    display: inline-block;
+    color: rgba(0,0,0,.55);
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+.alert-danger {
+    color: #055160!important;
+}
+
+.about_logo {
+    width: 150px;
+}
+
+.av_dropcap1 {
+    display: block;
+    float: left;
+    font-size: 45px;
+    line-height: 32px;
+    margin: 7px 8px 0 0;
+}
+
