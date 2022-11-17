@@ -65,86 +65,57 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-laptop-code text-primary"></i></div>
                                 Dashboard
                             </a>
-                            {{--<div class="sb-sidenav-menu-heading">Users</div>
-                            <a class="nav-link {{ Route::is('cms.user') ? 'active' : '' }}" href="{{ route('cms.user') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-users text-primary"></i></div>
-                                All Users
-                            </a>
-                            <a class="nav-link {{ Route::is('cms.activity') ? 'active' : '' }}" href="{{ route('cms.activity') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-users-cog text-primary"></i></div>
-                                Log Activity
-                            </a>
-
-                            <div class="sb-sidenav-menu-heading">Orders</div>
-                            <a class="nav-link {{ Route::is('cms.order') ? 'active' : '' }}" href="{{ route('cms.order') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart text-primary"></i></div>
-                                All Orders
-                            </a>
-                            <a class="nav-link {{ Route::is('cms.wd-usdt.index') ? 'active' : '' }}" href="{{ route('cms.wd-usdt.index') }}">
-                                <div class="sb-nav-link-icon"><i class="bi bi-upload text-primary"></i></div>
-                                Withdraw USDT
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Bonus</div>
-                            <a class="nav-link {{ Route::is('cms.bonus') ? 'active' : '' }}" href="{{ route('cms.bonus') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-gift text-primary"></i></div>
-                                Koisan Bonus
-                            </a>
                             <div class="sb-sidenav-menu-heading">Data</div>
-                            <a class="nav-link {{ Route::is('cms.package') ? 'active' : '' }}" href="{{ route('cms.package') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-cubes text-primary"></i></div>
-                                Package
+                            <a class="nav-link {{ Route::is('cms.pegawai') ? 'active' : '' }}" href="{{ route('cms.pegawai') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users text-primary"></i></div>
+                                Pegawai
                             </a>
-                            <a class="nav-link {{ Route::is('cms.landing_page.faq') ? 'active' : '' }}" href="{{ route('cms.landing_page.faq') }}">
+                            <a class="nav-link {{ Route::is('cms.publikasi') ? 'active' : '' }}" href="{{ route('cms.publikasi') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-file-pdf text-primary"></i></div>
+                                Publikasi
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Informasi</div>
+                            <a class="nav-link {{Route::is('cms.profile.*') ? 'active' : 'collapsed'}} " href="#" data-bs-toggle="collapse" data-bs-target="#collapseInformation" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-info-circle text-primary"></i></div>
+                                Profil Bapenda
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="{{Route::is('cms.profile.*') ? '' : 'collapse'}}" id="collapseInformation" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link {{Route::is('cms.profile.visi_misi') ? 'active' : ''}}" href="{{route('cms.profile.visi_misi')}}"><i class="fas fa-file-alt text-primary me-2"></i>Visi & Misi</a>
+                                    <a class="nav-link {{Route::is('cms.profile.sejarah') ? 'active' : ''}}" href="{{route('cms.profile.sejarah')}}"><i class="fas fa-landmark text-primary me-2"></i>Sejarah</a>
+                                    <a class="nav-link {{Route::is('cms.profile.kepala') ? 'active' : ''}}" href="{{route('cms.profile.kepala')}}"><i class="fas fa-portrait text-primary me-2"></i>Kepala Bapenda</a>
+                                    <a class="nav-link {{Route::is('cms.profile.struktur') ? 'active' : ''}}" href="{{route('cms.profile.struktur')}}"><i class="fas fa-sitemap text-primary me-2"></i>Struktur Organisasi</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link {{ Route::is('cms.uptb') ? 'active' : '' }}" href="{{ route('cms.uptb') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-info-circle text-primary"></i></div>
+                                Profil UPTB
+                            </a>
+                            <a class="nav-link {{ Route::is('cms.gallery') ? 'active' : '' }}" href="{{ route('cms.gallery') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-images text-primary"></i></div>
+                                Gallery
+                            </a>
+                            <a class="nav-link {{ Route::is('cms.services') ? 'active' : '' }}" href="{{ route('cms.services') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-info-circle text-primary"></i></div>
+                                Pembayaran
+                            </a>
+                            <a class="nav-link {{ Route::is('cms.portal') ? 'active' : '' }}" href="{{ route('cms.portal') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-link text-primary"></i></div>
+                                Portal
+                            </a>
+                            <a class="nav-link {{ Route::is('cms.video') ? 'active' : '' }}" href="{{ route('cms.video') }}">
+                                <div class="sb-nav-link-icon"><i class="fab fa-youtube text-primary"></i></div>
+                                Video
+                            </a>
+                            <a class="nav-link {{ Route::is('cms.infografis') ? 'active' : '' }}" href="{{ route('cms.infografis') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-file-image text-primary"></i></div>
+                                Infografis
+                            </a>
+                            <a class="nav-link {{ Route::is('cms.faq') ? 'active' : '' }}" href="{{ route('cms.faq') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-question-circle text-primary"></i></div>
                                 FAQ
                             </a>
-                            <a class="nav-link {{ Route::is('cms.landing_page.privacy_policy') ? 'active' : '' }}" href="{{ route('cms.landing_page.privacy_policy') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-shield-alt text-primary"></i></div>
-                                Privacy Policy
-                            </a>
-                            <a class="nav-link {{ Route::is('cms.landing_page.term_condition') ? 'active' : '' }}" href="{{ route('cms.landing_page.term_condition') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-file-contract text-primary"></i></div>
-                                Terms & Conditions
-                            </a>--}}
-                            {{--<div class="sb-sidenav-menu-heading">Scholarships</div>
-                            <a class="nav-link {{ Route::is('admin.manager') ? 'active' : '' }}" href="{{ route('admin.manager') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tasks text-primary"></i></div>
-                                Manager
-                            </a>
-                            <a class="nav-link {{ Route::is('admin.scholar') ? 'active' : '' }}" href="{{ route('admin.scholar') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tasks text-primary"></i></div>
-                                Scholar
-                            </a>
-                            <a class="nav-link {{ Route::is('admin.withdraw') ? 'active' : '' }}" href="{{ route('admin.withdraw') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-money-check text-primary"></i></div>
-                                Withdraw
-                            </a>
-                            @if(auth()->guard('admin')->user()->name == 'SGMS Admin')
-                                <a class="nav-link {{ Route::is('admin.withdraw-foundation') ? 'active' : '' }}" href="{{ route('admin.withdraw-foundation') }}">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-money-check text-primary"></i></div>
-                                    Withdraw Foundation
-                                </a>
-                                <a class="nav-link {{ Route::is('admin.log-files') ? 'active' : '' }}" href="{{ route('admin.log-files') }}">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-cogs text-primary"></i></div>
-                                    Log Files
-                                </a>
-                            @endif
-
-                            <div class="sb-sidenav-menu-heading">Account</div>
-                            <a class="nav-link {{ Route::is('admin.setting') ? 'active' : '' }}" href="{{ route('admin.setting') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user-cog text-primary"></i></div>
-                                Setting
-                            </a>
-                            <a class="nav-link {{ Route::is('admin.wallet') ? 'active' : '' }}" href="{{ route('admin.wallet') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-wallet text-primary"></i></div>
-                                Wallet
-                            </a>
-
-                            <div class="sb-sidenav-menu-heading">Support</div>
-                            <a class="nav-link {{ Route::is('admin.support') ? 'active' : '' }}" href="{{ route('admin.support') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-headset text-primary"></i></div>
-                                Feedback
-                            </a>--}}
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

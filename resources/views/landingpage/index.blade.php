@@ -13,44 +13,21 @@
 
 @section('content')
     <div class="container-fluid mx-0 px-0">
-        <section id="home" class="p-4" style="min-height:50vh!important;">
-            {{--<div class="row align-items-center gy-4 mb-4 mt-0">
-                <div class="col-lg-6 col-12 text-light" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="1500">
-                    <h1 class="mb-0 text-welcome">Selamat Datang</h1>
-                    <h3 class="mb-3 text-welcome">di Portal Resmi</h3>
-                    <h1 class="mb-3 text-welcome display-5">Badan Pendapatan Daerah (Bapenda)</h1>
-                    <h4 class="mb-0 text-welcome">Kabupaten Katingan</h4>
-                    <h4 class="mb-0 text-welcome">Provinsi Kalimantan Tengah</h4>
-                    <div class="d-flex mt-4">
-                        <a href="#about" class="text-decoration-none btn-news2 text-center m-1"><i class="bi bi-info-circle me-2"></i>Bapenda</a>
-                        <a href="#news" class="text-decoration-none btn-news2 text-center m-1"><i class="bi bi-newspaper me-2"></i>Berita</a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-12 d-flex justify-content-end">
-                    <img src="{{asset('img/tax.svg')}}" alt="Tax Illustration" class="d-lg-block d-md-none d-none w-75">
-                </div>
-            </div>--}}
-            <div class="row align-items-center gy-4 mb-4 mt-0">
-                <div class="col-lg-12 col-12 text-light text-center" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="1500">
-                    <h1 class="mb-0 text-welcome">Selamat Datang</h1>
-                    <h3 class="mb-3 text-welcome">di Portal Resmi</h3>
-                    <h1 class="mb-3 text-welcome display-5">Badan Pendapatan Daerah (Bapenda)</h1>
-                    <h4 class="mb-0 text-welcome">Kabupaten Katingan</h4>
-                    <h4 class="mb-0 text-welcome">Provinsi Kalimantan Tengah</h4>
-                    <div class="d-flex mt-4 justify-content-center">
-                        <a href="#about" class="text-decoration-none btn-news2 text-center m-1"><i class="bi bi-info-circle me-2"></i>Bapenda</a>
-                        <a href="#news" class="text-decoration-none btn-news2 text-center m-1"><i class="bi bi-newspaper me-2"></i>Berita</a>
-                    </div>
-                </div>
-            </div>
+        <div class="main border-light border-bottom">
+            <div class="section-center mt-lg-0 mt-md-0 mt-5">
+                <h3 class="mb-3 text-uppercase home">Selamat Datang</h3>
+                <h3 class="mb-3 text-uppercase home">di Portal Resmi</h3>
+                <h1 class="mb-4 text-uppercase home">Badan Pendapatan Daerah</h1>
+                <h1 class="mb-4 text-uppercase home">"Bapenda"</h1>
+                <h3 class="mb-3 text-uppercase home">Kabupaten Katingan</h3>
+                <h3 class="mb-3 text-uppercase home">Provinsi Kalimantan Tengah</h3>
 
-            <div class="row justify-content-center border-top border-light" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" data-aos-duration="1500">
-                <div class="col-lg-10 col-md-12 col-12 text-center text-light mt-4">
-                    <p class="fw-bold mb-2 text-uppercase text-welcome">Informasi Perpajakan?</p>
-                    <p class="mb-0 text-welcome">Cari tahu tentang Jenis-jenis pelayanan silahkan klik <a href="{{route('home')}}#services" class="text-white">disini</a>!</p>
+                <div class="align-items-center justify-content-center mt-4">
+                    <a href="#about" class="text-uppercase text-decoration-none btn-trailer m-3">Bapenda</a>
+                    <a href="#news" class="text-uppercase text-decoration-none btn-trailer m-3">Berita</a>
                 </div>
             </div>
-        </section>
+        </div>
 
         <section id="about" class="p-4 bg-light align-items-center">
             <div class="row justify-content-center align-items-center" style="min-height:80vh!important;">
