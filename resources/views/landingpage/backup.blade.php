@@ -1,3 +1,4 @@
+        <!-- Home v1 -->
         <section id="home" class="p-0" style="min-height:90vh!important;">
 
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -42,6 +43,7 @@
 
         </section>
 
+        <!-- Home v2 -->
         <section id="home" class="p-4" style="min-height:50vh!important;">
             <div class="row align-items-center gy-4 mb-4 mt-0">
                 <div class="col-lg-6 col-12 text-light" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="1500">
