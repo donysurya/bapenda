@@ -78,14 +78,14 @@ Route::prefix('cms')->name('cms.')->group(function () {
         });
 
         // Publikasi
-        Route::get('/publikasi', [App\Http\Controllers\cms\publikasiController::class, 'index'])->name('publikasi');
+        Route::get('/publikasi', [App\Http\Controllers\cms\publicationController::class, 'index'])->name('publikasi');
         Route::prefix('publikasi')->name('publikasi.')->group(function (){
-            Route::get('/create', [App\Http\Controllers\cms\publikasiController::class, 'create'])->name('create');
-            Route::post('/create', [App\Http\Controllers\cms\publikasiController::class, 'store'])->name('store');
-            Route::get('/{id}', [App\Http\Controllers\cms\publikasiController::class, 'show'])->name('show');
-            Route::get('{id}/edit', [App\Http\Controllers\cms\publikasiController::class, 'edit'])->name('edit');
-            Route::put('{id}/edit', [App\Http\Controllers\cms\publikasiController::class, 'update'])->name('update');
-            Route::delete('/{id}', [App\Http\Controllers\cms\publikasiController::class, 'destroy'])->name('destroy');
+            Route::get('/create', [App\Http\Controllers\cms\publicationController::class, 'create'])->name('create');
+            Route::post('/create', [App\Http\Controllers\cms\publicationController::class, 'store'])->name('store');
+            Route::get('/{id}', [App\Http\Controllers\cms\publicationController::class, 'show'])->name('show');
+            Route::get('{id}/edit', [App\Http\Controllers\cms\publicationController::class, 'edit'])->name('edit');
+            Route::put('{id}/edit', [App\Http\Controllers\cms\publicationController::class, 'update'])->name('update');
+            Route::delete('/{id}', [App\Http\Controllers\cms\publicationController::class, 'destroy'])->name('destroy');
         });
 
         // Profil Bapenda
@@ -157,59 +157,73 @@ Route::prefix('cms')->name('cms.')->group(function () {
             Route::delete('/{id}', [App\Http\Controllers\cms\galleryController::class, 'destroy'])->name('destroy');
         });
 
-        // Jenis Pelayanan
-        Route::get('/services', [App\Http\Controllers\cms\informationController::class, 'services'])->name('services');
-        Route::prefix('services')->name('services.')->group(function (){
-            Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'services_create'])->name('create');
-            Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'services_store'])->name('store');
-            Route::get('/{id}', [App\Http\Controllers\cms\informationController::class, 'services_show'])->name('show');
-            Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'services_edit'])->name('edit');
-            Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'services_update'])->name('update');
-            Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'services_destroy'])->name('destroy');
-        });
+        // Profil Bapenda
+        Route::prefix('other')->name('other.')->group(function (){
+            // Jenis Pelayanan
+            Route::get('/services', [App\Http\Controllers\cms\informationController::class, 'services'])->name('services');
+            Route::prefix('services')->name('services.')->group(function (){
+                Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'services_create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'services_store'])->name('store');
+                Route::get('/{id}', [App\Http\Controllers\cms\informationController::class, 'services_show'])->name('show');
+                Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'services_edit'])->name('edit');
+                Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'services_update'])->name('update');
+                Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'services_destroy'])->name('destroy');
+            });
 
-        // Portal
-        Route::get('/portal', [App\Http\Controllers\cms\portalController::class, 'index'])->name('portal');
-        Route::prefix('portal')->name('portal.')->group(function (){
-            Route::get('/create', [App\Http\Controllers\cms\portalController::class, 'create'])->name('create');
-            Route::post('/create', [App\Http\Controllers\cms\portalController::class, 'store'])->name('store');
-            Route::get('/{id}', [App\Http\Controllers\cms\portalController::class, 'show'])->name('show');
-            Route::get('{id}/edit', [App\Http\Controllers\cms\portalController::class, 'edit'])->name('edit');
-            Route::put('{id}/edit', [App\Http\Controllers\cms\portalController::class, 'update'])->name('update');
-            Route::delete('/{id}', [App\Http\Controllers\cms\portalController::class, 'destroy'])->name('destroy');
-        });
+            // Pembayaran
+            Route::get('/payment', [App\Http\Controllers\cms\paymentController::class, 'index'])->name('payment');
+            Route::prefix('payment')->name('payment.')->group(function (){
+                Route::get('/create', [App\Http\Controllers\cms\paymentController::class, 'create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\cms\paymentController::class, 'store'])->name('store');
+                Route::get('/{id}', [App\Http\Controllers\cms\paymentController::class, 'show'])->name('show');
+                Route::get('{id}/edit', [App\Http\Controllers\cms\paymentController::class, 'edit'])->name('edit');
+                Route::put('{id}/edit', [App\Http\Controllers\cms\paymentController::class, 'update'])->name('update');
+                Route::delete('/{id}', [App\Http\Controllers\cms\paymentController::class, 'destroy'])->name('destroy');
+            });
 
-        // Portal
-        Route::get('/video', [App\Http\Controllers\cms\videoController::class, 'index'])->name('video');
-        Route::prefix('video')->name('video.')->group(function (){
-            Route::get('/create', [App\Http\Controllers\cms\videoController::class, 'create'])->name('create');
-            Route::post('/create', [App\Http\Controllers\cms\videoController::class, 'store'])->name('store');
-            Route::get('/{id}', [App\Http\Controllers\cms\videoController::class, 'show'])->name('show');
-            Route::get('{id}/edit', [App\Http\Controllers\cms\videoController::class, 'edit'])->name('edit');
-            Route::put('{id}/edit', [App\Http\Controllers\cms\videoController::class, 'update'])->name('update');
-            Route::delete('/{id}', [App\Http\Controllers\cms\videoController::class, 'destroy'])->name('destroy');
-        });
+            // Portal
+            Route::get('/portal', [App\Http\Controllers\cms\portalController::class, 'index'])->name('portal');
+            Route::prefix('portal')->name('portal.')->group(function (){
+                Route::get('/create', [App\Http\Controllers\cms\portalController::class, 'create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\cms\portalController::class, 'store'])->name('store');
+                Route::get('/{id}', [App\Http\Controllers\cms\portalController::class, 'show'])->name('show');
+                Route::get('{id}/edit', [App\Http\Controllers\cms\portalController::class, 'edit'])->name('edit');
+                Route::put('{id}/edit', [App\Http\Controllers\cms\portalController::class, 'update'])->name('update');
+                Route::delete('/{id}', [App\Http\Controllers\cms\portalController::class, 'destroy'])->name('destroy');
+            });
 
-        // Infografis
-        Route::get('/infografis', [App\Http\Controllers\cms\infografisController::class, 'index'])->name('infografis');
-        Route::prefix('infografis')->name('infografis.')->group(function (){
-            Route::get('/create', [App\Http\Controllers\cms\infografisController::class, 'create'])->name('create');
-            Route::post('/create', [App\Http\Controllers\cms\infografisController::class, 'store'])->name('store');
-            Route::get('/{id}', [App\Http\Controllers\cms\infografisController::class, 'show'])->name('show');
-            Route::get('{id}/edit', [App\Http\Controllers\cms\infografisController::class, 'edit'])->name('edit');
-            Route::put('{id}/edit', [App\Http\Controllers\cms\infografisController::class, 'update'])->name('update');
-            Route::delete('/{id}', [App\Http\Controllers\cms\infografisController::class, 'destroy'])->name('destroy');
-        });
+            // Video
+            Route::get('/video', [App\Http\Controllers\cms\videoController::class, 'index'])->name('video');
+            Route::prefix('video')->name('video.')->group(function (){
+                Route::get('/create', [App\Http\Controllers\cms\videoController::class, 'create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\cms\videoController::class, 'store'])->name('store');
+                Route::get('/{id}', [App\Http\Controllers\cms\videoController::class, 'show'])->name('show');
+                Route::get('{id}/edit', [App\Http\Controllers\cms\videoController::class, 'edit'])->name('edit');
+                Route::put('{id}/edit', [App\Http\Controllers\cms\videoController::class, 'update'])->name('update');
+                Route::delete('/{id}', [App\Http\Controllers\cms\videoController::class, 'destroy'])->name('destroy');
+            });
 
-        // FAQ
-        Route::get('/faq', [App\Http\Controllers\cms\informationController::class, 'faq'])->name('faq');
-        Route::prefix('faq')->name('faq.')->group(function (){
-            Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'faq_create'])->name('create');
-            Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'faq_store'])->name('store');
-            Route::get('/{id}', [App\Http\Controllers\cms\informationController::class, 'faq_show'])->name('show');
-            Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'faq_edit'])->name('edit');
-            Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'faq_update'])->name('update');
-            Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'faq_destroy'])->name('destroy');
+            // Infografis
+            Route::get('/infografis', [App\Http\Controllers\cms\infografisController::class, 'index'])->name('infografis');
+            Route::prefix('infografis')->name('infografis.')->group(function (){
+                Route::get('/create', [App\Http\Controllers\cms\infografisController::class, 'create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\cms\infografisController::class, 'store'])->name('store');
+                Route::get('/{id}', [App\Http\Controllers\cms\infografisController::class, 'show'])->name('show');
+                Route::get('{id}/edit', [App\Http\Controllers\cms\infografisController::class, 'edit'])->name('edit');
+                Route::put('{id}/edit', [App\Http\Controllers\cms\infografisController::class, 'update'])->name('update');
+                Route::delete('/{id}', [App\Http\Controllers\cms\infografisController::class, 'destroy'])->name('destroy');
+            });
+
+            // FAQ
+            Route::get('/faq', [App\Http\Controllers\cms\informationController::class, 'faq'])->name('faq');
+            Route::prefix('faq')->name('faq.')->group(function (){
+                Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'faq_create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'faq_store'])->name('store');
+                Route::get('/{id}', [App\Http\Controllers\cms\informationController::class, 'faq_show'])->name('show');
+                Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'faq_edit'])->name('edit');
+                Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'faq_update'])->name('update');
+                Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'faq_destroy'])->name('destroy');
+            });
         });
     });
 });

@@ -14,7 +14,7 @@
             <h1 class="mt-4"><i class="fas fa-question-circle text-primary me-2"></i>Show Detail FAQ</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('cms.home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('cms.faq') }}">FAQ</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('cms.other.faq') }}">FAQ</a></li>
                 <li class="breadcrumb-item active">Show Detail FAQ</li>
             </ol>
 
@@ -41,7 +41,7 @@
                                 <div id="messageHelp" class="form-text">Detail about FAQ from a title you have been describe before.</div>
                             </div>
                             <div class="mb-3">
-                                <a href="{{ route('cms.faq') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>
+                                <a href="{{ route('cms.other.faq') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>
                             </div>
                         </div>
                     </div>   

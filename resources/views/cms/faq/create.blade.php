@@ -14,7 +14,7 @@
             <h1 class="mt-4"><i class="fas fa-question-circle text-primary me-2"></i>Create FAQ</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('cms.home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('cms.faq') }}">FAQ</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('cms.other.faq') }}">FAQ</a></li>
                 <li class="breadcrumb-item active">Create FAQ</li>
             </ol>
 
@@ -26,7 +26,7 @@
                             Create FAQ
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('cms.faq.store') }}" method="post">
+                            <form action="{{ route('cms.other.faq.store') }}" method="post">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="exampleInputName1" class="form-label">FAQ Title</label>
@@ -49,7 +49,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <a href="{{ route('cms.faq') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>
+                                    <a href="{{ route('cms.other.faq') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>
                                     <button type="submit" class="btn btn-primary"><i class="far fa-edit me-2"></i>Create FAQ</button>
                                 </div>
                             </form>

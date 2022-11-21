@@ -55,12 +55,6 @@
                                 &nbsp;Home
                             </a>
                         </li>
-                        {{--<li class="nav-item">
-                            <a class="nav-link px-3 px-lg-2" href="{{route('home')}}#flow">
-                                <i class="bi bi-bezier2"></i>
-                                &nbsp;Alur Sistem
-                            </a>
-                        </li>--}}
                         <li class="nav-item dropdown">
                             <a class="nav-link px-3 px-lg-2 dropdown-toggle" href="#" id="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-info-circle"></i>
@@ -85,12 +79,6 @@
                                 &nbsp;Publikasi
                             </a>
                         </li>
-                        {{--<li class="nav-item">
-                            <a class="nav-link px-3 px-lg-2" href="{{route('home')}}#payment">
-                                <i class="bi bi-credit-card"></i>
-                                &nbsp;Pembayaran
-                            </a>
-                        </li>--}}
                         <li class="nav-item">
                             <a class="nav-link px-3 px-lg-2" href="{{route('home')}}#faq">
                                 <i class="bi bi-question-circle"></i>

@@ -4,39 +4,39 @@ namespace App\Http\Controllers\cms;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Video;
+use App\Models\Publication;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class videoController extends Controller
+class publicationController extends Controller
 {
     public function index() {
-        $video = Video::all();
-        return view('cms.video.index', compact('video'));
+        $publikasi = Publication::all();
+        return view('cms.publikasi.index', compact('publikasi'));
     }
 
     public function create()
     {
-        return view('cms.video.create');
+        return view('cms.publikasi.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'link' => 'required',
+            'file' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
-            $video = Video::create([
+            $publikasi = Publication::create([
                 'name' => $request->name,
-                'link' => $request->link,
+                'file' => $request->file,
             ]);
             DB::commit();
-            alert()->success('Success', 'Video successfully Created');
-            return redirect()->route('cms.other.video');
+            alert()->success('Success', 'Publikasi successfully Created');
+            return redirect()->route('cms.publikasi');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -46,32 +46,32 @@ class videoController extends Controller
 
     public function show($id)
     {
-        $video = Video::where('id', $id)->first();
-        return view('cms.video.show', compact('video'));
+        $publikasi = Publication::where('id', $id)->first();
+        return view('cms.publikasi.show', compact('publikasi'));
     }
 
     public function edit($id)
     {
-        $video = Video::where('id', $id)->first();
-        return view('cms.video.edit', compact('video'));
+        $publikasi = Publication::where('id', $id)->first();
+        return view('cms.publikasi.edit', compact('publikasi'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
-            'link' => 'required',
+            'file' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
-            Video::where('id', $id)->update([
+            Publication::where('id', $id)->update([
                 'name' => $request->name,
-                'link' => $request->link,
+                'file' => $request->file,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Video successfully updated');
-            return redirect()->route('cms.other.video');
+            alert()->success('Success', 'Your Publikasi successfully updated');
+            return redirect()->route('cms.publikasi');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -81,8 +81,8 @@ class videoController extends Controller
 
     public function destroy($id)
     {
-        Video::where('id', $id)->delete();
-        alert()->success('Success', 'Your Video has been deleted!');
-        return redirect()->route('cms.other.video');
+        Publication::where('id', $id)->delete();
+        alert()->success('Success', 'Your Publikasi has been deleted!');
+        return redirect()->route('cms.publikasi');
     }
 }

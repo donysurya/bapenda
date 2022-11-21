@@ -4,39 +4,41 @@ namespace App\Http\Controllers\cms;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Video;
+use App\Models\Payment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class videoController extends Controller
+class paymentController extends Controller
 {
     public function index() {
-        $video = Video::all();
-        return view('cms.video.index', compact('video'));
+        $payment = Payment::all();
+        return view('cms.payment.index', compact('payment'));
     }
 
     public function create()
     {
-        return view('cms.video.create');
+        return view('cms.payment.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'link' => 'required',
+            'file' => 'required',
+            'description' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
-            $video = Video::create([
+            $portal = Portal::create([
                 'name' => $request->name,
-                'link' => $request->link,
+                'image' => $request->file,
+                'description' => $request->description,
             ]);
             DB::commit();
-            alert()->success('Success', 'Video successfully Created');
-            return redirect()->route('cms.other.video');
+            alert()->success('Success', 'Payment successfully Created');
+            return redirect()->route('cms.other.payment');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -46,32 +48,34 @@ class videoController extends Controller
 
     public function show($id)
     {
-        $video = Video::where('id', $id)->first();
-        return view('cms.video.show', compact('video'));
+        $payment = Payment::where('id', $id)->first();
+        return view('cms.payment.show', compact('payment'));
     }
 
     public function edit($id)
     {
-        $video = Video::where('id', $id)->first();
-        return view('cms.video.edit', compact('video'));
+        $payment = Payment::where('id', $id)->first();
+        return view('cms.payment.edit', compact('payment'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
-            'link' => 'required',
+            'file' => 'required',
+            'description' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
-            Video::where('id', $id)->update([
+            Payment::where('id', $id)->update([
                 'name' => $request->name,
-                'link' => $request->link,
+                'image' => $request->file,
+                'description' => $request->description,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Video successfully updated');
-            return redirect()->route('cms.other.video');
+            alert()->success('Success', 'Your Payment successfully updated');
+            return redirect()->route('cms.other.payment');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -81,8 +85,8 @@ class videoController extends Controller
 
     public function destroy($id)
     {
-        Video::where('id', $id)->delete();
-        alert()->success('Success', 'Your Video has been deleted!');
-        return redirect()->route('cms.other.video');
+        Payment::where('id', $id)->delete();
+        alert()->success('Success', 'Your Payment Method has been deleted!');
+        return redirect()->route('cms.other.payment');
     }
 }

@@ -38,7 +38,7 @@ class informationController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'FAQ successfully Created');
-            return redirect()->route('cms.faq');
+            return redirect()->route('cms.other.faq');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -73,7 +73,7 @@ class informationController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Your FAQ successfully updated');
-            return redirect()->route('cms.faq');
+            return redirect()->route('cms.other.faq');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -85,6 +85,6 @@ class informationController extends Controller
     {
         faq::where('id', $id)->delete();
         alert()->success('Success', 'Your FAQ has been deleted!');
-        return redirect()->route('cms.faq');
+        return redirect()->route('cms.other.faq');
     }
 }
