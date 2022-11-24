@@ -25,15 +25,19 @@ class paymentController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required',
+            'file' => 'required|file|max:50',
             'description' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
-            $portal = Portal::create([
+            $path = Storage::putFile(
+                'public/images',
+                $request->file('file'),
+            );
+            $payment = Payment::create([
                 'name' => $request->name,
-                'image' => $request->file,
+                'image' => $path,
                 'description' => $request->description,
             ]);
             DB::commit();
@@ -62,19 +66,52 @@ class paymentController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required',
             'description' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
+            $admin = auth()->guard('cms')->user()->id;
             Payment::where('id', $id)->update([
                 'name' => $request->name,
-                'image' => $request->file,
                 'description' => $request->description,
+                'updated_by' => $admin,
             ]);
             DB::commit();
             alert()->success('Success', 'Your Payment successfully updated');
+            return redirect()->route('cms.other.payment');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
+            return back();
+        }
+    }
+
+    public function image($id)
+    {
+        $payment = Payment::where('id', $id)->first();
+        return view('cms.payment.image', compact('payment'));
+    }
+
+    public function update_image(Request $request, $id)
+    {
+        $request->validate([
+            'file' => 'required|file|max:50',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $path = Storage::putFile(
+                'public/images',
+                $request->file('file'),
+            );
+            $admin = auth()->guard('cms')->user()->id;
+            Payment::where('id', $id)->update([
+                'image' => $path,
+                'updated_by' => $admin,
+            ]);
+            DB::commit();
+            alert()->success('Success', 'Your Payment Logo successfully updated');
             return redirect()->route('cms.other.payment');
         } catch (\Exception $exception) {
             DB::rollBack();

@@ -168,7 +168,9 @@
             </div>
         </section>
 
-        {{--<section id="flow" class="p-4 py-5 bg-light" style="min-height:50vh!important;">
+        <hr class="section-break-1">
+
+        <section id="flow" class="p-4 py-5 bg-light" style="min-height:50vh!important;">
             <h2 class="fw-bold mb-4 text-uppercase text-welcome text-center">Alur Proses Pajak Online</h2>
             <div class="row my-4 gy-3">
                 <div class="col-lg-4 col-md-6 col-12 text-center">
@@ -196,7 +198,7 @@
                     <p class="fw-bold">Jika objek pajak yang dimiliki oleh wajib pajak tidak muncul silahkan hubungi / email UPPRD atau Samsat terdekat</p>
                 </div>
             </div>
-        </section>--}}
+        </section>
 
         <hr class="section-break-1">
 

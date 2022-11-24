@@ -30,9 +30,10 @@ class videoController extends Controller
 
         try {
             DB::beginTransaction();
+            $embed = "https://www.youtube.com/embed/".$request->link."?autoplay=1";
             $video = Video::create([
                 'name' => $request->name,
-                'link' => $request->link,
+                'link' => $embed,
             ]);
             DB::commit();
             alert()->success('Success', 'Video successfully Created');
@@ -65,9 +66,10 @@ class videoController extends Controller
 
         try {
             DB::beginTransaction();
+            $embed = "https://www.youtube.com/embed/".$request->link."?autoplay=1";
             Video::where('id', $id)->update([
                 'name' => $request->name,
-                'link' => $request->link,
+                'link' => $embed,
             ]);
             DB::commit();
             alert()->success('Success', 'Your Video successfully updated');

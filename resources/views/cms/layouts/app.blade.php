@@ -86,7 +86,8 @@
                             </a>
                             <div class="{{Route::is('cms.profile.*') ? '' : 'collapse'}}" id="collapseInformation" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link {{Route::is('cms.profile.visi_misi') ? 'active' : ''}}" href="{{route('cms.profile.visi_misi')}}"><i class="fas fa-file-alt text-primary me-2"></i>Visi & Misi</a>
+                                    <a class="nav-link {{Route::is('cms.profile.vision') ? 'active' : ''}}" href="{{route('cms.profile.vision')}}"><i class="fas fa-file-alt text-primary me-2"></i>Visi</a>
+                                    <a class="nav-link {{Route::is('cms.profile.mission') ? 'active' : ''}}" href="{{route('cms.profile.mission')}}"><i class="fas fa-file-alt text-primary me-2"></i>Misi</a>
                                     <a class="nav-link {{Route::is('cms.profile.sejarah') ? 'active' : ''}}" href="{{route('cms.profile.sejarah')}}"><i class="fas fa-landmark text-primary me-2"></i>Sejarah</a>
                                     <a class="nav-link {{Route::is('cms.profile.kepala') ? 'active' : ''}}" href="{{route('cms.profile.kepala')}}"><i class="fas fa-portrait text-primary me-2"></i>Kepala Bapenda</a>
                                     <a class="nav-link {{Route::is('cms.profile.struktur') ? 'active' : ''}}" href="{{route('cms.profile.struktur')}}"><i class="fas fa-sitemap text-primary me-2"></i>Struktur Organisasi</a>
@@ -95,12 +96,14 @@
 
                             <a class="nav-link {{Route::is('cms.other.*') ? 'active' : 'collapsed'}} " href="#" data-bs-toggle="collapse" data-bs-target="#collapseOther" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-info-circle text-primary"></i></div>
-                                Other
+                                Informasi
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="{{Route::is('cms.other.*') ? '' : 'collapse'}}" id="collapseOther" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link {{Route::is('cms.other.payment') ? 'active' : ''}}" href="{{route('cms.other.payment')}}"><i class="fas fa-credit-card text-primary me-2"></i>Pembayaran</a>
+                                    <a class="nav-link {{Route::is('cms.other.service') ? 'active' : ''}}" href="{{route('cms.other.service')}}"><i class="fas fa-hands-helping text-primary me-2"></i>Pelayanan</a>
+                                    <a class="nav-link {{Route::is('cms.other.flow') ? 'active' : ''}}" href="{{route('cms.other.flow')}}"><i class="fas fa-sync text-primary me-2"></i>Alur Proses</a>
                                     <a class="nav-link {{Route::is('cms.other.portal') ? 'active' : ''}}" href="{{route('cms.other.portal')}}"><i class="fas fa-link text-primary me-2"></i>Portal</a>
                                     <a class="nav-link {{Route::is('cms.other.video') ? 'active' : ''}}" href="{{route('cms.other.video')}}"><i class="fab fa-youtube text-primary me-2"></i>Video</a>
                                     <a class="nav-link {{Route::is('cms.other.infografis') ? 'active' : ''}}" href="{{route('cms.other.infografis')}}"><i class="fas fa-file-image text-primary me-2"></i>Infografis</a>

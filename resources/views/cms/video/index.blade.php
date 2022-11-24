@@ -38,7 +38,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Name</th>
-                                        <th>Link</th>
+                                        <th>Video</th>
                                         <th>Created At</th>
                                         <th>Action</th>
                                     </tr>
@@ -48,7 +48,9 @@
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$item->name}}</td>
-                                            <td>{{$item->link}}</td>
+                                            <td>
+                                                <object data="{{$item->link}}" width="320px" height="200px"></object>
+                                            </td>
                                             <td>{{$item->created_at}}</td>
                                             <td>
                                                 <center>

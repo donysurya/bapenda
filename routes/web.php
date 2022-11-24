@@ -90,25 +90,35 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
         // Profil Bapenda
         Route::prefix('profile')->name('profile.')->group(function (){
-            // Visi & Misi
-            Route::get('/visi_misi', [App\Http\Controllers\cms\profileController::class, 'visi_misi'])->name('visi_misi');
-            Route::prefix('visi_misi')->name('visi_misi.')->group(function (){
-                Route::get('/create', [App\Http\Controllers\cms\profileController::class, 'visi_misi_create'])->name('create');
-                Route::post('/create', [App\Http\Controllers\cms\profileController::class, 'visi_misi_store'])->name('store');
-                Route::get('/{id}', [App\Http\Controllers\cms\profileController::class, 'visi_misi_show'])->name('show');
-                Route::get('{id}/edit', [App\Http\Controllers\cms\profileController::class, 'visi_misi_edit'])->name('edit');
-                Route::put('{id}/edit', [App\Http\Controllers\cms\profileController::class, 'visi_misi_update'])->name('update');
-                Route::delete('/{id}', [App\Http\Controllers\cms\profileController::class, 'visi_misi_destroy'])->name('destroy');
+            // Visi
+            Route::get('/vision', [App\Http\Controllers\cms\profileController::class, 'vision'])->name('vision');
+            Route::prefix('vision')->name('vision.')->group(function (){
+                Route::get('/create', [App\Http\Controllers\cms\profileController::class, 'vision_create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\cms\profileController::class, 'vision_store'])->name('store');
+                Route::get('{id}/edit', [App\Http\Controllers\cms\profileController::class, 'vision_edit'])->name('edit');
+                Route::put('{id}/edit', [App\Http\Controllers\cms\profileController::class, 'vision_update'])->name('update');
+                Route::delete('/{id}', [App\Http\Controllers\cms\profileController::class, 'vision_destroy'])->name('destroy');
             });
 
-            // Visi & Misi
+            // Misi
+            Route::get('/mission', [App\Http\Controllers\cms\profileController::class, 'mission'])->name('mission');
+            Route::prefix('mission')->name('mission.')->group(function (){
+                Route::get('/create', [App\Http\Controllers\cms\profileController::class, 'mission_create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\cms\profileController::class, 'mission_store'])->name('store');
+                Route::get('{id}/edit', [App\Http\Controllers\cms\profileController::class, 'mission_edit'])->name('edit');
+                Route::put('{id}/edit', [App\Http\Controllers\cms\profileController::class, 'mission_update'])->name('update');
+                Route::delete('/{id}', [App\Http\Controllers\cms\profileController::class, 'mission_destroy'])->name('destroy');
+            });
+
+            // Sejarah
             Route::get('/sejarah', [App\Http\Controllers\cms\profileController::class, 'sejarah'])->name('sejarah');
             Route::prefix('sejarah')->name('sejarah.')->group(function (){
                 Route::get('/create', [App\Http\Controllers\cms\profileController::class, 'sejarah_create'])->name('create');
                 Route::post('/create', [App\Http\Controllers\cms\profileController::class, 'sejarah_store'])->name('store');
-                Route::get('/{id}', [App\Http\Controllers\cms\profileController::class, 'sejarah_show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\profileController::class, 'sejarah_edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\profileController::class, 'sejarah_update'])->name('update');
+                Route::get('{id}/image', [App\Http\Controllers\cms\profileController::class, 'sejarah_image'])->name('image');
+                Route::put('{id}/image', [App\Http\Controllers\cms\profileController::class, 'sejarah_update_image'])->name('update.image');
                 Route::delete('/{id}', [App\Http\Controllers\cms\profileController::class, 'sejarah_destroy'])->name('destroy');
             });
 
@@ -120,6 +130,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
                 Route::get('/{id}', [App\Http\Controllers\cms\profileController::class, 'kepala_show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\profileController::class, 'kepala_edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\profileController::class, 'kepala_update'])->name('update');
+                Route::get('{id}/image', [App\Http\Controllers\cms\profileController::class, 'kepala_image'])->name('image');
+                Route::put('{id}/image', [App\Http\Controllers\cms\profileController::class, 'kepala_update_image'])->name('update.image');
                 Route::delete('/{id}', [App\Http\Controllers\cms\profileController::class, 'kepala_destroy'])->name('destroy');
             });
 
@@ -136,14 +148,18 @@ Route::prefix('cms')->name('cms.')->group(function () {
         });
 
         // Profil UPTB
-        Route::get('/uptb', [App\Http\Controllers\cms\informationController::class, 'uptb'])->name('uptb');
+        Route::get('/uptb', [App\Http\Controllers\cms\uptbController::class, 'index'])->name('uptb');
         Route::prefix('uptb')->name('uptb.')->group(function (){
-            Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'uptb_create'])->name('create');
-            Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'uptb_store'])->name('store');
-            Route::get('/{id}', [App\Http\Controllers\cms\informationController::class, 'uptb_show'])->name('show');
-            Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'uptb_edit'])->name('edit');
-            Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'uptb_update'])->name('update');
-            Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'uptb_destroy'])->name('destroy');
+            Route::get('/create', [App\Http\Controllers\cms\uptbController::class, 'create'])->name('create');
+            Route::post('/create', [App\Http\Controllers\cms\uptbController::class, 'store'])->name('store');
+            Route::get('/{id}', [App\Http\Controllers\cms\uptbController::class, 'show'])->name('show');
+            Route::get('{id}/edit', [App\Http\Controllers\cms\uptbController::class, 'edit'])->name('edit');
+            Route::put('{id}/edit', [App\Http\Controllers\cms\uptbController::class, 'update'])->name('update');
+            Route::get('{id}/image', [App\Http\Controllers\cms\uptbController::class, 'image'])->name('image');
+            Route::put('{id}/image', [App\Http\Controllers\cms\uptbController::class, 'update_image'])->name('update.image');
+            Route::get('{id}/maps', [App\Http\Controllers\cms\uptbController::class, 'maps_image'])->name('image');
+            Route::put('{id}/maps', [App\Http\Controllers\cms\uptbController::class, 'maps_update_image'])->name('update.image');
+            Route::delete('/{id}', [App\Http\Controllers\cms\uptbController::class, 'destroy'])->name('destroy');
         });
 
         // Gallery
@@ -160,14 +176,28 @@ Route::prefix('cms')->name('cms.')->group(function () {
         // Profil Bapenda
         Route::prefix('other')->name('other.')->group(function (){
             // Jenis Pelayanan
-            Route::get('/services', [App\Http\Controllers\cms\informationController::class, 'services'])->name('services');
-            Route::prefix('services')->name('services.')->group(function (){
-                Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'services_create'])->name('create');
-                Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'services_store'])->name('store');
-                Route::get('/{id}', [App\Http\Controllers\cms\informationController::class, 'services_show'])->name('show');
-                Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'services_edit'])->name('edit');
-                Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'services_update'])->name('update');
-                Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'services_destroy'])->name('destroy');
+            Route::get('/service', [App\Http\Controllers\cms\informationController::class, 'service'])->name('service');
+            Route::prefix('service')->name('service.')->group(function (){
+                Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'service_create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'service_store'])->name('store');
+                Route::get('/{id}', [App\Http\Controllers\cms\informationController::class, 'service_show'])->name('show');
+                Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'service_edit'])->name('edit');
+                Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'service_update'])->name('update');
+                Route::get('{id}/image', [App\Http\Controllers\cms\informationController::class, 'service_image'])->name('image');
+                Route::put('{id}/image', [App\Http\Controllers\cms\informationController::class, 'service_update_image'])->name('update.image');
+                Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'service_destroy'])->name('destroy');
+            });
+
+            Route::get('/flow', [App\Http\Controllers\cms\informationController::class, 'flow'])->name('flow');
+            Route::prefix('flow')->name('flow.')->group(function (){
+                Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'flow_create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'flow_store'])->name('store');
+                Route::get('/{id}', [App\Http\Controllers\cms\informationController::class, 'flow_show'])->name('show');
+                Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'flow_edit'])->name('edit');
+                Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'flow_update'])->name('update');
+                Route::get('{id}/image', [App\Http\Controllers\cms\informationController::class, 'flow_image'])->name('image');
+                Route::put('{id}/image', [App\Http\Controllers\cms\informationController::class, 'flow_update_image'])->name('update.image');
+                Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'flow_destroy'])->name('destroy');
             });
 
             // Pembayaran
@@ -178,6 +208,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
                 Route::get('/{id}', [App\Http\Controllers\cms\paymentController::class, 'show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\paymentController::class, 'edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\paymentController::class, 'update'])->name('update');
+                Route::get('{id}/image', [App\Http\Controllers\cms\paymentController::class, 'image'])->name('image');
+                Route::put('{id}/image', [App\Http\Controllers\cms\paymentController::class, 'update_image'])->name('update.image');
                 Route::delete('/{id}', [App\Http\Controllers\cms\paymentController::class, 'destroy'])->name('destroy');
             });
 
@@ -189,6 +221,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
                 Route::get('/{id}', [App\Http\Controllers\cms\portalController::class, 'show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\portalController::class, 'edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\portalController::class, 'update'])->name('update');
+                Route::get('{id}/image', [App\Http\Controllers\cms\portalController::class, 'image'])->name('image');
+                Route::put('{id}/image', [App\Http\Controllers\cms\portalController::class, 'update_image'])->name('update.image');
                 Route::delete('/{id}', [App\Http\Controllers\cms\portalController::class, 'destroy'])->name('destroy');
             });
 
@@ -211,6 +245,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
                 Route::get('/{id}', [App\Http\Controllers\cms\infografisController::class, 'show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\infografisController::class, 'edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\infografisController::class, 'update'])->name('update');
+                Route::get('{id}/image', [App\Http\Controllers\cms\infografisController::class, 'image'])->name('image');
+                Route::put('{id}/image', [App\Http\Controllers\cms\infografisController::class, 'update_image'])->name('update.image');
                 Route::delete('/{id}', [App\Http\Controllers\cms\infografisController::class, 'destroy'])->name('destroy');
             });
 

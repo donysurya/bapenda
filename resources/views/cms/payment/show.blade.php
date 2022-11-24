@@ -33,17 +33,16 @@
                             <div class="mb-3">
                                 <label for="FileName" class="form-label">Nama Pembayaran</label>
                                 <input type="text" name="name" class="form-control" id="FileName" value="{{ $payment->name }}" aria-describedby="nameHelp">
-                                <div id="nameHelp" class="form-text">Deskripsikan nama metode pembayaran.</div>
+                                <div id="nameHelp" class="form-text">Nama metode pembayaran.</div>
                             </div>
                             <div class="mb-3">
                                 <label for="desc" class="form-label">Cara Pembayaran</label>
                                 <textarea name="description" class="ckeditor form-control" id="desc" aria-describedby="descriptionHelp">{{ $payment->description }}</textarea>
-                                <div id="descriptionHelp" class="form-text">Deskripsikan cara melakukan pembayaran.</div>
+                                <div id="descriptionHelp" class="form-text">Cara melakukan pembayaran.</div>
                             </div>
                             <div class="mb-3">
-                                <label for="uploadFile" class="form-label">Logo</label>
-                                <input type="file" name="file" class="form-control" id="uploadFile" value="{{ $payment->image }}" aria-describedby="fileHelp">
-                                <div id="fileHelp" class="form-text">Upload logo pembayaran.</div>
+                                <label for="uploadFile" class="form-label me-2 fw-bold">Logo:</label>
+                                <img src="{{Storage::url($payment->image)}}" alt="{{$payment->name}}" width="150px">
                             </div>
                             <div class="mb-3">
                                 <a href="{{ route('cms.other.payment') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>

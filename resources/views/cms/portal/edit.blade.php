@@ -26,13 +26,18 @@
                             Update Portal
                         </div>
                         <div class="card-body">
+                            @if(session()->has('error'))
+                                <div class="alert alert-danger">
+                                    <strong>{{ session()->get('error') }}</strong>
+                                </div>
+                            @endif
                             <form action="{{ route('cms.other.portal.update', ['id' => $portal->id]) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="mb-3">
-                                    <label for="FileName" class="form-label">Name</label>
+                                    <label for="FileName" class="form-label">Nama Portal</label>
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="FileName" value="{{ $portal->name }}" aria-describedby="nameHelp">
-                                    <div id="nameHelp" class="form-text">Deskripsikan nama portal.</div>
+                                    <div id="nameHelp" class="form-text">Deskripsikan nama portal. <strong>Contoh: Portal Katingan, dll.</strong></div>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -40,20 +45,10 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="linkAddress" class="form-label">Link</label>
+                                    <label for="linkAddress" class="form-label">Link Portal</label>
                                     <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" id="linkAddress" value="{{ $portal->link }}" aria-describedby="linkHelp">
-                                    <div id="linkHelp" class="form-text">Deskripsikan nama portal.</div>
+                                    <div id="linkHelp" class="form-text">Deskripsikan link portal. <strong>Contoh: https://portal.katingankab.go.id/</strong></div>
                                     @error('link')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="uploadFile" class="form-label">Image</label>
-                                    <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" id="uploadFile" value="{{ $portal->image }}" aria-describedby="fileHelp">
-                                    <div id="fileHelp" class="form-text">Upload your files here.</div>
-                                    @error('file')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

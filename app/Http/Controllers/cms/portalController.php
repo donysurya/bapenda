@@ -25,15 +25,19 @@ class portalController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required',
+            'file' => 'required|file|max:50',
             'link' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
+            $path = Storage::putFile(
+                'public/images',
+                $request->file('file'),
+            );
             $portal = Portal::create([
                 'name' => $request->name,
-                'image' => $request->file,
+                'image' => $path,
                 'link' => $request->link,
             ]);
             DB::commit();
@@ -62,19 +66,52 @@ class portalController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required',
             'link' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
+            $admin = auth()->guard('cms')->user()->id;  
             Portal::where('id', $id)->update([
                 'name' => $request->name,
-                'image' => $request->file,
                 'link' => $request->link,
+                'updated_by' => $admin,
             ]);
             DB::commit();
             alert()->success('Success', 'Your Portal successfully updated');
+            return redirect()->route('cms.other.portal');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
+            return back();
+        }
+    }
+
+    public function image($id)
+    {
+        $portal = Portal::where('id', $id)->first();
+        return view('cms.portal.image', compact('portal'));
+    }
+
+    public function update_image(Request $request, $id)
+    {
+        $request->validate([
+            'file' => 'required|file|max:50',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $path = Storage::putFile(
+                'public/images',
+                $request->file('file'),
+            );
+            $admin = auth()->guard('cms')->user()->id;
+            Portal::where('id', $id)->update([
+                'image' => $path,
+                'updated_by' => $admin,
+            ]);
+            DB::commit();
+            alert()->success('Success', 'Your Portal Logo successfully updated');
             return redirect()->route('cms.other.portal');
         } catch (\Exception $exception) {
             DB::rollBack();

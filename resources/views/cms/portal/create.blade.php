@@ -26,12 +26,17 @@
                             Create Portal
                         </div>
                         <div class="card-body">
+                            @if(session()->has('error'))
+                                <div class="alert alert-danger">
+                                    <strong>{{ session()->get('error') }}</strong>
+                                </div>
+                            @endif
                             <form action="{{ route('cms.other.portal.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="FileName" class="form-label">Name</label>
+                                    <label for="FileName" class="form-label">Nama Portal</label>
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="FileName" value="{{ old('name') }}" aria-describedby="nameHelp">
-                                    <div id="nameHelp" class="form-text">Deskripsikan nama portal.</div>
+                                    <div id="nameHelp" class="form-text">Deskripsikan nama portal. <strong>Contoh: Portal Katingan, dll.</strong></div>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -39,9 +44,9 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="linkAddress" class="form-label">Link</label>
+                                    <label for="linkAddress" class="form-label">Link Portal</label>
                                     <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" id="linkAddress" value="{{ old('link') }}" aria-describedby="linkHelp">
-                                    <div id="linkHelp" class="form-text">Deskripsikan link portal.</div>
+                                    <div id="linkHelp" class="form-text">Deskripsikan link portal. <strong>Contoh: https://portal.katingankab.go.id/</strong></div>
                                     @error('link')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -49,9 +54,10 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="uploadFile" class="form-label">Image</label>
+                                    <label for="uploadFile" class="form-label">Logo Portal</label>
                                     <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" id="uploadFile" value="{{ old('file') }}" aria-describedby="fileHelp">
-                                    <div id="fileHelp" class="form-text">Upload your image here.</div>
+                                    <div id="fileHelp" class="form-text">Upload logo portal (*PNG, JPG, WEBP). <strong>Maksimum Size: 50 kb</strong></div>
+                                    <div id="fileHelp" class="form-text">*disarankan logo dengan bentuk persegi panjang.</div>
                                     @error('file')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

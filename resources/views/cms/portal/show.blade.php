@@ -31,19 +31,18 @@
                                 <input type="datetime" name="datetime" class="form-control @error('date') is-invalid @enderror" value="{{ $portal->created_at }}" id="createdAt" aria-describedby="createdHelp" disabled>
                             </div>
                             <div class="mb-3">
-                                <label for="FileName" class="form-label">Name</label>
+                                <label for="FileName" class="form-label">Nama Portal</label>
                                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $portal->name }}" id="FileName" aria-describedby="nameHelp" disabled>
-                                <div id="nameHelp" class="form-text">Your Portal Name.</div>
+                                <div id="nameHelp" class="form-text">Nama Portal.</div>
                             </div>
                             <div class="mb-3">
-                                <label for="linkAddress" class="form-label">Link</label>
+                                <label for="linkAddress" class="form-label">Link Portal</label>
                                 <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" value="{{ $portal->link }}" id="linkAddress" aria-describedby="linkHelp" disabled>
-                                <div id="linkHelp" class="form-text">Your Portal Link.</div>
+                                <div id="linkHelp" class="form-text">Link Portal.</div>
                             </div>
                             <div class="mb-3">
-                                <label for="uploadFile" class="form-label">Image</label>
-                                <input type="text" name="file" class="form-control @error('file') is-invalid @enderror" value="{{ $portal->image }}" id="uploadFile" aria-describedby="fileHelp" disabled>
-                                <div id="fileHelp" class="form-text">Portal Image</div>
+                                <label for="uploadFile" class="form-label me-2 fw-bold">Logo:</label>
+                                <img src="{{Storage::url($portal->image)}}" alt="{{$portal->name}}" width="150px">
                             </div>
                             <div class="mb-3">
                                 <a href="{{ route('cms.other.portal') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>

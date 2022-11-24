@@ -26,13 +26,18 @@
                             Update Informasi Pembayaran
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('cms.other.portal.update', ['id' => $payment->id]) }}" method="post" enctype="multipart/form-data">
+                            @if(session()->has('error'))
+                                <div class="alert alert-danger">
+                                    <strong>{{ session()->get('error') }}</strong>
+                                </div>
+                            @endif
+                            <form action="{{ route('cms.other.payment.update', ['id' => $payment->id]) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="mb-3">
                                     <label for="FileName" class="form-label">Nama Pembayaran</label>
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="FileName" value="{{ $payment->name }}" aria-describedby="nameHelp">
-                                    <div id="nameHelp" class="form-text">Deskripsikan nama metode pembayaran.</div>
+                                    <div id="nameHelp" class="form-text">Deskripsikan nama metode pembayaran. <strong>Contoh: Bank Kalteng, Kantor Pos, dll.</strong></div>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -42,18 +47,8 @@
                                 <div class="mb-3">
                                     <label for="desc" class="form-label">Cara Pembayaran</label>
                                     <textarea name="description" class="ckeditor form-control @error('description') is-invalid @enderror" id="desc" aria-describedby="descriptionHelp">{{ $payment->description }}</textarea>
-                                    <div id="descriptionHelp" class="form-text">Deskripsikan cara melakukan pembayaran.</div>
+                                    <div id="descriptionHelp" class="form-text">Deskripsikan bagaimana cara melakukan pembayaran.</div>
                                     @error('description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="uploadFile" class="form-label">Logo</label>
-                                    <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" id="uploadFile" value="{{ $payment->image }}" aria-describedby="fileHelp">
-                                    <div id="fileHelp" class="form-text">Upload logo pembayaran.</div>
-                                    @error('file')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

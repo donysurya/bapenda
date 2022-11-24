@@ -26,23 +26,33 @@
                             Update Video
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('cms.other.video.update', ['id' => $video->id]) }}" method="post" enctype="multipart/form-data">
+                            @if(session()->has('error'))
+                                <div class="alert alert-danger">
+                                    <strong>{{ session()->get('error') }}</strong>
+                                </div>
+                            @endif
+                            <form action="{{ route('cms.other.video.update', ['id' => $video->id]) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="mb-3">
-                                    <label for="FileName" class="form-label">Name</label>
+                                    <label for="FileName" class="form-label">Nama Video</label>
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="FileName" value="{{ $video->name }}" aria-describedby="nameHelp">
-                                    <div id="nameHelp" class="form-text">Deskripsikan nama video.</div>
+                                    <div id="nameHelp" class="form-text">Deskripsikan nama video. <strong>Contoh: Kegiatan Pembayaran Pajak, dll.</strong></div>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <label for="uploadFile" class="form-label me-2 fw-bold">Video Embed:</label>
+                                    <object data="{{$video->link}}" width="320px" height="200px"></object>
+                                </div>
                                 <div class="mb-3">
-                                    <label for="linkAddress" class="form-label">Link</label>
-                                    <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" id="linkAddress" value="{{ $video->link }}" aria-describedby="linkHelp">
-                                    <div id="linkHelp" class="form-text">Deskripsikan nama video.</div>
+                                    <label for="linkAddress" class="form-label">Youtube Embed Link</label>
+                                    <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" id="linkAddress" value="{{ old('link') }}" aria-describedby="linkHelp">
+                                    <div id="linkHelp" class="form-text">Embed Link Video. <strong>Contoh: https://www.youtube.com/watch?v=<span class="text-primary">gdZLi9oWNZg</span></strong></div>
+                                    <div id="linkHelp" class="form-text">dari potongan contoh link diatas, ambil bagian kode yang berwarna biru untuk kemudian di copy, kemudian paste pada form yang disediakan di atas.</div>
                                     @error('link')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
