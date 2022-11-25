@@ -51,13 +51,13 @@
                                             <td>{{$item->name}}</td>
                                             <td>
                                                 <img src="{{Storage::url($item->image)}}" alt="{{$item->name}}" width="120px">
-                                                <a href="{{ route('cms.uptb.image', ['id' => $item->id]) }}" class="btn btn-info m-1 py-1 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Logo Pembayaran" style="font-size:10px;">
+                                                <a href="{{ route('cms.uptb.image', ['id' => $item->id]) }}" class="btn btn-info m-1 py-1 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Gambar UPTB" style="font-size:10px;">
                                                     <i class="fas fa-sync text-light"></i>
                                                 </a>
                                             </td>
                                             <td>
                                                 <img src="{{Storage::url($item->image)}}" alt="{{$item->name}}" width="120px">
-                                                <a href="{{ route('cms.uptb.image', ['id' => $item->id]) }}" class="btn btn-info m-1 py-1 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Logo Pembayaran" style="font-size:10px;">
+                                                <a href="{{ route('cms.uptb.image', ['id' => $item->id]) }}" class="btn btn-info m-1 py-1 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Maps UPTB" style="font-size:10px;">
                                                     <i class="fas fa-sync text-light"></i>
                                                 </a>
                                             </td>

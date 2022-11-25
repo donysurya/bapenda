@@ -30,8 +30,8 @@ class uptbController extends Controller
             'layanan_pajak' => 'required',
             'wilayah_uptb' => 'required',
             'jam_layanan' => 'required',
-            'file' => 'required|file|max:200',
-            'maps_uptb' => 'required|file|max:200',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
+            'maps_uptb' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
         ]);
 
         try {
@@ -118,7 +118,7 @@ class uptbController extends Controller
     public function update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|file|max:200',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
         ]);
 
         try {
@@ -151,7 +151,7 @@ class uptbController extends Controller
     public function maps_update_image(Request $request, $id)
     {
         $request->validate([
-            'maps_uptb' => 'required|file|max:200',
+            'maps_uptb' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
         ]);
 
         try {

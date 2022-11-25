@@ -25,7 +25,7 @@ class infografisController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|file|max:700',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:700',
         ]);
 
         try {
@@ -92,7 +92,7 @@ class infografisController extends Controller
     public function update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|file|max:700',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:700',
         ]);
 
         try {

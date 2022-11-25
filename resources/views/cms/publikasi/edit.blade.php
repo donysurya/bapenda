@@ -11,7 +11,7 @@
 
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4"><i class="fas fa-question-circle text-primary me-2"></i>Update Publikasi</h1>
+            <h1 class="mt-4"><i class="fas fa-file-pdf text-primary me-2"></i>Update Publikasi</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('cms.home') }}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('cms.publikasi') }}">Publikasi</a></li>
@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <i class="fas fa-question-circle text-primary me-1"></i>
+                            <i class="fas fa-file-pdf text-primary me-1"></i>
                             Update Publikasi
                         </div>
                         <div class="card-body">

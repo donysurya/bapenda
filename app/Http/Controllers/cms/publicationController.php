@@ -25,14 +25,18 @@ class publicationController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required',
+            'file' => 'required|file',
         ]);
 
         try {
             DB::beginTransaction();
+            $path = Storage::putFile(
+                'public/files',
+                $request->file('file'),
+            );
             $publikasi = Publication::create([
                 'name' => $request->name,
-                'file' => $request->file,
+                'file' => $path,
             ]);
             DB::commit();
             alert()->success('Success', 'Publikasi successfully Created');
@@ -60,14 +64,20 @@ class publicationController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required',
+            'file' => 'required|file',
         ]);
 
         try {
             DB::beginTransaction();
+            $admin = auth()->guard('cms')->user()->id;
+            $path = Storage::putFile(
+                'public/files',
+                $request->file('file'),
+            );
             Publication::where('id', $id)->update([
                 'name' => $request->name,
-                'file' => $request->file,
+                'file' => $path,
+                'updated_by' => $admin,
             ]);
             DB::commit();
             alert()->success('Success', 'Your Publikasi successfully updated');

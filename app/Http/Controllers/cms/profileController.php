@@ -8,6 +8,7 @@ use App\Models\Vision;
 use App\Models\Mission;
 use App\Models\History;
 use App\Models\Director;
+use App\Models\Structure;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -164,7 +165,7 @@ class profileController extends Controller
     public function sejarah_store(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|max:200',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
             'description' => 'required',
         ]);
 
@@ -226,7 +227,7 @@ class profileController extends Controller
     public function sejarah_update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|file|max:200',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
         ]);
 
         try {
@@ -272,7 +273,7 @@ class profileController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|file|max:100',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:100',
             'description' => 'required',
             'jobdesk' => 'required',
         ]);
@@ -341,7 +342,7 @@ class profileController extends Controller
     public function kepala_update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|file|max:100',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:100',
         ]);
 
         try {
@@ -370,5 +371,81 @@ class profileController extends Controller
         Director::where('id', $id)->delete();
         alert()->success('Success', 'Your History has been deleted!');
         return redirect()->route('cms.profile.kepala');
+    }
+
+    // Kepala Bapenda
+    public function struktur() {
+        $struktur = Structure::all();
+        return view('cms.bapenda.struktur.index', compact('struktur'));
+    }
+
+    public function struktur_create()
+    {
+        return view('cms.bapenda.struktur.create');
+    }
+
+    public function struktur_store(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $path = Storage::putFile(
+                'public/images',
+                $request->file('file'),
+            );
+            $struktur = Structure::create([
+                'image' => $path,
+            ]);
+            DB::commit();
+            alert()->success('Success', 'Organization Structure successfully Created');
+            return redirect()->route('cms.profile.struktur');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
+            return back();
+        }
+    }
+
+    public function struktur_edit($id)
+    {
+        $struktur = Structure::where('id', $id)->first();
+        return view('cms.bapenda.struktur.edit', compact('struktur'));
+    }
+
+    public function struktur_update(Request $request, $id)
+    {
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $path = Storage::putFile(
+                'public/images',
+                $request->file('file'),
+            );
+            $admin = auth()->guard('cms')->user()->id;
+            Structure::where('id', $id)->update([
+                'image' => $path,
+                'updated_by' => $admin,
+            ]);
+            DB::commit();
+            alert()->success('Success', 'Your Organization Structure Picture successfully updated');
+            return redirect()->route('cms.profile.struktur');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
+            return back();
+        }
+    }
+
+    public function struktur_destroy($id)
+    {
+        Structure::where('id', $id)->delete();
+        alert()->success('Success', 'Your Organization Structure has been deleted!');
+        return redirect()->route('cms.profile.struktur');
     }
 }

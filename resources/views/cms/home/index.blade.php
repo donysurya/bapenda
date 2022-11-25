@@ -34,7 +34,7 @@
                 <div class="col-xl-12 col-md-12">
                     <h3 class="mb-3"><i class="fas fa-chart-line text-info me-2"></i>Statistik Bapenda</h3>
                     <div class="row">
-                        <div class="col-xl-4 col-md-6 col-12">
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-12">
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">
                                     <div class="row align-items-center gy-3">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6 col-12">
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-12">
                             <div class="card bg-danger text-light mb-4">
                                 <div class="card-body">
                                     <div class="row align-items-center gy-3">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6 col-12">
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-12">
                             <div class="card bg-warning text-dark mb-4">
                                 <div class="card-body">
                                     <div class="row align-items-center gy-3">
@@ -88,6 +88,25 @@
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-dark stretched-link text-decoration-none" href="{{route('cms.publikasi')}}">View Details</a>
                                     <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+                            <div class="card bg-secondary text-light mb-4">
+                                <div class="card-body">
+                                    <div class="row align-items-center gy-3">
+                                        <div class="col-md-3">
+                                            <i class="fas fa-file-excel text-light fa-2x"></i>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <h5 class="fw-light">Total Realisasi</h5>
+                                            <h4 class="mb-0">- {{$realisasi->count()}} -</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-light stretched-link text-decoration-none" href="{{route('cms.publikasi')}}">View Details</a>
+                                    <div class="small text-light"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +139,7 @@
                                                 <td><img src="{{asset('img/home.webp')}}" alt="Background Landing Page" width="400px"></td>
                                                 <td>
                                                     <center>
-                                                        <a href="#!" class="btn btn-primary m-1 py-1 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Background" style="font-size:14px;">
+                                                        <a href="{{route('cms.background.edit', ['id' => 1])}}" class="btn btn-primary m-1 py-1 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Background" style="font-size:14px;">
                                                             Update Background
                                                         </a>
                                                     </center>

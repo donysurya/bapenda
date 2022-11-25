@@ -74,6 +74,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
             Route::get('/{id}', [App\Http\Controllers\cms\pegawaiController::class, 'show'])->name('show');
             Route::get('{id}/edit', [App\Http\Controllers\cms\pegawaiController::class, 'edit'])->name('edit');
             Route::put('{id}/edit', [App\Http\Controllers\cms\pegawaiController::class, 'update'])->name('update');
+            Route::get('{id}/image', [App\Http\Controllers\cms\pegawaiController::class, 'image'])->name('image');
+            Route::put('{id}/image', [App\Http\Controllers\cms\pegawaiController::class, 'update_image'])->name('update.image');
             Route::delete('/{id}', [App\Http\Controllers\cms\pegawaiController::class, 'destroy'])->name('destroy');
         });
 
@@ -86,6 +88,25 @@ Route::prefix('cms')->name('cms.')->group(function () {
             Route::get('{id}/edit', [App\Http\Controllers\cms\publicationController::class, 'edit'])->name('edit');
             Route::put('{id}/edit', [App\Http\Controllers\cms\publicationController::class, 'update'])->name('update');
             Route::delete('/{id}', [App\Http\Controllers\cms\publicationController::class, 'destroy'])->name('destroy');
+        });
+
+        // Background
+        Route::get('/background', [App\Http\Controllers\cms\realizationController::class, 'index'])->name('background');
+        Route::prefix('background')->name('background.')->group(function (){
+            Route::get('{id}/edit', [App\Http\Controllers\cms\backgroundController::class, 'edit'])->name('edit');
+            Route::put('{id}/edit', [App\Http\Controllers\cms\backgroundController::class, 'update'])->name('update');
+            Route::delete('/{id}', [App\Http\Controllers\cms\backgroundController::class, 'destroy'])->name('destroy');
+        });
+
+        // Realisasi
+        Route::get('/realisasi', [App\Http\Controllers\cms\realizationController::class, 'index'])->name('realisasi');
+        Route::prefix('realisasi')->name('realisasi.')->group(function (){
+            Route::get('/create', [App\Http\Controllers\cms\realizationController::class, 'create'])->name('create');
+            Route::post('/create', [App\Http\Controllers\cms\realizationController::class, 'store'])->name('store');
+            Route::get('/{id}', [App\Http\Controllers\cms\realizationController::class, 'show'])->name('show');
+            Route::get('{id}/edit', [App\Http\Controllers\cms\realizationController::class, 'edit'])->name('edit');
+            Route::put('{id}/edit', [App\Http\Controllers\cms\realizationController::class, 'update'])->name('update');
+            Route::delete('/{id}', [App\Http\Controllers\cms\realizationController::class, 'destroy'])->name('destroy');
         });
 
         // Profil Bapenda
@@ -170,6 +191,10 @@ Route::prefix('cms')->name('cms.')->group(function () {
             Route::get('/{id}', [App\Http\Controllers\cms\galleryController::class, 'show'])->name('show');
             Route::get('{id}/edit', [App\Http\Controllers\cms\galleryController::class, 'edit'])->name('edit');
             Route::put('{id}/edit', [App\Http\Controllers\cms\galleryController::class, 'update'])->name('update');
+            Route::get('{id}/image', [App\Http\Controllers\cms\galleryController::class, 'image'])->name('image');
+            Route::put('{id}/image', [App\Http\Controllers\cms\galleryController::class, 'update_image'])->name('update.image');
+            Route::get('{id}/thumbnail', [App\Http\Controllers\cms\galleryController::class, 'thumbnail'])->name('thumbnail');
+            Route::put('{id}/thumbnail', [App\Http\Controllers\cms\galleryController::class, 'update_thumbnail'])->name('update.thumbnail');
             Route::delete('/{id}', [App\Http\Controllers\cms\galleryController::class, 'destroy'])->name('destroy');
         });
 
@@ -259,6 +284,34 @@ Route::prefix('cms')->name('cms.')->group(function () {
                 Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'faq_edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'faq_update'])->name('update');
                 Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'faq_destroy'])->name('destroy');
+            });
+        });
+
+        // Berita Bapenda
+        Route::name('news.')->prefix('news')->group(function (){
+            Route::prefix('category')->name('category.')->group(function (){
+                Route::get('', [\App\Http\Controllers\cms\categoryController::class, 'index'])->name('index');
+                Route::get('/create', [\App\Http\Controllers\cms\categoryController::class, 'create'])->name('create');
+                Route::post('/store', [\App\Http\Controllers\cms\categoryController::class, 'store'])->name('store');
+                Route::get('/{id}', [\App\Http\Controllers\cms\categoryController::class, 'edit'])->name('edit');
+                Route::put('/{id}', [\App\Http\Controllers\cms\categoryController::class, 'update'])->name('update');
+                Route::delete('/{id}', [\App\Http\Controllers\cms\categoryController::class, 'destroy'])->name('destroy');
+            });
+            Route::prefix('tags')->name('tags.')->group(function (){
+                Route::get('', [\App\Http\Controllers\cms\tagController::class, 'index'])->name('index');
+                Route::get('/create', [\App\Http\Controllers\cms\tagController::class, 'create'])->name('create');
+                Route::post('/store', [\App\Http\Controllers\cms\tagController::class, 'store'])->name('store');
+                Route::get('/{id}', [\App\Http\Controllers\cms\tagController::class, 'edit'])->name('edit');
+                Route::put('/{id}', [\App\Http\Controllers\cms\tagController::class, 'update'])->name('update');
+                Route::delete('/{id}', [\App\Http\Controllers\cms\tagController::class, 'destroy'])->name('destroy');
+            });
+            Route::prefix('post')->name('post.')->group(function (){
+                Route::get('', [\App\Http\Controllers\cms\postController::class, 'index'])->name('index');
+                Route::get('/create', [\App\Http\Controllers\cms\postController::class, 'create'])->name('create');
+                Route::post('/store', [\App\Http\Controllers\cms\postController::class, 'store'])->name('store');
+                Route::get('/{id}', [\App\Http\Controllers\cms\postController::class, 'edit'])->name('edit');
+                Route::put('/{id}', [\App\Http\Controllers\cms\postController::class, 'update'])->name('update');
+                Route::delete('/{id}', [\App\Http\Controllers\cms\postController::class, 'destroy'])->name('destroy');
             });
         });
     });

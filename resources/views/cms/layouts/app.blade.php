@@ -74,6 +74,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-pdf text-primary"></i></div>
                                 Publikasi
                             </a>
+                            <a class="nav-link {{ Route::is('cms.realisasi') ? 'active' : '' }}" href="{{ route('cms.realisasi') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-file-excel text-primary"></i></div>
+                                Pendapatan Daerah
+                            </a>
                             <a class="nav-link {{ Route::is('cms.uptb') ? 'active' : '' }}" href="{{ route('cms.uptb') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-info-circle text-primary"></i></div>
                                 Profil UPTB
@@ -108,6 +112,19 @@
                                     <a class="nav-link {{Route::is('cms.other.video') ? 'active' : ''}}" href="{{route('cms.other.video')}}"><i class="fab fa-youtube text-primary me-2"></i>Video</a>
                                     <a class="nav-link {{Route::is('cms.other.infografis') ? 'active' : ''}}" href="{{route('cms.other.infografis')}}"><i class="fas fa-file-image text-primary me-2"></i>Infografis</a>
                                     <a class="nav-link {{Route::is('cms.other.faq') ? 'active' : ''}}" href="{{route('cms.other.faq')}}"><i class="fas fa-question-circle text-primary me-2"></i>FAQ</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link {{Route::is('cms.news.*') ? 'active' : 'collapsed'}} " href="#" data-bs-toggle="collapse" data-bs-target="#collapseNews" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="bi bi-newspaper text-primary"></i></div>
+                                Berita
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="{{Route::is('cms.news.*') ? '' : 'collapse'}}" id="collapseNews" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link {{Route::is('cms.news.category.index') ? 'active' : ''}}" href="{{route('cms.news.category.index')}}"><i class="bi bi-columns-gap text-primary me-2"></i>Category</a>
+                                    <a class="nav-link {{Route::is('cms.news.tags.index') ? 'active' : ''}}" href="{{route('cms.news.tags.index')}}"><i class="bi bi-tags text-primary me-2"></i>Tags</a>
+                                    <a class="nav-link {{Route::is('cms.news.post.index') ? 'active' : ''}}" href="{{route('cms.news.post.index')}}"><i class="bi bi-file-earmark-richtext text-primary me-2"></i>Post Berita</a>
                                 </nav>
                             </div>
                             <a class="nav-link {{ Route::is('cms.gallery') ? 'active' : '' }}" href="{{ route('cms.gallery') }}">
