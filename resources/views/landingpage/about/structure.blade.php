@@ -25,7 +25,7 @@
                         <hr class="bg-secondary">
                         <div class="row justify-content-center">
                             <div class="col-12">
-                            <img src="{{Storage::url($struktur->image)}}" alt="Struktur Organisasi Bapenda Katingan" class="w-100">
+                                <img src="{{Storage::url($struktur->image)}}" alt="Struktur Organisasi Bapenda Katingan" class="w-100">
                             </div>
                         </div>
                     </div>
