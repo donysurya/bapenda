@@ -44,7 +44,7 @@
                 <div class="col-lg-6 col-12">
                     <h1 class="fw-bold mb-3 text-uppercase text-welcome" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1400"><i class="bi bi-info-circle me-3"></i>Profil Bapenda</h1>
                     <p class="fw-bold" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1200">Badan Pendapatan Daerah merupakan Satuan Perangkat Kerja Daerah (SKPD) Pemerintah Kabupaten Katingan yang bertugas dalam melakukan pemungutan, penagihan dan pengawasan pajak dan retribusi pada pemerintah Kabupaten Katingan. Bapenda Katingan memiliki visi terwujudnya Kabupaten Katingan yang bermartabat.</p>
-                    <a href="{{ route('about') }}" class="mt-2 text-decoration-none btn btn-outline-danger fw-bold text-center px-4 py-2" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" data-aos-duration="1300"><i class="bi bi-info-circle me-2"></i>Detail Bapenda</a>
+                    <a href="{{ route('about.visi_misi') }}" class="mt-2 text-decoration-none btn btn-outline-danger fw-bold text-center px-4 py-2" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" data-aos-duration="1300"><i class="bi bi-info-circle me-2"></i>Detail Bapenda</a>
                 </div>
             </div>
         </section>
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#!" class="text-decoration-none btn-news text-center d-lg-block d-none"><i class="bi bi-newspaper me-2"></i>Portal Berita</a>
+                    <a href="{{route('news.index')}}" class="text-decoration-none btn-news text-center d-lg-block d-none"><i class="bi bi-newspaper me-2"></i>Portal Berita</a>
                 </div>
                 <div class="col-lg-5 col-12 border-start border-danger mb-3">
                     <div class="row mb-3">
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
-                    <a href="{{ route('article') }}" class="text-decoration-none btn-news text-center d-lg-none d-block"><i class="bi bi-newspaper me-2"></i>Portal Berita</a>
+                    <a href="{{ route('news.index') }}" class="text-decoration-none btn-news text-center d-lg-none d-block"><i class="bi bi-newspaper me-2"></i>Portal Berita</a>
                 </div>
             </div>
         </section>
@@ -137,7 +137,7 @@
                         <h3 class="fw-bold mb-4 text-uppercase text-welcome"><i class="bi bi-play-btn me-3"></i>Video</h3>
                         <div class="row">
                             <div class="col-12 p-2">
-                                <iframe height="350" src="https://www.youtube.com/embed/6Av2zH4jN_0" class="w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <object data="{{$video->link}}" class="w-100" height="350" title="YouTube video player"></object>
                             </div>
                             <p class="mt-3">
                                 <a href="{{ route('video') }}" class="text-decoration-none rounded px-3 py-2 bg-info fw-bold text-white"><i class="bi bi-box-arrow-up-right me-2"></i>Video Lainnya</a>
@@ -172,30 +172,9 @@
 
         <section id="flow" class="p-4 py-5 bg-light" style="min-height:50vh!important;">
             <h2 class="fw-bold mb-4 text-uppercase text-welcome text-center">Alur Proses Pajak Online</h2>
-            <div class="row my-4 gy-3">
-                <div class="col-lg-4 col-md-6 col-12 text-center">
-                    <img src="{{ asset('img/flow/01.png') }}" class="rounded w-25 mb-3" alt="...">
-                    <p class="fw-bold">Wajib Pajak Registrasi ke <a href="#!" class="text-decoration-none">bapenda.katingan.go.id</a></p>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12 text-center">
-                    <img src="{{ asset('img/flow/02.png') }}" class="rounded w-25 mb-3" alt="...">
-                    <p class="fw-bold">Registrasi menggunakan NIK (Pribadi) atau NPWP Pusat (Badan Usaha)</p>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12 text-center">
-                    <img src="{{ asset('img/flow/03.png') }}" class="rounded w-25 mb-3" alt="...">
-                    <p class="fw-bold">Jika berhasil maka wajib pajak akan mendapatkan email aktivasi untuk melakukan aktivasi</p>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12 text-center">
-                    <img src="{{ asset('img/flow/04.png') }}" class="rounded w-25 mb-3" alt="...">
-                    <p class="fw-bold">Jika sudah melakukan aktivasi maka wajib pajak lakukan login untuk memanfaat fasilitas layanan yang ada di pajak online</p>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12 text-center">
-                    <img src="{{ asset('img/flow/05.png') }}" class="rounded w-25 mb-3" alt="...">
-                    <p class="fw-bold">Objek pajak yang muncul di pajak online adalah objek pajak yang dalam database BPRD jakarta sudah terisi dengan NIK/NPWP wajib pajak</p>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12 text-center">
-                    <img src="{{ asset('img/flow/06.png') }}" class="rounded w-25 mb-3" alt="...">
-                    <p class="fw-bold">Jika objek pajak yang dimiliki oleh wajib pajak tidak muncul silahkan hubungi / email UPPRD atau Samsat terdekat</p>
+            <div class="row my-4 justify-content-center">
+                <div class="col-md-10">
+                    <img src="{{Storage::url($flow->image)}}" alt="{{$flow->name}}" class="w-100">
                 </div>
             </div>
         </section>
@@ -264,12 +243,12 @@
                             <img src="{{ asset('img/payment/gopay.png') }}" class="rounded w-50 mb-3" alt="...">
                         </a>
                     </div>--}}
-                    <div class="col-12 text-center">
+                    {{--<div class="col-12 text-center">
                         <span class="text-dark"><i class="bi bi-sticky me-2"></i>Catatan: Klik Pada Gambar yang ada untuk melihat Detail / Cara melakukan Pembayaran</span>
-                    </div>
+                    </div>--}}
 
                     <!-- Modal Pembayaran -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    {{--<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered">
                             <div class="modal-content" style="background: #19234f !important;">
                                 <div class="modal-body mb-4">
@@ -298,7 +277,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
         </section>

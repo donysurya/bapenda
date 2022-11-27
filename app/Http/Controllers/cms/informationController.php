@@ -222,7 +222,7 @@ class informationController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
             'description' => 'required',
         ]);
 
@@ -293,7 +293,7 @@ class informationController extends Controller
     public function flow_update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
         ]);
 
         try {

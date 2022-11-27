@@ -13,7 +13,7 @@
     <div class="container-fluid mx-0 px-0">
         <div class="row gy-3 mt-3 px-3">
 
-            @include('landingpage.about.menu', ['active' => 'history'])
+            @include('landingpage.about.menu', ['active' => 'kepala-bapenda'])
 
             <div class="col-lg-12 p-4 pt-0">
                 <div class="card h-100">
@@ -30,13 +30,14 @@
                                 <div class="card shadow mb-3">
                                     <div class="row g-0">
                                         <div class="col-md-4">
-                                            <img src="{{ asset('img/news/1.jpeg') }}" class="img-fluid rounded-start h-100" alt="...">
+                                            <img src="{{Storage::url($kepala->image)}}" alt="Kepala Bapenda Katingan" class="p-2 img-fluid rounded-start h-100">
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
-                                                <h5 class="card-title fw-bold mb-3">DR. ABC, M.Si</h5>
-                                                <p class="card-text">Menjabat sebagai Kepala Badan Pendapatan Daerah Kabupaten Katingan pada 01 Agustus 2020 sampai sekarang.</p>
-                                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, quaerat dicta reprehenderit, adipisci pariatur provident eaque quas voluptatem quod voluptate tempore ipsa maxime ducimus expedita necessitatibus explicabo alias magni distinctio repellendus. Aliquid dolorum id saepe iusto facilis dolores necessitatibus corrupti. Quia atque libero fugit nemo corporis sit inventore, facilis velit.</p>
+                                                <h5 class="card-title fw-bold mb-3">{{$kepala->name}}</h5>
+                                                <div class="card-text">
+                                                    {!!$kepala->description!!}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -44,27 +45,7 @@
                             </div>
                         </div>
                         <h5 class="fw-bold mt-4">Tugas dan Fungsi</h5>
-                        <p class="mb-2">Kepala Badan Pendapatan Daerah Kabupaten Katingan</p>
-                        <p style="text-align:justify;" class="mb-2">
-                            Sebagaimana yang telah diatur dalam <a href="#!" class="fw-bold">Peraturan Gubernur Prov. Kalimantan Tengah Nomor xx Tahun 20xx</a> mengenai Tugas Pokok, Fungsi, Rincian Tugas Unit dan Tata Kerja Badan Pendapatan Daerah Kabupaten Katingan Provinsi Kalimantan Tengah, Fungsi dari Kepala Badan Pendapatan Daerah adalah meliputi sebagai berikut:
-                        </p>
-                        <ol>
-                            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, eum!</li>
-                            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, eum!</li>
-                            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, eum!</li>
-                            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, eum!</li>
-                        </ol>
-                        <p style="text-align:justify;" class="mb-2">
-                            Adapun Tugas Kepala Badan Pendapatan adalah sebagai berikut :                        </p>
-                        <ol>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente labore nihil quam blanditiis, neque ducimus doloremque debitis sed beatae ullam!</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente labore nihil quam blanditiis, neque ducimus doloremque debitis sed beatae ullam!</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente labore nihil quam blanditiis, neque ducimus doloremque debitis sed beatae ullam!</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente labore nihil quam blanditiis, neque ducimus doloremque debitis sed beatae ullam!</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente labore nihil quam blanditiis, neque ducimus doloremque debitis sed beatae ullam!</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente labore nihil quam blanditiis, neque ducimus doloremque debitis sed beatae ullam!</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente labore nihil quam blanditiis, neque ducimus doloremque debitis sed beatae ullam!</li>
-                        </ol>
+                        {!!$kepala->jobdesk!!}
                     </div>
                     <div class="row justify-content-end p-4">
                         <img src="{{ asset('img/logo.png') }}" alt="" class="about_logo">

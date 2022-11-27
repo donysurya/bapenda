@@ -61,10 +61,10 @@
                                 &nbsp;Informasi
                             </a>
                             <ul class="dropdown-menu me-3" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Tentang Kami</a></li>
-                                <li><a class="dropdown-item" href="#!">Profil UPTB</a></li>
-                                <li><a class="dropdown-item" href="#!">Foto Galeri</a></li>
-                                <li><a class="dropdown-item" href="#!">Realisasi Pendapatan Daerah</a></li>
+                                <li><a class="dropdown-item" href="{{route('about.visi_misi')}}">Tentang Kami</a></li>
+                                <li><a class="dropdown-item" href="{{route('uptb.index')}}">Profil UPTB</a></li>
+                                <li><a class="dropdown-item" href="{{route('gallery')}}">Foto Galeri</a></li>
+                                <li><a class="dropdown-item" href="{{route('realisasi.index')}}">Realisasi Pendapatan Daerah</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -74,7 +74,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3 px-lg-2" href="{{route('home')}}#services">
+                            <a class="nav-link px-3 px-lg-2" href="{{route('download')}}">
                                 <i class="bi bi-file-earmark-pdf"></i>
                                 &nbsp;Publikasi
                             </a>

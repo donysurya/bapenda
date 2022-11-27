@@ -38,7 +38,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Alur Proses</th>
-                                        <th>Logo Alur Proses</th>
+                                        <th>Gambar Alur Proses</th>
                                         <th>Created At</th>
                                         <th>Action</th>
                                     </tr>

@@ -21,55 +21,30 @@
                         <h3 class="fw-bold text-uppercase text-center">Berita Bapenda Kabupaten Katingan</h3>
                         <hr class="bg-secondary">
 
-                        {{--<div class="row mt-4 mb-2">
-                            <div class="col-md-12">
-                                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                    <div class="col-md-7 col-lg-7 col-12 p-4 d-flex flex-column position-static">
-                                        <strong class="d-inline-block mb-2 text-primary">Bapenda, Bapenda Katingan, Bapenda Kalteng</strong>
-                                        <h3 class="mb-0">Rapat Pembahasan Analisa SWOT Smart City Kabupaten Katingan</h3>
-                                        <div class="mb-1 text-muted">Aug 05, 2022</div>
-                                        <p class="card-text mb-auto">Kepala Dinas Komunikasi Informatika Persandian dan Statistik (Diskominfopersantik) Kabupaten Katingan memimpin Rapat Pembahasan Analisa SWOT Smart City Kabupaten Katingan di Media Center Diskominfopersantik. Senin (27/6/2022). Rapat pembahasan ini membahas 6 pilar yang menjadi dasar...</p>
-                                        <a href="#" class="stretched-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalNews">Baca Selengkapnya</a>
-                                    </div>
-                                    <div class="col-5 d-md-block d-none d-lg-block">
-                                        <img src="{{ asset('img/news/1.jpeg') }}" alt="" width="100%" height="100%">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>--}}
-
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="row mb-2">
-                                    <div class="col-md-12">
-                                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                            <div class="col p-4 d-flex flex-column position-static">
-                                                <strong class="d-inline-block mb-2 text-primary">Bapenda, Bapenda Katingan, Bapenda Kalteng</strong>
-                                                <h3 class="my-0">Rapat Pembahasan Analisa SWOT Smart City Kabupaten Katingan</h3>
-                                                <div class="mb-1 text-muted">Aug 05, 2022</div>
-                                                <p class="card-text mb-auto">Kepala Dinas Komunikasi Informatika Persandian dan Statistik (Diskominfopersantik) Kabupaten Katingan memimpin Rapat Pembahasan Analisa SWOT Smart City Kabupaten Katingan di Media Center Diskominfopersantik. Senin (27/6/2022). Rapat pembahasan ini membahas 6 pilar yang menjadi dasar...</p>
-                                                <a href="#" class="stretched-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalNewsDetik">Baca Selengkapnya</a>
-                                            </div>
-                                            <div class="col-auto d-none d-lg-block">
-                                                <img src="{{ asset('img/news/1.jpeg') }}" alt="" width="350px" class="h-100">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                            <div class="col p-4 d-flex flex-column position-static">
-                                                <strong class="d-inline-block mb-2 text-primary">Bapenda, Bapenda Katingan, Bapenda Kalteng</strong>
-                                                <h3 class="my-0">Rapat Pembahasan Analisa SWOT Smart City Kabupaten Katingan</h3>
-                                                <div class="mb-1 text-muted">Aug 05, 2022</div>
-                                                <p class="card-text mb-auto">Kepala Dinas Komunikasi Informatika Persandian dan Statistik (Diskominfopersantik) Kabupaten Katingan memimpin Rapat Pembahasan Analisa SWOT Smart City Kabupaten Katingan di Media Center Diskominfopersantik. Senin (27/6/2022). Rapat pembahasan ini membahas 6 pilar yang menjadi dasar...</p>
-                                                <a href="#" class="stretched-link text-decoration-none">Baca Selengkapnya</a>
-                                            </div>
-                                            <div class="col-auto d-none d-lg-block">
-                                                <img src="{{ asset('img/news/1.jpeg') }}" alt="" width="350px" class="h-100">
+                                    @foreach($data as $item)
+                                        <div class="col-md-12">
+                                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                                <div class="col p-4 d-flex flex-column position-static">
+                                                    <strong class="d-inline-block mb-2 text-primary">
+                                                        @foreach($item->tags as $tag)
+                                                            {{$tag->name}}{{$loop->last?'':','}}
+                                                        @endforeach
+                                                    </strong>
+                                                    <h4 class="my-0 mb-3">{{$item->title}}</h4>
+                                                    <div class="mb-1 text-muted fw-bold">Creator: {{ $item->admin->name }}</div>
+                                                    <div class="mb-3 text-muted">{{ $item->created_at->format('l, d M Y') }}</div>
+                                                    <p class="card-text mb-auto text-start text-dark textShadow fw-normal">{{$item->abstract}}</p>
+                                                    <a href="{{route('news.show', ['slug' => $item->slug])}}" class="stretched-link text-decoration-none mt-2">Continue reading</a>
+                                                </div>
+                                                <div class="col-auto d-none d-lg-block">
+                                                    <img src="{{Storage::url($item->image)}}" alt="" width="350px" height="100%">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endforeach
                                 </div>
 
                                 <nav aria-label="Page navigation example">

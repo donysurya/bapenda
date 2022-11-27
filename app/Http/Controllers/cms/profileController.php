@@ -165,7 +165,7 @@ class profileController extends Controller
     public function sejarah_store(Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
             'description' => 'required',
         ]);
 
@@ -227,7 +227,7 @@ class profileController extends Controller
     public function sejarah_update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
         ]);
 
         try {
@@ -273,7 +273,7 @@ class profileController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:100',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
             'description' => 'required',
             'jobdesk' => 'required',
         ]);
@@ -342,7 +342,7 @@ class profileController extends Controller
     public function kepala_update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:100',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
         ]);
 
         try {
@@ -387,7 +387,7 @@ class profileController extends Controller
     public function struktur_store(Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:1000',
         ]);
 
         try {
@@ -418,7 +418,7 @@ class profileController extends Controller
     public function struktur_update(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:1000',
         ]);
 
         try {

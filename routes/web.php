@@ -13,26 +13,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landingpage.index');
-})->name('home');
+Route::get('/', [\App\Http\Controllers\homeController::class, 'index'])->name('home');
 
-// About Bapenda
-Route::get('/about', function () {
-    return view('landingpage.about.index');
-})->name('about'); //Visi & Misi
+// News
+Route::prefix('news')->name('news.')->group(function (){
+    Route::get('', [\App\Http\Controllers\articleController::class, 'index'])->name('index');
+    Route::get('/{slug}', [\App\Http\Controllers\articleController::class, 'show'])->name('show');
+});
 
-Route::get('/history', function () {
-    return view('landingpage.about.history');
-})->name('history'); //Sejarah Bapenda
+// Profil UPTB
+Route::prefix('uptb')->name('uptb.')->group(function (){
+    Route::get('', [\App\Http\Controllers\uptbController::class, 'index'])->name('index');
+    Route::get('/{id}', [\App\Http\Controllers\uptbController::class, 'show'])->name('show');
+});
 
-Route::get('/director', function () {
-    return view('landingpage.about.director');
-})->name('director'); //Kepala Bapenda
+// Realisasi Pendapatan Daerah
+Route::prefix('realisasi')->name('realisasi.')->group(function (){
+    Route::get('', [\App\Http\Controllers\realizationController::class, 'index'])->name('index');
+    Route::get('/{id}', [\App\Http\Controllers\realizationController::class, 'show'])->name('show');
+});
 
-Route::get('/organization', function () {
-    return view('landingpage.about.organization');
-})->name('organization'); //Struktur Organisasi
+// Gallery
+Route::get('/gallery', [\App\Http\Controllers\galleryController::class, 'index'])->name('gallery');
+
+// Profil UPTB
+Route::prefix('about')->name('about.')->group(function (){
+    Route::get('/visi-misi', [\App\Http\Controllers\aboutController::class, 'visi_misi'])->name('visi_misi');
+    Route::get('/sejarah', [\App\Http\Controllers\aboutController::class, 'sejarah'])->name('sejarah');
+    Route::get('/kepala-bapenda', [\App\Http\Controllers\aboutController::class, 'kepala_bapenda'])->name('kepala');
+    Route::get('/struktur-organisasi', [\App\Http\Controllers\aboutController::class, 'struktur_organisasi'])->name('struktur');
+});
 
 // Download
 Route::get('/download', function () {
@@ -48,11 +58,6 @@ Route::get('/infografis', function () {
 Route::get('/video', function () {
     return view('landingpage.video.index');
 })->name('video'); 
-
-// News
-Route::get('/article', function () {
-    return view('landingpage.article.index');
-})->name('article'); 
 
 Route::get('/cms', function () {
     return redirect()->route('cms.login');
@@ -91,7 +96,7 @@ Route::prefix('cms')->name('cms.')->group(function () {
         });
 
         // Background
-        Route::get('/background', [App\Http\Controllers\cms\realizationController::class, 'index'])->name('background');
+        Route::get('/background', [App\Http\Controllers\cms\backgroundController::class, 'index'])->name('background');
         Route::prefix('background')->name('background.')->group(function (){
             Route::get('{id}/edit', [App\Http\Controllers\cms\backgroundController::class, 'edit'])->name('edit');
             Route::put('{id}/edit', [App\Http\Controllers\cms\backgroundController::class, 'update'])->name('update');

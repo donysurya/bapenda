@@ -41,8 +41,8 @@
                                 <div id="descriptionHelp" class="form-text">Deskripsi Singkat Alur Proses.</div>
                             </div>
                             <div class="mb-3">
-                                <label for="uploadFile" class="form-label me-2 fw-bold">Logo:</label>
-                                <img src="{{Storage::url($flow->image)}}" alt="{{$flow->name}}" width="150px">
+                                <label for="uploadFile" class="form-label me-2 fw-bold">Gambar:</label>
+                                <img src="{{Storage::url($flow->image)}}" alt="{{$flow->name}}" width="300px">
                             </div>
                             <div class="mb-3">
                                 <a href="{{ route('cms.other.flow') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>

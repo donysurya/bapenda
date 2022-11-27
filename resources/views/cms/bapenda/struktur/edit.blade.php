@@ -37,7 +37,7 @@
                                 <div class="mb-3">
                                     <label for="uploadFile" class="form-label">Struktur Organisasi</label>
                                     <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" required id="uploadFile" aria-describedby="fileHelp">
-                                    <div id="fileHelp" class="form-text">Upload struktur organisasi (*PNG, JPG, WEBP). <strong>Maksimum Size: 500 kb</strong></div>
+                                    <div id="fileHelp" class="form-text">Upload struktur organisasi (*PNG, JPG, WEBP). <strong>Maksimum Size: 1000 kb</strong></div>
                                     @error('file')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

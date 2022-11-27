@@ -121,3 +121,7 @@ html, body {
     transform: translate(-50%, -65%);
     width: 10px;
 }
+
+.footer_logo {
+    width: 150px;
+}

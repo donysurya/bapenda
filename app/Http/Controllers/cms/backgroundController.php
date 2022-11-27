@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class backgroundController extends Controller
 {
+    public function index()
+    {
+        return view('cms.background.index');
+    }
+
     public function edit($id)
     {
         $background = Background::where('id', $id)->first();

@@ -23,4 +23,8 @@ class Uptb extends Model
         'maps_uptb',
         'updated_by',
     ];
+
+    public function admin() {
+        return $this->belongsTo(Cms::class, 'updated_by');
+    }
 }

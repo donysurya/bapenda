@@ -54,9 +54,9 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="uploadFile" class="form-label">Logo</label>
+                                    <label for="uploadFile" class="form-label">Gambar</label>
                                     <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" id="uploadFile" value="{{ old('file') }}" aria-describedby="fileHelp">
-                                    <div id="fileHelp" class="form-text">Upload logo Alur Proses (*PNG, JPG, WEBP). <strong>Maksimum Size: 50 kb</strong></div>
+                                    <div id="fileHelp" class="form-text">Upload Gambar Alur Proses (*PNG, JPG, WEBP). <strong>Maksimum Size: 500 kb</strong></div>
                                     @error('file')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

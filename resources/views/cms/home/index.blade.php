@@ -139,7 +139,10 @@
                                                 <td><img src="{{asset('img/home.webp')}}" alt="Background Landing Page" width="400px"></td>
                                                 <td>
                                                     <center>
-                                                        <a href="{{route('cms.background.edit', ['id' => 1])}}" class="btn btn-primary m-1 py-1 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Background" style="font-size:14px;">
+                                                        {{--<a href="{{route('cms.background.edit', ['id' => 1])}}" class="btn btn-primary m-1 py-1 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Background" style="font-size:14px;">
+                                                            Update Background
+                                                        </a>--}}
+                                                        <a href="{{route('cms.background')}}" class="btn btn-primary m-1 py-1 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Background" style="font-size:14px;">
                                                             Update Background
                                                         </a>
                                                     </center>

@@ -13,7 +13,7 @@
     <div class="container-fluid mx-0 px-0">
         <div class="row gy-3 mt-3 px-3">
 
-            @include('landingpage.about.menu', ['active' => 'history'])
+            @include('landingpage.about.menu', ['active' => 'struktur-organisasi'])
 
             <div class="col-lg-12 p-4 pt-0">
                 <div class="card h-100">
@@ -25,7 +25,7 @@
                         <hr class="bg-secondary">
                         <div class="row justify-content-center">
                             <div class="col-12">
-                                <img src="{{ asset('img/news/1.jpeg') }}" class="w-100" alt="...">
+                            <img src="{{Storage::url($struktur->image)}}" alt="Struktur Organisasi Bapenda Katingan" class="w-100">
                             </div>
                         </div>
                     </div>
