@@ -25,7 +25,11 @@
                         <hr class="bg-secondary">
                         <div class="row justify-content-center">
                             <div class="col-12">
-                                <img src="{{Storage::url($struktur->image)}}" alt="Struktur Organisasi Bapenda Katingan" class="w-100">
+                                @if(is_null($struktur))
+                                    - No Data Found -
+                                @else
+                                    <img src="{{Storage::url($struktur->image)}}" alt="Struktur Organisasi Bapenda Katingan" class="w-100">
+                                @endif
                             </div>
                         </div>
                     </div>

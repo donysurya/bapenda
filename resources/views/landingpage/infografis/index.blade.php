@@ -20,18 +20,16 @@
                     <div class="card-body p-4 pb-0">
                         <h5 class="fw-bold">File Infografis</h5>
                         <div class="row">
-                            <div class="col-lg-3 col-md-4 col-6 p-2">
-                                <img src="{{ asset('img/infografis/1.jpeg') }}" class="rounded w-100" alt="...">
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-6 p-2">
-                                <img src="{{ asset('img/infografis/1.jpeg') }}" class="rounded w-100" alt="...">
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-6 p-2">
-                                <img src="{{ asset('img/infografis/1.jpeg') }}" class="rounded w-100" alt="...">
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-6 p-2">
-                                <img src="{{ asset('img/infografis/1.jpeg') }}" class="rounded w-100" alt="...">
-                            </div>
+                            @if(is_null($infografis))
+                            @else
+                                @forelse($infografis as $index => $item)
+                                    <div class="col-lg-3 col-md-4 col-6 p-2">
+                                        <img src="{{Storage::url($item->image)}}" class="rounded w-100" alt="{{$item->name}}">
+                                    </div>
+                                @empty
+                                    - No Infografis Found -
+                                @endforelse
+                            @endif
                         </div>
                     </div>
                     <div class="row justify-content-end p-4">

@@ -18,17 +18,21 @@ use Carbon\Carbon;
 class homeController extends Controller
 {
     public function index() {
-        $background = Background::where('id', 1)->first();
         $video = Video::orderBy('created_at', 'desc')->first();
         $infografis = Infografis::take(4)->get();
         $flow = Flow::orderBy('created_at', 'desc')->first();
         $service = Service::all();
         $payment = Payment::all();
         $portal = Portal::take(5)->get();
-        $publication = Publication::all();
+        $publication = Publication::take(3)->get();
         $faq = faq::all();
+
+        // Berita
+        $post1 = Posts::orderBy('created_at', 'desc')->first();
+        $post2 = Posts::orderBy('created_at', 'desc')->take(4)->get();
+
         return view ('landingpage.index', 
-                        compact('background', 'video', 
+                        compact('video', 'post1', 'post2',
                                 'infografis', 'flow',
                                 'service', 'payment', 
                                 'portal', 'publication', 

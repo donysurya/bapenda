@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="row mb-2">
-                                    @foreach($data as $item)
+                                    @forelse($data as $index => $item)
                                         <div class="col-md-12">
                                             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                                 <div class="col p-4 d-flex flex-column position-static">
@@ -44,7 +44,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    @empty
+                                        - No Data Found -
+                                    @endforelse
                                 </div>
 
                                 <nav aria-label="Page navigation example">

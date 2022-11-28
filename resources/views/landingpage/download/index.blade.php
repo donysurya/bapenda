@@ -28,24 +28,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</th>
-                                    <td>Jumlah Tower Telekomunikasi Berdasarkan Kecamatan Tahun 2017</td>
-                                    <td class="text-center">
-                                        <a href="#!" class="rounded text-decoration-none bg-primary px-2 py-1 text-light">
-                                            <i class="bi bi-download"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</th>
-                                    <td>Edaran Bupati Katingan Nomor: 800/765/BKPP-2/2021 Tentang PELAKSANAAN APEL PAGI</td>
-                                    <td class="text-center">
-                                        <a href="#!" class="rounded text-decoration-none bg-primary px-2 py-1 text-light">
-                                            <i class="bi bi-download"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                @forelse($publikasi as $index => $item)
+                                    <tr>
+                                        <td>{{$index+1}}</th>
+                                        <td>{{$item->name}}</td>
+                                        <td class="text-center">
+                                            <a href="{{Storage::url($item->file)}}" class="rounded text-decoration-none bg-primary px-2 py-1 text-light" target="_blank" rel="noopener noreferrer">
+                                                <i class="bi bi-download"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center alert-warning">No data found.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

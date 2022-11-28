@@ -24,11 +24,19 @@
                         <h4 class="text-uppercase">
                             Visi
                         </h4>
-                        {!!$visi->description!!}
+                        @if(is_null($visi))
+                            - No Data Found -
+                        @else
+                            {!!$visi->description!!}
+                        @endif
                         <h4 class="text-uppercase">
                             Misi
                         </h4>
-                        {!!$misi->description!!}
+                        @if(is_null($misi))
+                            - No Data Found -
+                        @else
+                            {!!$misi->description!!}
+                        @endif
                     </div>
                     <div class="row justify-content-end p-4">
                         <img src="{{ asset('img/logo.png') }}" alt="" class="about_logo">

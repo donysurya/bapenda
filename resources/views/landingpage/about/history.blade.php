@@ -24,12 +24,16 @@
                         <h4 class="fw-bold text-uppercase text-center mb-3">Sejarah Bapenda kabupaten katingan provinsi kalimantan tengah</h4>
                         <hr class="bg-secondary">
                         <div class="row justify-content-center">
-                            <div class="col-lg-8 col-md-9 col-12 mb-3">
-                                <img src="{{Storage::url($sejarah->image)}}" alt="Sejarah Bapenda" class="w-100">
-                            </div>
-                            <div class="col-12 mt-3" style="text-align:justify;">
-                                {!!$sejarah->description!!}
-                            </div>
+                            @if(is_null($sejarah))
+                                - No Data Found -
+                            @else
+                                <div class="col-lg-8 col-md-9 col-12 mb-3">
+                                    <img src="{{Storage::url($sejarah->image)}}" alt="Sejarah Bapenda" class="w-100">
+                                </div>
+                                <div class="col-12 mt-3" style="text-align:justify;">
+                                    {!!$sejarah->description!!}
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="row justify-content-end p-4">

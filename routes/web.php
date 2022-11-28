@@ -45,19 +45,13 @@ Route::prefix('about')->name('about.')->group(function (){
 });
 
 // Download
-Route::get('/download', function () {
-    return view('landingpage.download.index');
-})->name('download'); 
+Route::get('/download', [\App\Http\Controllers\publicationController::class, 'index'])->name('download');
 
 // Infografis
-Route::get('/infografis', function () {
-    return view('landingpage.infografis.index');
-})->name('infografis'); 
+Route::get('/infografis', [\App\Http\Controllers\informationController::class, 'infografis'])->name('infografis');
 
 // Video
-Route::get('/video', function () {
-    return view('landingpage.video.index');
-})->name('video'); 
+Route::get('/video', [\App\Http\Controllers\informationController::class, 'video'])->name('video');
 
 Route::get('/cms', function () {
     return redirect()->route('cms.login');

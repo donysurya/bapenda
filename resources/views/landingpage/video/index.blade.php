@@ -20,18 +20,16 @@
                     <div class="card-body p-4 pb-0">
                         <h5 class="fw-bold">File Video</h5>
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-12 p-2">
-                                <iframe height="350" src="https://www.youtube.com/embed/6Av2zH4jN_0" class="w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 p-2">
-                                <iframe height="350" src="https://www.youtube.com/embed/6Av2zH4jN_0" class="w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 p-2">
-                                <iframe height="350" src="https://www.youtube.com/embed/6Av2zH4jN_0" class="w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 p-2">
-                                <iframe height="350" src="https://www.youtube.com/embed/6Av2zH4jN_0" class="w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
+                            @if(is_null($video))
+                            @else
+                                @forelse($video as $index => $item)
+                                    <div class="col-lg-4 col-md-6 col-12 p-2">
+                                        <object data="{{$item->link}}" class="w-100" height="350" title="YouTube video player"></object>
+                                    </div>
+                                @empty
+                                    - No Video Found -
+                                @endforelse
+                            @endif
                         </div>
                     </div>
                     <div class="row justify-content-end p-4">

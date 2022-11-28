@@ -25,27 +25,31 @@
                         <hr class="bg-secondary">
                         <h5 class="fw-bold mt-4">Profil Kepala</h5>
                         <p>Kepala Badan Pendapatan Daerah Kabupaten Katingan</p>
-                        <div class="row">
-                            <div class="col-lg-8 col-12">
-                                <div class="card shadow mb-3">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <img src="{{Storage::url($kepala->image)}}" alt="Kepala Bapenda Katingan" class="p-2 img-fluid rounded-start h-100">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title fw-bold mb-3">{{$kepala->name}}</h5>
-                                                <div class="card-text">
-                                                    {!!$kepala->description!!}
+                        @if(is_null($kepala))
+                            - No Data Found -
+                        @else
+                            <div class="row">
+                                <div class="col-lg-8 col-12">
+                                    <div class="card shadow mb-3">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="{{Storage::url($kepala->image)}}" alt="Kepala Bapenda Katingan" class="p-2 img-fluid rounded-start h-100">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title fw-bold mb-3">{{$kepala->name}}</h5>
+                                                    <div class="card-text">
+                                                        {!!$kepala->description!!}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <h5 class="fw-bold mt-4">Tugas dan Fungsi</h5>
-                        {!!$kepala->jobdesk!!}
+                            <h5 class="fw-bold mt-4">Tugas dan Fungsi</h5>
+                            {!!$kepala->jobdesk!!}
+                        @endif
                     </div>
                     <div class="row justify-content-end p-4">
                         <img src="{{ asset('img/logo.png') }}" alt="" class="about_logo">
