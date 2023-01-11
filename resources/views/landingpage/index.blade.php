@@ -3,7 +3,7 @@
 @section('title', 'Bapenda | Pajak Online | Kabupaten Katingan - Kalimantan Tengah')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/home.css?v2') }}" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 @endpush
 
@@ -93,7 +93,6 @@
                             -
                         @endforelse
                     </div>
-
                 @endif
                 
                 <div class="col-12 d-flex justify-content-center">
@@ -138,29 +137,24 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <h3 class="fw-bold mb-4 text-uppercase text-welcome"><i class="bi bi-images me-3"></i>Infografis</h3>
                         <div class="row">
-                            @if(is_null($infografis))
+                            @forelse($infografis as $index => $item)
                                 <div class="col-6 p-2">
-                                    <img src="{{ asset('img/infografis/1.jpeg') }}" class="rounded w-100" alt="...">
+                                    <img src="{{Storage::url($item->image)}}" class="rounded w-100" alt="{{$item->name}}">
+                                </div>
+                            @empty
+                                <div class="col-6 p-2">
+                                    <img src="{{ asset('img/infografis/1.webp') }}" class="rounded w-100" alt="...">
                                 </div>
                                 <div class="col-6 p-2">
-                                    <img src="{{ asset('img/infografis/1.jpeg') }}" class="rounded w-100" alt="...">
+                                    <img src="{{ asset('img/infografis/1.webp') }}" class="rounded w-100" alt="...">
                                 </div>
                                 <div class="col-6 p-2">
-                                    <img src="{{ asset('img/infografis/1.jpeg') }}" class="rounded w-100" alt="...">
+                                    <img src="{{ asset('img/infografis/1.webp') }}" class="rounded w-100" alt="...">
                                 </div>
                                 <div class="col-6 p-2">
-                                    <img src="{{ asset('img/infografis/1.jpeg') }}" class="rounded w-100" alt="...">
+                                    <img src="{{ asset('img/infografis/1.webp') }}" class="rounded w-100" alt="...">
                                 </div>
-                            @else
-                                @forelse($infografis as $index => $item)
-                                    <div class="col-6 p-2">
-                                        <img src="{{Storage::url($item->image)}}" class="rounded w-100" alt="{{$item->name}}">
-                                    </div>
-                                @empty
-                                    -
-                                @endforelse
-                            @endif
-                            
+                            @endforelse
                             <p class="mt-4">
                                 <a href="{{ route('infografis') }}" class="text-decoration-none rounded px-3 py-2 bg-info fw-bold text-white"><i class="bi bi-box-arrow-up-right me-2"></i>Infografis Lainnya</a>
                             </p>
@@ -190,7 +184,13 @@
         <section id="services" class="p-4 py-5" style="min-height:50vh!important;">
             <h2 class="fw-bold mb-4 text-uppercase text-welcome text-center text-light">Jenis-Jenis Pelayanan</h2>
             <div class="row my-4 gy-4 justify-content-center">
-                @if(is_null($service))
+                @forelse($service as $index => $item)
+                    <div class="col-lg-3 col-md-6 col-12 text-center text-light">
+                        <img src="{{Storage::url($item->image)}}" class="rounded w-25 mb-3" alt="{{$item->name}}">
+                        <h4 class="fw-bold">{{$item->name}}</h4>
+                        <p class="fw-bold">{{$item->description}}</p>
+                    </div>
+                @empty
                     <div class="col-lg-3 col-md-6 col-12 text-center text-light">
                         <img src="{{ asset('img/services/3.png') }}" class="rounded w-25 mb-3" alt="...">
                         <h4 class="fw-bold">Pendaftaran PBB P2</h4>
@@ -221,17 +221,7 @@
                         <h4 class="fw-bold">Retribusi Daerah</h4>
                         <p class="fw-bold">Pelayanan Retribusi Daerah (Penerbitan Surat Ketetapan Retribusi Daerah)</p>
                     </div>
-                @else
-                    @forelse($service as $index => $item)
-                        <div class="col-lg-3 col-md-6 col-12 text-center text-light">
-                            <img src="{{Storage::url($item->image)}}" class="rounded w-25 mb-3" alt="{{$item->name}}">
-                            <h4 class="fw-bold">{{$item->name}}</h4>
-                            <p class="fw-bold">{{$item->description}}</p>
-                        </div>
-                    @empty
-                        -
-                    @endforelse
-                @endif
+                @endforelse
             </div>
         </section>
 
@@ -241,7 +231,13 @@
             <div class="container">    
                 <h2 class="fw-bold mb-4 text-uppercase text-welcome text-center">Channel Pembayaran</h2>
                 <div class="row gy-4 my-4 align-items-center justify-content-center">
-                    @if(is_null($payment))
+                    @forelse($payment as $index => $item)
+                        <div class="col-lg-3 col-md-6 col-12 text-center">
+                            <a href="#!" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <img src="{{Storage::url($item->image)}}" class="rounded w-50 mb-3" alt="{{$item->name}}">
+                            </a>
+                        </div>
+                    @empty
                         <div class="col-lg-3 col-md-6 col-12 text-center">
                             <a href="#!" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 <img src="{{ asset('img/payment/bank_kalteng.png') }}" class="rounded w-75 mb-3" alt="...">
@@ -252,23 +248,13 @@
                                 <img src="{{ asset('img/payment/kantor-pos.png') }}" class="rounded w-50 mb-3" alt="...">
                             </a>
                         </div>
-                    @else
-                        @forelse($payment as $index => $item)
-                            <div class="col-lg-3 col-md-6 col-12 text-center">
-                                <a href="#!" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    <img src="{{Storage::url($item->image)}}" class="rounded w-50 mb-3" alt="{{$item->name}}">
-                                </a>
-                            </div>
-                        @empty
-                            -
-                        @endforelse
-                    @endif
-                    {{--<div class="col-12 text-center">
+                    @endforelse
+                    <div class="col-12 text-center">
                         <span class="text-dark"><i class="bi bi-sticky me-2"></i>Catatan: Klik Pada Gambar yang ada untuk melihat Detail / Cara melakukan Pembayaran</span>
-                    </div>--}}
+                    </div>
 
                     <!-- Modal Pembayaran -->
-                    {{--<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered">
                             <div class="modal-content" style="background: #19234f !important;">
                                 <div class="modal-body mb-4">
@@ -297,7 +283,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>--}}
+                    </div>
                 </div>
             </div>
         </section>
@@ -312,39 +298,32 @@
                     <div class="col-lg-7 col-md-8 col-12">
                         <h3 class="fw-bold mb-4 text-uppercase text-welcome"><i class="bi bi-globe me-3"></i>Portal Lainnya</h3>
                         <div class="row align-items-center gy-2">
-                            @if(is_null($portal))
+                            @forelse($portal as $index => $item)
                                 <div class="col-6 p-2">
-                                    <a href="https://portal.katingankab.go.id/" target="_blank" rel="noopener noreferrer">
-                                        <img src="{{ asset('img/portal/portal_katingan.jpeg') }}" class="rounded w-100" style="height:90px!important;" alt="...">
+                                    <a href="{{$item->link}}" target="_blank" rel="noopener noreferrer">
+                                        <img src="{{Storage::url($item->image)}}" class="rounded w-100" style="height:90px!important;" alt="{{$item->name}}">
                                     </a>
                                 </div>
-                            @else
-                                @forelse($portal as $index => $item)
-                                    <div class="col-6 p-2">
-                                        <a href="{{$item->link}}" target="_blank" rel="noopener noreferrer">
-                                            <img src="{{Storage::url($item->image)}}" class="rounded w-100" style="height:90px!important;" alt="{{$item->name}}">
-                                        </a>
-                                    </div>
-                                @empty
-                                    -
-                                @endforelse
-                            @endif
+                            @empty
+                                <div class="col-6 p-2">
+                                    <a href="https://portal.katingankab.go.id/" target="_blank" rel="noopener noreferrer">
+                                        <img src="{{ asset('img/portal/portal_katingan.webp') }}" class="rounded w-100" style="height:90px!important;" alt="...">
+                                    </a>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-4 col-12">
                         <h3 class="fw-bold mb-4 text-uppercase text-welcome"><i class="bi bi-download me-3"></i>Unduhan</h3>
                         <div class="row">
                             <div class="col-12 px-4">
-                                @if(is_null($publication))
-                                @else
-                                    @forelse($publication as $index => $item)
-                                        <p>
-                                            <a href="{{Storage::url($item->file)}}" class="text-decoration-none fw-bold" target="_blank" rel="noopener noreferrer"><i class="bi bi-file-earmark-text me-2"></i>{{$item->name}}</a>
-                                        </p>
-                                    @empty
-                                        -
-                                    @endforelse
-                                @endif
+                                @forelse($publication as $index => $item)
+                                    <p>
+                                        <a href="{{Storage::url($item->file)}}" class="text-decoration-none fw-bold" target="_blank" rel="noopener noreferrer"><i class="bi bi-file-earmark-text me-2"></i>{{$item->name}}</a>
+                                    </p>
+                                @empty
+                                    -
+                                @endforelse
                                 <p class="mt-4">
                                     <a href="{{ route('download') }}" class="text-decoration-none rounded px-3 py-2 bg-primary fw-bold text-light"><i class="bi bi-link-45deg me-2"></i>Unduhan Lainnya</a>
                                 </p>
@@ -363,27 +342,58 @@
             <div class="row my-4 justify-content-center">
                 <div class="col-lg-8 col-md-10 col-12">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
-                        @if(is_null($faq))
-                        @else
-                            @forelse($faq as $index => $item)
-                                <div class="border-0 mb-2 accordion-item rounded">
-                                    <h2 class="accordion-header" id="flush-headingOne">
-                                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-{{$item->id}}" aria-expanded="false" aria-controls="flush-{{$item->id}}">
-                                            <i class="bi bi-question-circle me-2 text-primary"></i>{{$item->title}}
-                                        </button>
-                                    </h2>
-                                    <div id="flush-{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$item->id}}" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">{{$item->content}}</div>
-                                    </div>
+                        @forelse($faq as $index => $item)
+                            <div class="border-0 mb-2 accordion-item rounded">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-{{$item->id}}" aria-expanded="false" aria-controls="flush-{{$item->id}}">
+                                        <i class="bi bi-question-circle me-2 text-primary"></i>{{$item->title}}
+                                    </button>
+                                </h2>
+                                <div id="flush-{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$item->id}}" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">{{$item->content}}</div>
                                 </div>
-                            @empty
-                                -
-                            @endforelse
-                        @endif
+                            </div>
+                        @empty
+                            -
+                        @endforelse
                     </div>
                 </div>
             </div>
         </section>
+
+        {{--<hr class="section-break-1">
+
+        <section id="faq" class="p-4 py-5 bg-light">
+            <h3 class="fw-bold mb-2 text-uppercase text-welcome text-center">- Statistik -</h3>
+            <h2 class="fw-bold mb-4 text-uppercase text-welcome text-center">Jumlah Pengunjung</h2>
+            <div class="row my-4 gy-4 justify-content-center">
+                <div class="col-lg-2 col-md-3 col-4 text-center text-dark">
+                    <i class="bi bi-calendar2-check fa-2x mb-3"></i>
+                    <p class="fw-bold mb-1">Hari ini</p>
+                    <h4 class="fw-bold">20 Orang</h4>
+                </div>
+                <div class="col-lg-2 col-md-3 col-4 text-center text-dark">
+                    <i class="bi bi-calendar2-x fa-2x mb-3"></i>
+                    <p class="fw-bold mb-1">Kemarin</p>
+                    <h4 class="fw-bold">20 Orang</h4>
+                </div>
+                <div class="col-lg-2 col-md-3 col-4 text-center text-dark">
+                    <i class="bi bi-calendar2-week fa-2x mb-3"></i>
+                    <p class="fw-bold mb-1">Minggu ini</p>
+                    <h4 class="fw-bold">20 Orang</h4>
+                </div>
+                <div class="col-lg-2 col-md-3 col-4 text-center text-dark">
+                    <i class="bi bi-calendar2-month fa-2x mb-3"></i>
+                    <p class="fw-bold mb-1">Bulan ini</p>
+                    <h4 class="fw-bold">20 Orang</h4>
+                </div>
+                <div class="col-lg-2 col-md-3 col-4 text-center text-dark">
+                    <i class="bi bi-calendar3 fa-2x mb-3"></i>
+                    <p class="fw-bold mb-1">Total</p>
+                    <h4 class="fw-bold">20 Orang</h4>
+                </div>
+            </div>
+        </section>--}}
 
         <hr class="section-break-1">
     </div>

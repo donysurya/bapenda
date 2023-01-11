@@ -80,6 +80,26 @@ p.home {
     text-shadow: 2px 2px 25px #000000;
 }
 
+@media screen and (max-width: 960px) {
+    h1.home {
+        font-size: 4vw;
+    }
+    
+    h3.home {
+        font-size: 3vw;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    h1.home {
+        font-size: 6vw;
+    }
+    
+    h3.home {
+        font-size: 5vw;
+    }
+}
+
 .btn-trailer {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
