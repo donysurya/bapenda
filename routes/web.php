@@ -17,8 +17,8 @@ Route::get('/', [\App\Http\Controllers\homeController::class, 'index'])->name('h
 
 // News
 Route::prefix('news')->name('news.')->group(function (){
-    Route::get('', [\App\Http\Controllers\articleController::class, 'index'])->name('index');
-    Route::get('/{slug}', [\App\Http\Controllers\articleController::class, 'show'])->name('show');
+    Route::get('', [\App\Http\Controllers\ArticleController::class, 'index'])->name('index');
+    Route::get('/{slug}', [\App\Http\Controllers\ArticleController::class, 'show'])->name('show');
 });
 
 // Profil UPTB
