@@ -42,6 +42,7 @@
                                     <label for="uploadFile" class="form-label">File</label>
                                     <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" id="uploadFile" value="{{ old('file') }}" aria-describedby="fileHelp">
                                     <div id="fileHelp" class="form-text">Upload your file here.</div>
+                                    <div id="fileHelp" class="form-text">Upload file (*doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp). <strong>Maksimum Size: 15 Mb</strong>.</div>
                                     @error('file')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
