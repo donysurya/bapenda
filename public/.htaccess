@@ -27,6 +27,6 @@ SetEnvIf X-Forwarded-Proto "https" HTTPS=on
     RewriteRule ^ index.php [L]
 </IfModule>
 
-<IfModule mod_php8.c>
-    php_value memory_limit 64M
-</IfModule>
+# <IfModule mod_php8.c>
+#     php_value memory_limit 64M
+# </IfModule>
