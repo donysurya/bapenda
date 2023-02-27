@@ -36,6 +36,11 @@
                                 <div id="nameHelp" class="form-text">Your File Name.</div>
                             </div>
                             <div class="mb-3">
+                                <label for="FileCategory" class="form-label">Category</label>
+                                <input type="text" name="category" class="form-control @error('category') is-invalid @enderror" value="{{ $publikasi->category }}" id="FileCategory" aria-describedby="categoryHelp" disabled>
+                                <div id="categoryHelp" class="form-text">Your Category Name.</div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="uploadFile" class="form-label">File</label>
                                 <input type="text" name="file" class="form-control @error('file') is-invalid @enderror" value="{{ $publikasi->file }}" id="uploadFile" aria-describedby="fileHelp" disabled>
                                 <div id="fileHelp" class="form-text">Your File.</div>

@@ -40,6 +40,20 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
+                                    <label for="FileCategory" class="form-label">Category</label>
+                                    <select name="category" id="category" class="form-control @error('category') is-invalid @enderror" aria-describedby="categoryHelp">
+                                        <option value="PERDA" {{$publikasi->category == 'PERDA' ? 'selected' : ''}}>PERDA</option>
+                                        <option value="PERBUP" {{$publikasi->category == 'PERBUP' ? 'selected' : ''}}>PERBUP</option>
+                                        <option value="Document" {{$publikasi->category == 'Document' ? 'selected' : ''}}>Document</option>
+                                    </select>
+                                    <div id="categoryHelp" class="form-text">Deskripsikan Category File.</div>
+                                    @error('category')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
                                     <label for="uploadFile" class="form-label">File</label>
                                     <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" id="uploadFile" value="{{ $publikasi->file }}" aria-describedby="fileHelp">
                                     <div id="fileHelp" class="form-text">Upload file (*doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp). <strong>Maksimum Size: 15 Mb</strong>.</div>

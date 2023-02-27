@@ -39,6 +39,7 @@
                                         <th>No</th>
                                         <th>Name</th>
                                         <th>Files</th>
+                                        <th>Category</th>
                                         <th>Created At</th>
                                         <th>Action</th>
                                     </tr>
@@ -49,6 +50,7 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$item->name}}</td>
                                             <td>{{$item->file}}</td>
+                                            <td>{{$item->category}}</td>
                                             <td>{{$item->created_at}}</td>
                                             <td>
                                                 <center>

@@ -13,6 +13,7 @@ class Publication extends Model
     protected $fillable = [
         'name',
         'file',
+        'category',
         'updated_by',
     ];
 }

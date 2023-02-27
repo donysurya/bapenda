@@ -25,6 +25,7 @@ class publicationController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'category' => 'required',
             'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:15000',
         ]);
 
@@ -36,6 +37,7 @@ class publicationController extends Controller
             );
             $publikasi = Publication::create([
                 'name' => $request->name,
+                'category' => $request->category,
                 'file' => $path,
             ]);
             DB::commit();
@@ -64,6 +66,7 @@ class publicationController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'category' => 'required',
             'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:15000',
         ]);
 
@@ -76,6 +79,7 @@ class publicationController extends Controller
             );
             Publication::where('id', $id)->update([
                 'name' => $request->name,
+                'category' => $request->category,
                 'file' => $path,
                 'updated_by' => $admin,
             ]);
