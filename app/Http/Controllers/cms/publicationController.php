@@ -26,7 +26,7 @@ class publicationController extends Controller
         $request->validate([
             'name' => 'required',
             'category' => 'required',
-            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:15000',
+            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:5000',
         ]);
 
         try {
