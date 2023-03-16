@@ -12,13 +12,20 @@ use Illuminate\Support\Facades\Storage;
 class pegawaiController extends Controller
 {
     public function index() {
-        $pegawai = Pegawai::all();
+        $name = $_GET['name'] ?? '';
+        $nip = $_GET['nip'] ?? '';
+        $pegawai = Pegawai::when($name != '', function ($query) use ($name) {
+                            $query->where('nama', 'LIKE', "%{$name}%");
+                        })->when($nip != '', function ($query) use ($nip) {
+                            $query->where('nip', 'LIKE', "%{$nip}%");
+                        })->get();
         return view('cms.data-pegawai.index', compact('pegawai'));
     }
 
     public function create()
     {
-        return view('cms.data-pegawai.create');
+        $golongan = array("I/A - Juru Muda", "I/B - Juru Muda Tingkat 1", "I/C - Juru", "I/D - Juru Tingkat 1", "II/A - Pengatur Muda", "II/B - Pengatur Muda Tingkat 1", "II/C - Pengatur", "II/D - Pengatur Tingkat 1", "III/A - Penata Muda", "III/B - Penata Muda Tingkat 1", "III/C - Penata", "III/D - Penata Tingkat 1", "IV/A - Pembina", "IV/B - Pembina Tingkat 1", "IV/C - Pembina Utama Muda", "IV/D - Pembina Utama Madya", "IV/E - Pembina Utama");
+        return view('cms.data-pegawai.create', compact('golongan'));
     }
 
     public function store(Request $request)
@@ -29,7 +36,7 @@ class pegawaiController extends Controller
             'golongan' => 'required',
             'jabatan' => 'required',
             'keterangan' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:300',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp,bmp|max:2000',
         ]);
 
         try {
@@ -58,14 +65,16 @@ class pegawaiController extends Controller
 
     public function show($id)
     {
+        $golongan = array("I/A - Juru Muda", "I/B - Juru Muda Tingkat 1", "I/C - Juru", "I/D - Juru Tingkat 1", "II/A - Pengatur Muda", "II/B - Pengatur Muda Tingkat 1", "II/C - Pengatur", "II/D - Pengatur Tingkat 1", "III/A - Penata Muda", "III/B - Penata Muda Tingkat 1", "III/C - Penata", "III/D - Penata Tingkat 1", "IV/A - Pembina", "IV/B - Pembina Tingkat 1", "IV/C - Pembina Utama Muda", "IV/D - Pembina Utama Madya", "IV/E - Pembina Utama");
         $pegawai = Pegawai::where('id', $id)->first();
-        return view('cms.data-pegawai.show', compact('pegawai'));
+        return view('cms.data-pegawai.show', compact('pegawai', 'golongan'));
     }
 
     public function edit($id)
     {
+        $golongan = array("I/A - Juru Muda", "I/B - Juru Muda Tingkat 1", "I/C - Juru", "I/D - Juru Tingkat 1", "II/A - Pengatur Muda", "II/B - Pengatur Muda Tingkat 1", "II/C - Pengatur", "II/D - Pengatur Tingkat 1", "III/A - Penata Muda", "III/B - Penata Muda Tingkat 1", "III/C - Penata", "III/D - Penata Tingkat 1", "IV/A - Pembina", "IV/B - Pembina Tingkat 1", "IV/C - Pembina Utama Muda", "IV/D - Pembina Utama Madya", "IV/E - Pembina Utama");
         $pegawai = Pegawai::where('id', $id)->first();
-        return view('cms.data-pegawai.edit', compact('pegawai'));
+        return view('cms.data-pegawai.edit', compact('pegawai', 'golongan'));
     }
 
     public function update(Request $request, $id)
@@ -108,7 +117,7 @@ class pegawaiController extends Controller
     public function update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:300',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp,bmp|max:2000',
         ]);
 
         try {

@@ -12,8 +12,29 @@ use Illuminate\Support\Facades\Storage;
 class publicationController extends Controller
 {
     public function index() {
-        $publikasi = Publication::all();
-        return view('cms.publikasi.index', compact('publikasi'));
+        $category = $_GET['category'] ?? 'All';
+        if($category == 'All') {
+            $name = $_GET['name'] ?? '';
+            $publikasi = Publication::when($name != '', function ($query) use ($name) {
+                            $query->where('name', 'LIKE', "%{$name}%");
+                        })->get();
+        } elseif($category == 'PERDA') {
+            $name = $_GET['name'] ?? '';
+            $publikasi = Publication::where('category', 'PERDA')->when($name != '', function ($query) use ($name) {
+                            $query->where('name', 'LIKE', "%{$name}%");
+                        })->get();
+        } elseif($category == 'PERBUP') {
+            $name = $_GET['name'] ?? '';
+            $publikasi = Publication::where('category', 'PERBUP')->when($name != '', function ($query) use ($name) {
+                            $query->where('name', 'LIKE', "%{$name}%");
+                        })->get();
+        } else {
+            $name = $_GET['name'] ?? '';
+            $publikasi = Publication::where('category', 'Document')->when($name != '', function ($query) use ($name) {
+                            $query->where('name', 'LIKE', "%{$name}%");
+                        })->get();
+        }
+        return view('cms.publikasi.index', compact('publikasi', 'category'));
     }
 
     public function create()
@@ -26,7 +47,7 @@ class publicationController extends Controller
         $request->validate([
             'name' => 'required',
             'category' => 'required',
-            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:5000',
+            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:2000',
         ]);
 
         try {
@@ -67,7 +88,7 @@ class publicationController extends Controller
         $request->validate([
             'name' => 'required',
             'category' => 'required',
-            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:15000',
+            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:2000',
         ]);
 
         try {

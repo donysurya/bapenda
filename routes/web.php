@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/phpmyinfo', function () {
+    phpinfo(); 
+})->name('phpmyinfo');
+
 Route::get('/', [\App\Http\Controllers\homeController::class, 'index'])->name('home');
 
 // News
@@ -177,8 +181,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
             Route::put('{id}/edit', [App\Http\Controllers\cms\uptbController::class, 'update'])->name('update');
             Route::get('{id}/image', [App\Http\Controllers\cms\uptbController::class, 'image'])->name('image');
             Route::put('{id}/image', [App\Http\Controllers\cms\uptbController::class, 'update_image'])->name('update.image');
-            Route::get('{id}/maps', [App\Http\Controllers\cms\uptbController::class, 'maps_image'])->name('image');
-            Route::put('{id}/maps', [App\Http\Controllers\cms\uptbController::class, 'maps_update_image'])->name('update.image');
+            Route::get('{id}/maps', [App\Http\Controllers\cms\uptbController::class, 'maps_image'])->name('maps');
+            Route::put('{id}/maps', [App\Http\Controllers\cms\uptbController::class, 'maps_update_image'])->name('update.maps');
             Route::delete('/{id}', [App\Http\Controllers\cms\uptbController::class, 'destroy'])->name('destroy');
         });
 

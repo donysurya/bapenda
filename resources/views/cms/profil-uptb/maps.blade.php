@@ -1,58 +1,86 @@
-@extends('cms.layouts.app')
+@extends('cms.layouts.main')
 
-@section('title', 'Administrator Bapenda | Update Maps Wilayah UPTB | Pajak Online | Kabupaten Katingan - Kalimantan Tengah')
+@section('title', 'Profil UPTB | Edit Maps Profil UPTB | Administrator')
 
 @push('css')
-    <!-- My CSS -->
-    <!-- <link rel="stylesheet" href="{{ asset('css/dashboard/mycss.css') }}"> -->
 @endpush
 
-@section('content')
+@push('headscript')
+@endpush
 
-    <main>
-        <div class="container-fluid px-4">
-            <h1 class="mt-4"><i class="fas fa-info-circle text-primary me-2"></i>Update Maps Wilayah UPTB</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="{{ route('cms.home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('cms.uptb') }}">Profil UPTB</a></li>
-                <li class="breadcrumb-item active">Update Maps Wilayah UPTB</li>
-            </ol>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-info-circle text-primary me-1"></i>
-                            Update Maps Wilayah UPTB
-                        </div>
-                        <div class="card-body">
-                            @if(session()->has('error'))
-                                <div class="alert alert-danger">
-                                    <strong>{{ session()->get('error') }}</strong>
-                                </div>
-                            @endif
-                            <form action="{{ route('cms.uptb.update.image', ['id' => $uptb->id]) }}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="mb-3">
-                                    <label for="upload2File" class="form-label">Maps Wilayah UPTB</label>
-                                    <input type="file" name="maps_uptb" class="form-control @error('maps_uptb') is-invalid @enderror" id="upload2File" value="{{ old('maps_uptb') }}" aria-describedby="maps_uptbHelp">
-                                    <div id="maps_uptbHelp" class="form-text">Upload Gambar Maps Wilayah UPTB (*PNG, JPG, WEBP). <strong>Maksimum Size: 200 kb</strong></div>
-                                    @error('maps_uptb')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <a href="{{ route('cms.uptb') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>
-                                    <button type="submit" class="btn btn-primary"><i class="far fa-edit me-2"></i>Update Maps Wilayah UPTB</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>   
-                </div>
-            </div>      
-        </div>
-    </main>
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{ route('cms.home') }}">Home</a></li>
+            <li class="breadcrumb-item text-sm text-white"><a class="opacity-5 text-white" href="{{ route('cms.uptb') }}">UPTB</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Edit Maps</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0"><i class="fa fa-map-o me-2"></i>Edit Maps UPTB</h6>
+    </nav>
 @endsection
+
+@section('content')
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6 d-flex align-items-center">
+                                <h6 class="mb-0 font-weight-bolder">Edit Maps Profil UPTB</h6>
+                            </div>
+                            <div class="col-6 text-end">
+                                <a class="btn bg-gradient-danger mb-0" href="{{ route('cms.uptb') }}"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Kembali</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3">
+                        <div class="row">
+                            <div class="card px-0">
+                                <div class="card-header pb-0 px-3">
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0"><i class="fa fa-edit me-2"></i>Edit Maps Profil UPTB</p>
+                                    </div>
+                                </div>
+                                <div class="card-body pt-3 px-3 pb-2">
+                                    @if(session()->has('error'))
+                                        <div class="alert alert-danger">
+                                            <strong>{{ session()->get('error') }}</strong>
+                                        </div>
+                                    @endif
+                                    <form action="{{ route('cms.uptb.update.maps', ['id' => $uptb->id]) }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row align-items-center">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input class="form-control @error('maps_uptb') is-invalid @enderror" type="file" name="maps_uptb" value="{{ $uptb->maps_uptb }}" placeholder="Upload Maps UPTB">
+                                                    <label for="maps_uptb" class="form-control-label mt-1">Upload Maps Profil UPTB (*jpg,jpeg,png,bmp,webp).<br><span class="text-danger"><i class="fa fa-info-circle me-2"></i>Maksimum Size: 2 MB.</span></label>
+                                                    @error('maps_uptb')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary btn-md ms-auto"><i class="fa fa-edit me-2"></i>Edit Data</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <!-- Footer -->
+        @include('cms.partials.footer')
+        <!-- End Footer -->
+    </div>
+@endsection
+
+@push('bottomscript')
+@endpush

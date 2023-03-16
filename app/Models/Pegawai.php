@@ -21,4 +21,8 @@ class Pegawai extends Model
         'keterangan',
         'updated_by',
     ];
+
+    public function admin() {
+        return $this->belongsTo(Cms::class, 'updated_by');
+    }
 }

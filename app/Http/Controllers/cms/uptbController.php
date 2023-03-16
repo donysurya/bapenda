@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Storage;
 class uptbController extends Controller
 {
     public function index() {
-        $uptb = Uptb::all();
+        $name = $_GET['name'] ?? '';
+        $uptb = Uptb::when($name != '', function ($query) use ($name) {
+                            $query->where('name', 'LIKE', "%{$name}%");
+                        })->get();
         return view('cms.profil-uptb.index', compact('uptb'));
     }
 
@@ -30,8 +33,8 @@ class uptbController extends Controller
             'layanan_pajak' => 'required',
             'wilayah_uptb' => 'required',
             'jam_layanan' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
-            'maps_uptb' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
+            'maps_uptb' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -118,7 +121,7 @@ class uptbController extends Controller
     public function update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -151,7 +154,7 @@ class uptbController extends Controller
     public function maps_update_image(Request $request, $id)
     {
         $request->validate([
-            'maps_uptb' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
+            'maps_uptb' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {

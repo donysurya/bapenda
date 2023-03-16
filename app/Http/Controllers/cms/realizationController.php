@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Storage;
 class realizationController extends Controller
 {
     public function index() {
-        $realisasi = Realization::all();
+        $name = $_GET['name'] ?? '';
+        $realisasi = Realization::when($name != '', function ($query) use ($name) {
+                            $query->where('name', 'LIKE', "%{$name}%");
+                        })->get();
         return view('cms.realisasi.index', compact('realisasi'));
     }
 
@@ -25,7 +28,7 @@ class realizationController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|file',
+            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:2000',
         ]);
 
         try {
@@ -64,7 +67,7 @@ class realizationController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|file',
+            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:2000',
         ]);
 
         try {

@@ -1,132 +1,164 @@
-@extends('cms.layouts.app')
+@extends('cms.layouts.main')
 
-@section('title', 'Administrator Bapenda | Create Profil UPTB | Pajak Online | Kabupaten Katingan - Kalimantan Tengah')
+@section('title', 'Profil UPTB | Buat Profil UPTB | Administrator')
 
 @push('css')
-    <!-- My CSS -->
-    <!-- <link rel="stylesheet" href="{{ asset('css/dashboard/mycss.css') }}"> -->
 @endpush
 
-@section('content')
+@push('headscript')
+@endpush
 
-    <main>
-        <div class="container-fluid px-4">
-            <h1 class="mt-4"><i class="fas fa-info-circle text-primary me-2"></i>Create Profil UPTB</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="{{ route('cms.home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('cms.uptb') }}">Profil UPTB</a></li>
-                <li class="breadcrumb-item active">Create Profil UPTB</li>
-            </ol>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-info-circle text-primary me-1"></i>
-                            Create Profil UPTB
-                        </div>
-                        <div class="card-body">
-                            @if(session()->has('error'))
-                                <div class="alert alert-danger">
-                                    <strong>{{ session()->get('error') }}</strong>
-                                </div>
-                            @endif
-                            <form action="{{ route('cms.uptb.store') }}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="FileName" class="form-label">Nama UPTB</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="FileName" value="{{ old('name') }}" aria-describedby="nameHelp">
-                                    <div id="nameHelp" class="form-text">Deskripsikan nama UPTB. <strong>Contoh: Pelayanan Pajak Katingan 1, dll.</strong></div>
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="peran" class="form-label">Peran</label>
-                                    <textarea name="peran" class="ckeditor form-control @error('peran') is-invalid @enderror" id="desc" aria-describedby="peranHelp">{{ old('peran') }}</textarea>
-                                    <div id="peranHelp" class="form-text">Deskripsikan peran dari UPTB.</div>
-                                    @error('peran')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="fungsi" class="form-label">Fungsi</label>
-                                    <textarea name="fungsi" class="ckeditor form-control @error('fungsi') is-invalid @enderror" id="desc" aria-describedby="fungsiHelp">{{ old('fungsi') }}</textarea>
-                                    <div id="fungsiHelp" class="form-text">Deskripsikan fungsi dari UPTB.</div>
-                                    @error('fungsi')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="layanan_pajak" class="form-label">Layanan Pajak</label>
-                                    <textarea name="layanan_pajak" class="ckeditor form-control @error('layanan_pajak') is-invalid @enderror" id="desc" aria-describedby="layanan_pajakHelp">{{ old('layanan_pajak') }}</textarea>
-                                    <div id="layanan_pajakHelp" class="form-text">Deskripsikan layanan pajak dari UPTB.</div>
-                                    @error('layanan_pajak')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="wilayah_uptb" class="form-label">Wilayah UPTB</label>
-                                    <textarea name="wilayah_uptb" class="ckeditor form-control @error('wilayah_uptb') is-invalid @enderror" id="desc" aria-describedby="wilayah_uptbHelp">{{ old('wilayah_uptb') }}</textarea>
-                                    <div id="wilayah_uptbHelp" class="form-text">Deskripsikan Wilayah UPTB dari UPTB.</div>
-                                    @error('wilayah_uptb')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="jam_layanan" class="form-label">Jam Pelayanan</label>
-                                    <textarea name="jam_layanan" class="ckeditor form-control @error('jam_layanan') is-invalid @enderror" id="desc" aria-describedby="jam_layananHelp">{{ old('jam_layanan') }}</textarea>
-                                    <div id="jam_layananHelp" class="form-text">Deskripsikan Jam Pelayanan dari UPTB.</div>
-                                    @error('jam_layanan')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="uploadFile" class="form-label">Gambar UPTB</label>
-                                    <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" id="uploadFile" value="{{ old('file') }}" aria-describedby="fileHelp">
-                                    <div id="fileHelp" class="form-text">Upload gambar UPTB (*PNG, JPG, WEBP). <strong>Maksimum Size: 200 kb</strong></div>
-                                    @error('file')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="upload2File" class="form-label">Maps Wilayah UPTB</label>
-                                    <input type="file" name="maps_uptb" class="form-control @error('maps_uptb') is-invalid @enderror" id="upload2File" value="{{ old('maps_uptb') }}" aria-describedby="maps_uptbHelp">
-                                    <div id="maps_uptbHelp" class="form-text">Upload Gambar Maps Wilayah UPTB (*PNG, JPG, WEBP). <strong>Maksimum Size: 200 kb</strong></div>
-                                    @error('maps_uptb')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <a href="{{ route('cms.uptb') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>
-                                    <button type="submit" class="btn btn-primary"><i class="far fa-edit me-2"></i>Create Profil UPTB</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>   
-                </div>
-            </div>      
-        </div>
-    </main>
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{ route('cms.home') }}">Home</a></li>
+            <li class="breadcrumb-item text-sm text-white"><a class="opacity-5 text-white" href="{{ route('cms.uptb') }}">UPTB</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tambah Data</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0"><i class="fa fa-map-o me-2"></i>Tambah Profil UPTB</h6>
+    </nav>
 @endsection
 
-@push('script')
+@section('content')
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6 d-flex align-items-center">
+                                <h6 class="mb-0 font-weight-bolder">Tambah Data Profil UPTB</h6>
+                            </div>
+                            <div class="col-6 text-end">
+                                <a class="btn bg-gradient-danger mb-0" href="{{ route('cms.uptb') }}"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Kembali</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3">
+                        <div class="row">
+                            <div class="card px-0">
+                                <div class="card-header pb-0 px-3">
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0"><i class="fa fa-plus me-2"></i>Buat UPTB</p>
+                                    </div>
+                                </div>
+                                <div class="card-body pt-3 px-3 pb-2">
+                                    @if(session()->has('error'))
+                                        <div class="alert alert-danger">
+                                            <strong>{{ session()->get('error') }}</strong>
+                                        </div>
+                                    @endif
+                                    <form action="{{ route('cms.uptb.store') }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row align-items-center">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name" type="text" placeholder="Nama Profil UPTB">
+                                                    <label for="name" class="form-control-label mt-1">Deskripsikan Nama UPTB.<br>Contoh: Pelayanan Pajak Katingan 1, dll.</label>
+                                                    @error('name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea name="peran" class="ckeditor form-control @error('peran') is-invalid @enderror" id="desc" aria-describedby="peranHelp">{{ old('peran') }}</textarea>
+                                                    <label for="peran" class="form-control-label">Deskripsikan peran dari UPTB.</label>
+                                                    @error('peran')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea name="fungsi" class="ckeditor form-control @error('fungsi') is-invalid @enderror" id="desc" aria-describedby="fungsiHelp">{{ old('fungsi') }}</textarea>
+                                                    <label for="fungsi" class="form-control-label">Deskripsikan fungsi dari UPTB.</label>
+                                                    @error('fungsi')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea name="layanan_pajak" class="ckeditor form-control @error('layanan_pajak') is-invalid @enderror" id="desc" aria-describedby="layanan_pajakHelp">{{ old('layanan_pajak') }}</textarea>
+                                                    <label for="layanan_pajak" class="form-control-label">Deskripsikan Layanan Pajak dari UPTB.</label>
+                                                    @error('layanan_pajak')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea name="wilayah_uptb" class="ckeditor form-control @error('wilayah_uptb') is-invalid @enderror" id="desc" aria-describedby="wilayah_uptbHelp">{{ old('wilayah_uptb') }}</textarea>
+                                                    <label for="wilayah_uptb" class="form-control-label">Deskripsikan Wilayah UPTB dari UPTB.</label>
+                                                    @error('wilayah_uptb')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea name="jam_layanan" class="ckeditor form-control @error('jam_layanan') is-invalid @enderror" id="desc" aria-describedby="jam_layananHelp">{{ old('jam_layanan') }}</textarea>
+                                                    <label for="jam_layanan" class="form-control-label">Deskripsikan Jam Layanan dari UPTB.</label>
+                                                    @error('jam_layanan')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" value="{{ old('file') }}" placeholder="Upload File">
+                                                    <label for="file" class="form-control-label mt-1">Upload Gambar UPTB (*jpg,jpeg,png,bmp,webp).<br><span class="text-danger"><i class="fa fa-info-circle me-2"></i>Maksimum Size: 2 MB.</span></label>
+                                                    @error('file')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input class="form-control @error('maps_uptb') is-invalid @enderror" type="file" name="maps_uptb" value="{{ old('maps_uptb') }}" placeholder="Upload Maps UPTB">
+                                                    <label for="maps_uptb" class="form-control-label mt-1">Upload Gambar Maps Wilayah UPTB (*jpg,jpeg,png,bmp,webp).<br><span class="text-danger"><i class="fa fa-info-circle me-2"></i>Maksimum Size: 2 MB.</span></label>
+                                                    @error('maps_uptb')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary btn-md ms-auto"><i class="fa fa-plus me-2"></i>Tambah Data</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <!-- Footer -->
+        @include('cms.partials.footer')
+        <!-- End Footer -->
+    </div>
+@endsection
+
+@push('bottomscript')
     <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
