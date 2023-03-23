@@ -115,6 +115,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
         // Profil Bapenda
         Route::prefix('profile')->name('profile.')->group(function (){
             // Visi
+            Route::get('/', [App\Http\Controllers\cms\profileController::class, 'index'])->name('bapenda');
+
             Route::get('/vision', [App\Http\Controllers\cms\profileController::class, 'vision'])->name('vision');
             Route::prefix('vision')->name('vision.')->group(function (){
                 Route::get('/create', [App\Http\Controllers\cms\profileController::class, 'vision_create'])->name('create');

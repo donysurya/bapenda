@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Storage;
 
 class profileController extends Controller
 {
+    public function index() {
+        $vision = Vision::all();
+        $mission = Mission::all();
+        return view('cms.bapenda.index', compact('vision', 'mission'));
+    }
+
     // Visi Bapenda
     public function vision() {
         $vision = Vision::all();
