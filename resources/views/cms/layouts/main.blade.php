@@ -51,7 +51,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('cms.pegawai') ? 'active' : '' }}" href="{{ route('cms.pegawai') }}">
+                        <a class="nav-link {{ Route::is('cms.pegawai', 'cms.pegawai.*') ? 'active' : '' }}" href="{{ route('cms.pegawai') }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-users text-primary text-sm opacity-10"></i>
                             </div>
@@ -59,7 +59,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('cms.publikasi') ? 'active' : '' }}" href="{{ route('cms.publikasi') }}">
+                        <a class="nav-link {{ Route::is('cms.publikasi', 'cms.publikasi.*') ? 'active' : '' }}" href="{{ route('cms.publikasi') }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-file-pdf-o text-success text-sm opacity-10"></i>
                             </div>
@@ -67,7 +67,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('cms.realisasi') ? 'active' : '' }}" href="{{ route('cms.realisasi') }}">
+                        <a class="nav-link {{ Route::is('cms.realisasi', 'cms.realisasi.*') ? 'active' : '' }}" href="{{ route('cms.realisasi') }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-file-excel-o text-info text-sm opacity-10"></i>
                             </div>
@@ -75,7 +75,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('cms.uptb') ? 'active' : '' }}" href="{{ route('cms.uptb') }}">
+                        <a class="nav-link {{ Route::is('cms.uptb', 'cms.uptb.*') ? 'active' : '' }}" href="{{ route('cms.uptb') }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-map-o text-danger text-sm opacity-10"></i>
                             </div>
@@ -88,7 +88,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="{{ route('cms.profile.bapenda') }}">
+                        <a class="nav-link {{ Route::is('cms.profile.*') ? 'active' : '' }}" href="{{ route('cms.profile.bapenda') }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fas fa-question-circle text-warning text-sm opacity-10"></i>
                             </div>
@@ -96,15 +96,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">
-                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-info-circle text-info text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Informasi</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">
+                        <a class="nav-link {{ Route::is('cms.news.*') ? 'active' : '' }}" href="{{ route('cms.news.index') }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-newspaper-o text-warning text-sm opacity-10"></i>
                             </div>
@@ -122,6 +114,14 @@
 
                     <li class="nav-item mt-3">
                         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pengaturan</h6>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-laptop text-info text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Landing Page</span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="#">

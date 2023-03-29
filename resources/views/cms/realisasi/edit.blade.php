@@ -25,7 +25,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-6 d-flex align-items-center">
                                 <h6 class="mb-0 font-weight-bolder">Edit Data Realisasi Pendapatan Daerah</h6>
                             </div>

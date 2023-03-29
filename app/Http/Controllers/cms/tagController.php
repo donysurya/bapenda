@@ -12,12 +12,6 @@ use Illuminate\Support\Str;
 
 class tagController extends Controller
 {
-    public function index()
-    {
-        $tags = Tags::paginate(10);
-        return view('cms.news.tags.index', compact('tags'));
-    }
-
     public function create()
     {
         return view('cms.news.tags.create');
@@ -37,7 +31,7 @@ class tagController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Tags for Bapenda News successfully Added');
-            return redirect()->route('cms.news.tags.index');
+            return redirect()->route('cms.news.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -65,7 +59,7 @@ class tagController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Tags for Bapenda News successfully Updated');
-            return redirect()->route('cms.news.tags.index');
+            return redirect()->route('cms.news.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -78,6 +72,6 @@ class tagController extends Controller
         $tags = Tags::findorfail($id);
         $tags->delete();
         alert()->success('Success', 'Your Tags Bapenda News has been Deleted!');
-        return redirect()->route('cms.news.tags.index');
+        return redirect()->route('cms.news.index');
     }
 }

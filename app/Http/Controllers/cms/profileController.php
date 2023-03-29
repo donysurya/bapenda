@@ -18,15 +18,13 @@ class profileController extends Controller
     public function index() {
         $vision = Vision::all();
         $mission = Mission::all();
-        return view('cms.bapenda.index', compact('vision', 'mission'));
+        $sejarah = History::all();
+        $kepala = Director::all();
+        $struktur = Structure::all();
+        return view('cms.bapenda.index', compact('vision', 'mission', 'sejarah', 'kepala', 'struktur'));
     }
 
     // Visi Bapenda
-    public function vision() {
-        $vision = Vision::all();
-        return view('cms.bapenda.visi.index', compact('vision'));
-    }
-
     public function vision_create()
     {
         return view('cms.bapenda.visi.create');
@@ -45,7 +43,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Vision successfully Created');
-            return redirect()->route('cms.profile.vision');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -74,7 +72,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Your Vision successfully updated');
-            return redirect()->route('cms.profile.vision');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -86,15 +84,10 @@ class profileController extends Controller
     {
         Vision::where('id', $id)->delete();
         alert()->success('Success', 'Your Vision has been deleted!');
-        return redirect()->route('cms.profile.vision');
+        return redirect()->route('cms.profile.bapenda');
     }
 
     // Misi Bapenda
-    public function mission() {
-        $mission = Mission::all();
-        return view('cms.bapenda.misi.index', compact('mission'));
-    }
-
     public function mission_create()
     {
         return view('cms.bapenda.misi.create');
@@ -113,7 +106,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'mission successfully Created');
-            return redirect()->route('cms.profile.mission');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -142,7 +135,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Your mission successfully updated');
-            return redirect()->route('cms.profile.mission');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -154,7 +147,7 @@ class profileController extends Controller
     {
         Mission::where('id', $id)->delete();
         alert()->success('Success', 'Your mission has been deleted!');
-        return redirect()->route('cms.profile.mission');
+        return redirect()->route('cms.profile.bapenda');
     }
 
     // Sejarah Bapenda
@@ -171,7 +164,7 @@ class profileController extends Controller
     public function sejarah_store(Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
             'description' => 'required',
         ]);
 
@@ -187,7 +180,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'History successfully Created');
-            return redirect()->route('cms.profile.sejarah');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -216,7 +209,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Your History successfully updated');
-            return redirect()->route('cms.profile.sejarah');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -233,7 +226,7 @@ class profileController extends Controller
     public function sejarah_update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -249,7 +242,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Your Banner History successfully updated');
-            return redirect()->route('cms.profile.sejarah');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -261,7 +254,7 @@ class profileController extends Controller
     {
         History::where('id', $id)->delete();
         alert()->success('Success', 'Your History has been deleted!');
-        return redirect()->route('cms.profile.sejarah');
+        return redirect()->route('cms.profile.bapenda');
     }
 
     // Kepala Bapenda
@@ -279,7 +272,7 @@ class profileController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
             'description' => 'required',
             'jobdesk' => 'required',
         ]);
@@ -298,7 +291,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Director successfully Created');
-            return redirect()->route('cms.profile.kepala');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -331,7 +324,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Your Director successfully updated');
-            return redirect()->route('cms.profile.kepala');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -348,7 +341,7 @@ class profileController extends Controller
     public function kepala_update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -364,7 +357,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Your Director Picture successfully updated');
-            return redirect()->route('cms.profile.kepala');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -375,16 +368,11 @@ class profileController extends Controller
     public function kepala_destroy($id)
     {
         Director::where('id', $id)->delete();
-        alert()->success('Success', 'Your History has been deleted!');
-        return redirect()->route('cms.profile.kepala');
+        alert()->success('Success', 'Your Director has been deleted!');
+        return redirect()->route('cms.profile.bapenda');
     }
 
-    // Kepala Bapenda
-    public function struktur() {
-        $struktur = Structure::all();
-        return view('cms.bapenda.struktur.index', compact('struktur'));
-    }
-
+    // Struktur Organisasi
     public function struktur_create()
     {
         return view('cms.bapenda.struktur.create');
@@ -393,7 +381,7 @@ class profileController extends Controller
     public function struktur_store(Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:1000',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -407,7 +395,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Organization Structure successfully Created');
-            return redirect()->route('cms.profile.struktur');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -424,7 +412,7 @@ class profileController extends Controller
     public function struktur_update(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:1000',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -440,7 +428,7 @@ class profileController extends Controller
             ]);
             DB::commit();
             alert()->success('Success', 'Your Organization Structure Picture successfully updated');
-            return redirect()->route('cms.profile.struktur');
+            return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -452,6 +440,6 @@ class profileController extends Controller
     {
         Structure::where('id', $id)->delete();
         alert()->success('Success', 'Your Organization Structure has been deleted!');
-        return redirect()->route('cms.profile.struktur');
+        return redirect()->route('cms.profile.bapenda');
     }
 }

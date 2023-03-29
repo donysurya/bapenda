@@ -3,6 +3,14 @@
 @section('title', 'Profil Bapenda | Administrator')
 
 @push('css')
+    <style>
+        h6.text-sejarah {
+            inline-size: 250px; 
+            white-space:nowrap; 
+            overflow:hidden; 
+            text-overflow: ellipsis;
+        }
+    </style>
 @endpush
 
 @push('headscript')
@@ -21,363 +29,41 @@
 @section('content')
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-xl-6 col-lg-6 col-12">
+            <div class="col-md-12 col-12">
                 <div class="card mb-4">
-                    <div class="card-header pt-3">
-                        <div class="row mb-0">
-                            <div class="col-6 d-flex align-items-center">
-                                <h6 class="mb-0 font-weight-bolder">Visi Bapenda</h6>
-                            </div>
-                            <div class="col-6 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="{{ route('cms.profile.vision.create') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body pt-0 pb-3">
-                        <div class="row">
-                            <div class="card">
-                                <div class="card-body px-0 py-3">
-                                    <div class="table-responsive p-0">
-                                        <table class="table align-items-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">Visi Bapenda</th>
-                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Tanggal Upload</th>
-                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @forelse($vision as $index => $item)
-                                                    <tr>
-                                                        <td style="white-space:normal!important;" class="align-middle">
-                                                            <div class="d-flex px-2 py-1">
-                                                                <div>
-                                                                    <div class="avatar avatar-sm me-3 mt-1 bg-gradient-danger shadow-danger text-center rounded-circle">
-                                                                        <i class="fa fa-file-pdf text-lg opacity-10" aria-hidden="true"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex flex-column justify-content-center">
-                                                                    <h6 class="mb-0 text-sm" style="inline-size: 250px; overflow:hidden; text-overflow: ellipsis;">{{ $item->description }}</h6>
-                                                                    <p class="text-xs text-secondary mb-0">Updated by: {{ $item->admin->name ?? 'Administrator'}}</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->created_at }}</span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <a class="btn btn-link text-dark px-2 mb-0" href="{{ route('cms.profile.vision.edit', ['id' => $item->id]) }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-publication{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                                        </td>
-
-                                                        <!-- Delete Modal -->
-                                                        <div class="modal fade" id="modal-delete-publication{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-delete-publication{{ $item->id }}" aria-hidden="true">
-                                                            <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-body">
-                                                                        <div class="py-3 text-center">
-                                                                            <i class="fa fa-exclamation-triangle fa-3x text-danger"></i>
-                                                                            <h4 class="text-gradient text-danger mt-4">Mohon diperhatikan!</h4>
-                                                                            <p>Apakah anda yakin ingin menghapus Visi?</p>
-                                                                        </div>
-                                                                        <div class="text-center">
-                                                                            <form action="{{ route('cms.profile.vision.destroy', ['id' => $item->id]) }}" method="post">
-                                                                                @csrf
-                                                                                @method('delete')
-                                                                                <button type="submit" class="btn btn-primary"><i class="fa fa-trash me-2"></i>Hapus Data</button>
-                                                                            </form>
-                                                                            <button type="button" class="btn btn-danger text-white ml-auto" data-bs-dismiss="modal"><i class="fa fa-close me-2"></i>Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Delete Modal -->
-                                                    </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="5" class="text-center">
-                                                            <p class="text-sm text-secondary font-weight-bolder mb-0">- No data found -</p>
-                                                        </td>
-                                                    </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-6 col-lg-6 col-12">
-                <div class="card mb-4">
-                    <div class="card-header pt-3">
-                        <div class="row mb-0">
-                            <div class="col-6 d-flex align-items-center">
-                                <h6 class="mb-0 font-weight-bolder">Misi Bapenda</h6>
-                            </div>
-                            <div class="col-6 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="{{ route('cms.profile.mission.create') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body pt-0 pb-3">
-                        <div class="row">
-                            <div class="card">
-                                <div class="card-body px-0 py-3">
-                                    <div class="table-responsive p-0">
-                                        <table class="table align-items-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">Visi</th>
-                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Tanggal Upload</th>
-                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @forelse($mission as $index => $item)
-                                                    <tr>
-                                                        <td style="white-space:normal!important;" class="align-middle">
-                                                            <div class="d-flex px-2 py-1">
-                                                                <div>
-                                                                    <div class="avatar avatar-sm me-3 mt-1 bg-gradient-danger shadow-danger text-center rounded-circle">
-                                                                        <i class="fa fa-file-pdf text-lg opacity-10" aria-hidden="true"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex flex-column justify-content-center">
-                                                                    <h6 class="mb-0 text-sm" style="inline-size: 250px; overflow:hidden; text-overflow: ellipsis;">{{ $item->description }}</h6>
-                                                                    <p class="text-xs text-secondary mb-0">Updated by: {{ $item->admin->name ?? 'Administrator'}}</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->created_at }}</span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <a class="btn btn-link text-dark px-2 mb-0" href="{{ route('cms.profile.mission.edit', ['id' => $item->id]) }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-publication{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                                        </td>
-
-                                                        <!-- Delete Modal -->
-                                                        <div class="modal fade" id="modal-delete-publication{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-delete-publication{{ $item->id }}" aria-hidden="true">
-                                                            <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-body">
-                                                                        <div class="py-3 text-center">
-                                                                            <i class="fa fa-exclamation-triangle fa-3x text-danger"></i>
-                                                                            <h4 class="text-gradient text-danger mt-4">Mohon diperhatikan!</h4>
-                                                                            <p>Apakah anda yakin ingin menghapus Visi?</p>
-                                                                        </div>
-                                                                        <div class="text-center">
-                                                                            <form action="{{ route('cms.profile.mission.destroy', ['id' => $item->id]) }}" method="post">
-                                                                                @csrf
-                                                                                @method('delete')
-                                                                                <button type="submit" class="btn btn-primary"><i class="fa fa-trash me-2"></i>Hapus Data</button>
-                                                                            </form>
-                                                                            <button type="button" class="btn btn-danger text-white ml-auto" data-bs-dismiss="modal"><i class="fa fa-close me-2"></i>Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Delete Modal -->
-                                                    </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="4" class="text-center">
-                                                            <p class="text-sm text-secondary font-weight-bolder mb-0">- No data found -</p>
-                                                        </td>
-                                                    </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card-body">
+                        <p class="text-uppercase text-primary text-xs font-weight-bolder mb-0">Fitur ini bertujuan untuk melakukan perubahan pada halaman profil, yang terdiri dari visi & misi, sejarah, kepala bapenda, serta struktur organisasi.</p>
                     </div>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-12">
-                <div class="card mb-4">
-                    <div class="card-header pt-3">
-                        <div class="row mb-0">
-                            <div class="col-6 d-flex align-items-center">
-                                <h6 class="mb-0 font-weight-bolder">Visi Bapenda</h6>
-                            </div>
-                            <div class="col-6 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="{{ route('cms.profile.vision.create') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body pt-0 pb-3">
-                        <div class="row">
-                            <div class="card">
-                                <div class="card-body px-0 py-3">
-                                    <div class="table-responsive p-0">
-                                        <table class="table align-items-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">Visi Bapenda</th>
-                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Tanggal Upload</th>
-                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @forelse($vision as $index => $item)
-                                                    <tr>
-                                                        <td style="white-space:normal!important;" class="align-middle">
-                                                            <div class="d-flex px-2 py-1">
-                                                                <div>
-                                                                    <div class="avatar avatar-sm me-3 mt-1 bg-gradient-danger shadow-danger text-center rounded-circle">
-                                                                        <i class="fa fa-file-pdf text-lg opacity-10" aria-hidden="true"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex flex-column justify-content-center">
-                                                                    <h6 class="mb-0 text-sm" style="inline-size: 250px; overflow:hidden; text-overflow: ellipsis;">{{ $item->description }}</h6>
-                                                                    <p class="text-xs text-secondary mb-0">Updated by: {{ $item->admin->name ?? 'Administrator'}}</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->created_at }}</span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <a class="btn btn-link text-dark px-2 mb-0" href="{{ route('cms.profile.vision.edit', ['id' => $item->id]) }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-publication{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                                        </td>
-
-                                                        <!-- Delete Modal -->
-                                                        <div class="modal fade" id="modal-delete-publication{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-delete-publication{{ $item->id }}" aria-hidden="true">
-                                                            <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-body">
-                                                                        <div class="py-3 text-center">
-                                                                            <i class="fa fa-exclamation-triangle fa-3x text-danger"></i>
-                                                                            <h4 class="text-gradient text-danger mt-4">Mohon diperhatikan!</h4>
-                                                                            <p>Apakah anda yakin ingin menghapus Visi?</p>
-                                                                        </div>
-                                                                        <div class="text-center">
-                                                                            <form action="{{ route('cms.profile.vision.destroy', ['id' => $item->id]) }}" method="post">
-                                                                                @csrf
-                                                                                @method('delete')
-                                                                                <button type="submit" class="btn btn-primary"><i class="fa fa-trash me-2"></i>Hapus Data</button>
-                                                                            </form>
-                                                                            <button type="button" class="btn btn-danger text-white ml-auto" data-bs-dismiss="modal"><i class="fa fa-close me-2"></i>Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Delete Modal -->
-                                                    </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="5" class="text-center">
-                                                            <p class="text-sm text-secondary font-weight-bolder mb-0">- No data found -</p>
-                                                        </td>
-                                                    </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Visi  -->
+                @include('cms.bapenda.visi.index')
+                <!-- End Visi -->
             </div>
 
             <div class="col-xl-6 col-lg-6 col-12">
-                <div class="card mb-4">
-                    <div class="card-header pt-3">
-                        <div class="row mb-0">
-                            <div class="col-6 d-flex align-items-center">
-                                <h6 class="mb-0 font-weight-bolder">Misi Bapenda</h6>
-                            </div>
-                            <div class="col-6 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="{{ route('cms.profile.mission.create') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body pt-0 pb-3">
-                        <div class="row">
-                            <div class="card">
-                                <div class="card-body px-0 py-3">
-                                    <div class="table-responsive p-0">
-                                        <table class="table align-items-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">Visi</th>
-                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Tanggal Upload</th>
-                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @forelse($mission as $index => $item)
-                                                    <tr>
-                                                        <td style="white-space:normal!important;" class="align-middle">
-                                                            <div class="d-flex px-2 py-1">
-                                                                <div>
-                                                                    <div class="avatar avatar-sm me-3 mt-1 bg-gradient-danger shadow-danger text-center rounded-circle">
-                                                                        <i class="fa fa-file-pdf text-lg opacity-10" aria-hidden="true"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex flex-column justify-content-center">
-                                                                    <h6 class="mb-0 text-sm" style="inline-size: 250px; overflow:hidden; text-overflow: ellipsis;">{{ $item->description }}</h6>
-                                                                    <p class="text-xs text-secondary mb-0">Updated by: {{ $item->admin->name ?? 'Administrator'}}</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->created_at }}</span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <a class="btn btn-link text-dark px-2 mb-0" href="{{ route('cms.profile.mission.edit', ['id' => $item->id]) }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-publication{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                                        </td>
+                <!-- Visi  -->
+                @include('cms.bapenda.misi.index')
+                <!-- End Visi -->
+            </div>
 
-                                                        <!-- Delete Modal -->
-                                                        <div class="modal fade" id="modal-delete-publication{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-delete-publication{{ $item->id }}" aria-hidden="true">
-                                                            <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-body">
-                                                                        <div class="py-3 text-center">
-                                                                            <i class="fa fa-exclamation-triangle fa-3x text-danger"></i>
-                                                                            <h4 class="text-gradient text-danger mt-4">Mohon diperhatikan!</h4>
-                                                                            <p>Apakah anda yakin ingin menghapus Visi?</p>
-                                                                        </div>
-                                                                        <div class="text-center">
-                                                                            <form action="{{ route('cms.profile.mission.destroy', ['id' => $item->id]) }}" method="post">
-                                                                                @csrf
-                                                                                @method('delete')
-                                                                                <button type="submit" class="btn btn-primary"><i class="fa fa-trash me-2"></i>Hapus Data</button>
-                                                                            </form>
-                                                                            <button type="button" class="btn btn-danger text-white ml-auto" data-bs-dismiss="modal"><i class="fa fa-close me-2"></i>Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Delete Modal -->
-                                                    </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="4" class="text-center">
-                                                            <p class="text-sm text-secondary font-weight-bolder mb-0">- No data found -</p>
-                                                        </td>
-                                                    </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-xl-6 col-lg-6 col-12">
+                <!-- Sejarah  -->
+                @include('cms.bapenda.sejarah.index')
+                <!-- End Sejarah -->
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-12">
+                <!-- Kepala  -->
+                @include('cms.bapenda.kepala.index')
+                <!-- End Kepala -->
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-12">
+                <!-- Struktur  -->
+                @include('cms.bapenda.struktur.index')
+                <!-- End Struktur -->
             </div>
         </div>    
 

@@ -18,7 +18,7 @@ class pegawaiController extends Controller
                             $query->where('nama', 'LIKE', "%{$name}%");
                         })->when($nip != '', function ($query) use ($nip) {
                             $query->where('nip', 'LIKE', "%{$nip}%");
-                        })->get();
+                        })->paginate(10);
         return view('cms.data-pegawai.index', compact('pegawai'));
     }
 
@@ -54,7 +54,7 @@ class pegawaiController extends Controller
                 'image' => $path,
             ]);
             DB::commit();
-            alert()->success('Success', 'Data successfully Created');
+            alert()->success('Success', 'Data Pegawai Berhasil Ditambahkan');
             return redirect()->route('cms.pegawai');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -99,7 +99,7 @@ class pegawaiController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Data successfully updated');
+            alert()->success('Success', 'Data Pegawai Berhasil Diubah');
             return redirect()->route('cms.pegawai');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -132,7 +132,7 @@ class pegawaiController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Data successfully updated');
+            alert()->success('Success', 'Foto Pegawai Berhasil Diubah');
             return redirect()->route('cms.pegawai');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -144,7 +144,7 @@ class pegawaiController extends Controller
     public function destroy($id)
     {
         Pegawai::where('id', $id)->delete();
-        alert()->success('Success', 'Your Data has been deleted!');
+        alert()->success('Success', 'Data Pegawai Berhasil Dihapus!');
         return redirect()->route('cms.pegawai');
     }
 }

@@ -12,12 +12,6 @@ use Illuminate\Support\Str;
 
 class categoryController extends Controller
 {
-    public function index()
-    {
-        $category = Category::paginate(10);
-        return view('cms.news.category.index', compact('category'));
-    }
-
     public function create()
     {
         return view('cms.news.category.create');
@@ -36,8 +30,8 @@ class categoryController extends Controller
                 'slug' => Str::slug($request->title),
             ]);
             DB::commit();
-            alert()->success('Success', 'Category for Bapenda News successfully Added');
-            return redirect()->route('cms.news.category.index');
+            alert()->success('Success', 'Kategori Berita Berhasil Ditambahkan');
+            return redirect()->route('cms.news.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -64,8 +58,8 @@ class categoryController extends Controller
                 'slug' => Str::slug($request->title),
             ]);
             DB::commit();
-            alert()->success('Success', 'Category for Bapenda News successfully Updated');
-            return redirect()->route('cms.news.category.index');
+            alert()->success('Success', 'Kategori Berita Berhasil Diubah');
+            return redirect()->route('cms.news.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -77,7 +71,7 @@ class categoryController extends Controller
     {
         $category = Category::findorfail($id);
         $category->delete();
-        alert()->success('Success', 'Your Category Bapenda News has been Deleted!');
-        return redirect()->route('cms.news.category.index');
+        alert()->success('Success', 'Kategori Berita Berhasil Dihapus!');
+        return redirect()->route('cms.news.index');
     }
 }

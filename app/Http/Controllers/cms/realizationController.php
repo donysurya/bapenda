@@ -15,7 +15,7 @@ class realizationController extends Controller
         $name = $_GET['name'] ?? '';
         $realisasi = Realization::when($name != '', function ($query) use ($name) {
                             $query->where('name', 'LIKE', "%{$name}%");
-                        })->get();
+                        })->paginate(10);
         return view('cms.realisasi.index', compact('realisasi'));
     }
 

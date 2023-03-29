@@ -1,63 +1,88 @@
-@extends('cms.layouts.app')
+@extends('cms.layouts.main')
 
-@section('title', 'Administrator Bapenda | Update Visi Bapenda | Pajak Online | Kabupaten Katingan - Kalimantan Tengah')
+@section('title', 'Visi Bapenda | Edit Visi Bapenda | Administrator')
 
 @push('css')
-    <!-- My CSS -->
-    <!-- <link rel="stylesheet" href="{{ asset('css/dashboard/mycss.css') }}"> -->
 @endpush
 
-@section('content')
+@push('headscript')
+@endpush
 
-    <main>
-        <div class="container-fluid px-4">
-            <h1 class="mt-4"><i class="fas fa-info-circle text-primary me-2"></i>Update Visi Bapenda</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="{{ route('cms.home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('cms.profile.vision') }}">Visi Bapenda</a></li>
-                <li class="breadcrumb-item active">Update Visi Bapenda</li>
-            </ol>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-info-circle text-primary me-1"></i>
-                            Update Visi Bapenda
-                        </div>
-                        <div class="card-body">
-                            @if(session()->has('error'))
-                                <div class="alert alert-danger">
-                                    <strong>{{ session()->get('error') }}</strong>
-                                </div>
-                            @endif
-                            <form action="{{ route('cms.profile.vision.update', ['id' => $vision->id]) }}" method="post">
-                                @csrf
-                                @method('PUT')
-                                <div class="mb-3">
-                                    <label for="desc" class="form-label">Visi Bapenda</label>
-                                    <textarea name="description" class="ckeditor form-control @error('description') is-invalid @enderror" id="desc" aria-describedby="descriptionHelp">{{ $vision->description }}</textarea>
-                                    <div id="descriptionHelp" class="form-text">Deskripsikan secara detail tentang Visi Bapenda Kabupaten Katingan.</div>
-                                    @error('description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <a href="{{ route('cms.profile.vision') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>
-                                    <button type="submit" class="btn btn-primary"><i class="far fa-edit me-2"></i>Update Visi Bapenda</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>   
-                </div>
-            </div>      
-        </div>
-    </main>
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{ route('cms.home') }}">Home</a></li>
+            <li class="breadcrumb-item text-sm text-white"><a class="opacity-5 text-white" href="{{ route('cms.profile.bapenda') }}">Bapenda</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Edit Data</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0"><i class="fas fa-question-circle me-2"></i>Edit Visi Bapenda</h6>
+    </nav>
 @endsection
 
-@push('script')
+@section('content')
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-6 d-flex align-items-center">
+                                <h6 class="mb-0 font-weight-bolder">Edit Visi Bapenda</h6>
+                            </div>
+                            <div class="col-6 text-end">
+                                <a class="btn bg-gradient-danger mb-0" href="{{ route('cms.profile.bapenda') }}"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Kembali</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3">
+                        <div class="row">
+                            <div class="card px-0">
+                                <div class="card-header pb-0 px-3">
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0"><i class="fa fa-edit me-2"></i>Edit Data Visi Bapenda</p>
+                                    </div>
+                                </div>
+                                <div class="card-body pt-3 px-3 pb-2">
+                                    @if(session()->has('error'))
+                                        <div class="alert alert-danger">
+                                            <strong>{{ session()->get('error') }}</strong>
+                                        </div>
+                                    @endif
+                                    <form action="{{ route('cms.profile.vision.update', ['id' => $vision->id]) }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row align-items-center">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea name="description" class="ckeditor form-control @error('description') is-invalid @enderror" id="desc" aria-describedby="descriptionHelp">{{ $vision->description }}</textarea>
+                                                    <label for="description" class="form-control-label">Deskripsikan secara detail tentang Visi dari Bapenda Kabupaten Katingan pada form yang tersedia.</label>
+                                                    @error('description')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary btn-md ms-auto"><i class="fa fa-edit me-2"></i>Edit Data</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <!-- Footer -->
+        @include('cms.partials.footer')
+        <!-- End Footer -->
+    </div>
+@endsection
+
+@push('bottomscript')
     <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

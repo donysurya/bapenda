@@ -17,22 +17,22 @@ class publicationController extends Controller
             $name = $_GET['name'] ?? '';
             $publikasi = Publication::when($name != '', function ($query) use ($name) {
                             $query->where('name', 'LIKE', "%{$name}%");
-                        })->get();
+                        })->paginate(10);
         } elseif($category == 'PERDA') {
             $name = $_GET['name'] ?? '';
             $publikasi = Publication::where('category', 'PERDA')->when($name != '', function ($query) use ($name) {
                             $query->where('name', 'LIKE', "%{$name}%");
-                        })->get();
+                        })->paginate(10);
         } elseif($category == 'PERBUP') {
             $name = $_GET['name'] ?? '';
             $publikasi = Publication::where('category', 'PERBUP')->when($name != '', function ($query) use ($name) {
                             $query->where('name', 'LIKE', "%{$name}%");
-                        })->get();
+                        })->paginate(10);
         } else {
             $name = $_GET['name'] ?? '';
             $publikasi = Publication::where('category', 'Document')->when($name != '', function ($query) use ($name) {
                             $query->where('name', 'LIKE', "%{$name}%");
-                        })->get();
+                        })->paginate(10);
         }
         return view('cms.publikasi.index', compact('publikasi', 'category'));
     }

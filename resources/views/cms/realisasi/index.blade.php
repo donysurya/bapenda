@@ -24,7 +24,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pt-3">
-                        <div class="row mb-3">
+                        <div class="row mb-3 align-items-center">
                             <div class="col-6 d-flex align-items-center">
                                 <h6 class="mb-0 font-weight-bolder">Daftar File Realisasi Pendapatan Daerah</h6>
                             </div>
@@ -138,6 +138,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="mt-3"></div>
+                            {{ $realisasi->withQueryString()->links() }}
                         </div>
                     </div>
                 </div>

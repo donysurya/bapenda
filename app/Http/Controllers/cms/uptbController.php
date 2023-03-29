@@ -15,7 +15,7 @@ class uptbController extends Controller
         $name = $_GET['name'] ?? '';
         $uptb = Uptb::when($name != '', function ($query) use ($name) {
                             $query->where('name', 'LIKE', "%{$name}%");
-                        })->get();
+                        })->paginate(10);
         return view('cms.profil-uptb.index', compact('uptb'));
     }
 

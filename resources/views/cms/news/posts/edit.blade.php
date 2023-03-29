@@ -1,6 +1,6 @@
-@extends('cms.layouts.app')
+@extends('cms.layouts.main')
 
-@section('title', 'Administrator Bapenda | Update Berita Bapenda | Pajak Online | Kabupaten Katingan - Kalimantan Tengah')
+@section('title', 'Post Berita | Edit Post Berita | Administrator')
 
 @push('css')
     <!-- My CSS -->
@@ -16,116 +16,134 @@
     </script>
 @endpush
 
-@section('content')
-
-    <main>
-        <div class="container-fluid px-4">
-            <h1 class="mt-4"><i class="bi bi-file-earmark-richtexttext-primary me-2"></i>Update Berita Bapenda</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="{{ route('cms.home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('cms.news.post.index') }}">Berita Bapenda</a></li>
-                <li class="breadcrumb-item active">Update Berita Bapenda</li>
-            </ol>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="bi bi-file-earmark-richtexttext-primary me-1"></i>
-                            Update Berita Bapenda
-                        </div>
-                        <div class="card-body">
-                            @if(session()->has('error'))
-                                <div class="alert alert-danger">
-                                    <strong>{{ session()->get('error') }}</strong>
-                                </div>
-                            @endif
-                            <form action="{{ route('cms.news.post.update', ['id' => $post->id]) }}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="mb-3">
-                                    <label for="category" class="form-label">Category</label>
-                                    <select class="form-control @error('category') is-invalid @enderror" aria-label="category" id="category" name="category" aria-describedby="categoryDesc">
-                                        <option value="" disabled>Select Category</option>
-                                        @foreach($category as $item)
-                                            <option value="{{ $item->id }}" {{old('category') ?? $post->category_id == $item->id ? 'selected' : ''}}>{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    <small id="categoryDesc" class="form-text text-muted">Pilih kategori Untuk Berita Bapenda Baru. <strong>Sebelum membuat berita terbaru, create / update Kategori terlebih dahulu.</strong></small>
-                                    @error('category')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="tags" class="form-label">Tags</label>
-                                    <select class="form-control @error('tags') is-invalid @enderror" multiple="multiple" aria-label="tags" id="form-select-select2" name="tags[]" aria-describedby="tagsDesc">
-                                        @foreach ($tag as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <small id="tagsDesc" class="form-text text-muted">Pilih tags Untuk Berita Bapenda Baru. <strong>Sebelum membuat berita terbaru, create / update tags terlebih dahulu.</strong></small>
-                                    @error('tags')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="title">Title / Post Name</label>
-                                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Post Name" name="title" aria-describedby="titleDesc" value="{{ $post->title }}">
-                                    <small id="titleDesc" class="form-text text-muted">Deskripsikan Nama Berita untuk Berita Bapenda</small>
-                                    @error('title')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="abstract">Abstract</label>
-                                    <textarea class="form-control @error('abstract') is-invalid @enderror" id="abstract" name="abstract" rows="3" aria-describedby="abstract">{{ $post->abstract }}</textarea>
-                                    <small id="abstractDesc" class="form-text text-muted">Deskripsikan secara singkat mengenai Berita terbaru yang akan di post</small>
-                                    @error('abstract')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="content">Content</label>
-                                    <textarea name="content" class="ckeditor form-control @error('content') is-invalid @enderror" id="content" aria-describedby="contentHelp">{{ $post->content }}</textarea>
-                                    <small id="contentHelp" class="form-text text-muted">Deskripsikan secara lengkap tentang berita terbaru yang akan di post</small>
-                                    @error('content')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="picture">Post Image / Post Thumbnail</label>
-                                    <input type="file" name="picture" class="form-control py-1 @error('picture') is-invalid @enderror" required id="picture" aria-describedby="picture">
-                                    <small id="picture" class="form-text text-muted">Upload Gambar mengenai Berita terbaru (*PNG, JPG, WEBP). <strong>Maksimum Size: 200 kb</strong></small>
-                                    @error('picture')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <a href="{{ route('cms.news.post.index') }}" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left me-2"></i>Back</a>
-                                    <button type="submit" class="btn btn-primary"><i class="far fa-edit me-2"></i>Update Berita Bapenda</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>   
-                </div>
-            </div>      
-        </div>
-    </main>
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{ route('cms.home') }}">Home</a></li>
+            <li class="breadcrumb-item text-sm text-white"><a class="opacity-5 text-white" href="{{ route('cms.news.index') }}">Berita</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Edit Data</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0"><i class="fa fa-newspaper-o me-2"></i>Edit Data Berita</h6>
+    </nav>
 @endsection
 
-@push('script')
+@section('content')
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-6 d-flex align-items-center">
+                                <h6 class="mb-0 font-weight-bolder">Edit Data Berita</h6>
+                            </div>
+                            <div class="col-6 text-end">
+                                <a class="btn bg-gradient-danger mb-0" href="{{ route('cms.news.index') }}"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Kembali</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3">
+                        <div class="row">
+                            <div class="card px-0">
+                                <div class="card-header pb-0 px-3">
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0"><i class="fa fa-edit me-2"></i>Edit Berita</p>
+                                    </div>
+                                </div>
+                                <div class="card-body pt-3 px-3 pb-2">
+                                    @if(session()->has('error'))
+                                        <div class="alert alert-danger">
+                                            <strong>{{ session()->get('error') }}</strong>
+                                        </div>
+                                    @endif
+                                    <form action="{{ route('cms.news.post.update', ['id' => $post->id]) }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row align-items-center">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <select class="form-control @error('category') is-invalid @enderror" aria-label="category" id="category" name="category" aria-describedby="categoryDesc">
+                                                        <option selected disabled>Select Category</option>
+                                                        @foreach ($category as $item)
+                                                            <option value="{{ $item->id }}" {{old('category') ?? $post->category_id == $item->id ? 'selected' : ''}}>{{$item->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <label for="category" class="form-control-label mt-1">Pilih kategori Untuk Berita Bapenda Baru.<br><span class="text-danger">Sebelum membuat berita terbaru, create / update Kategori terlebih dahulu.</span></label>
+                                                    @error('category')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <select class="form-control @error('tags') is-invalid @enderror" multiple="multiple" aria-label="tags" id="form-select-select2" name="tags[]" aria-describedby="tagsDesc">
+                                                        @foreach ($tag as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <label for="category" class="form-control-label mt-1">Pilih tags Untuk Berita Bapenda Baru.<br><span class="text-danger">Sebelum membuat berita terbaru, create / update tags terlebih dahulu.</span></label>
+                                                    @error('tags')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input class="form-control @error('title') is-invalid @enderror" value="{{ $post->title }}" name="title" type="text" placeholder="Nama Berita">
+                                                    <label for="title" class="form-control-label">Deskripsikan Nama Berita untuk Berita Bapenda.</label>
+                                                    @error('title')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control @error('abstract') is-invalid @enderror" id="abstract" name="abstract" rows="3" aria-describedby="abstract">{{ $post->abstract }}</textarea>
+                                                    <label for="abstract" class="form-control-label">Deskripsikan secara singkat mengenai Berita terbaru yang akan di post</label>
+                                                    @error('abstract')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea name="content" class="ckeditor form-control @error('content') is-invalid @enderror" id="desc" aria-describedby="contentHelp">{{ $post->content }}</textarea>
+                                                    <label for="content" class="form-control-label">Deskripsikan secara lengkap tentang berita terbaru yang akan dimuat ke dalam Postingan.</label>
+                                                    @error('content')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary btn-md ms-auto"><i class="fa fa-edit me-2"></i>Edit Data</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <!-- Footer -->
+        @include('cms.partials.footer')
+        <!-- End Footer -->
+    </div>
+@endsection
+
+@push('bottomscript')
     <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

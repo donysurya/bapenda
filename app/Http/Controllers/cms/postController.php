@@ -17,8 +17,19 @@ class postController extends Controller
 {
     public function index()
     {
-        $post = Posts::paginate(10);
-        return view('cms.news.posts.index', compact('post'));
+        $nameCategory = $_GET['nameCategory'] ?? '';
+        $nameTag = $_GET['nameTag'] ?? '';
+        $namePost = $_GET['namePost'] ?? '';
+        $category = Category::when($nameCategory != '', function ($query) use ($nameCategory) {
+                            $query->where('name', 'LIKE', "%{$nameCategory}%");
+                        })->paginate(5);
+        $tag = Tags::when($nameTag != '', function ($query) use ($nameTag) {
+                            $query->where('name', 'LIKE', "%{$nameTag}%");
+                        })->paginate(5);
+        $post = Posts::when($namePost != '', function ($query) use ($namePost) {
+            $query->where('title', 'LIKE', "%{$namePost}%");
+        })->paginate(10);
+        return view('cms.news.index', compact('category', 'tag', 'post'));
     }
 
     public function create()
@@ -35,7 +46,7 @@ class postController extends Controller
             'category' => 'required',
             'abstract' => 'required',
             'content' => 'required',
-            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -55,8 +66,8 @@ class postController extends Controller
             ]);
             $post->tags()->attach($request->tags);
             DB::commit();
-            alert()->success('Success', 'Bapenda News successfully Added');
-            return redirect()->route('cms.news.post.index');
+            alert()->success('Success', 'Berita Bapenda Berhasil Ditambahkan');
+            return redirect()->route('cms.news.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -79,7 +90,40 @@ class postController extends Controller
             'category' => 'required',
             'content' => 'required',
             'abstract' => 'required',
-            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:200',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $post = Posts::findOrFail($id);
+            $post->update([
+                'title' => $request->title,
+                'category_id' => $request->category,
+                'content' => $request->content,
+                'abstract' => $request->abstract,
+                'slug' => Str::slug($request->title),
+                'created_by' => auth()->guard('cms')->user()->id,
+            ]);
+            $post->tags()->sync($request->tags);
+            DB::commit();
+            alert()->success('Success', 'Berita Bapenda Berhasil Diubah');
+            return redirect()->route('cms.news.index');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
+            return back();
+        }
+    }
+
+    public function image($id)
+    {
+        $post = Posts::findorfail($id);
+        return view('cms.news.posts.image', compact('post'));
+    }
+
+    public function update_image(Request $request, $id)
+    {
+        $request->validate([
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -88,20 +132,14 @@ class postController extends Controller
                 'public/images',
                 $request->file('picture'),
             );
-            $post = Posts::findOrFail($id);
-            $post->update([
-                'title' => $request->title,
-                'category_id' => $request->category,
-                'content' => $request->content,
-                'abstract' => $request->abstract,
+            $admin = auth()->guard('cms')->user()->id;
+            Posts::where('id', $id)->update([
                 'image' => $path,
-                'slug' => Str::slug($request->title),
-                'created_by' => auth()->guard('cms')->user()->id,
+                'created_by' => $admin,
             ]);
-            $post->tags()->sync($request->tags);
             DB::commit();
-            alert()->success('Success', 'Bapenda News successfully Updated');
-            return redirect()->route('cms.news.post.index');
+            alert()->success('Success', 'Gambar Berita Bapenda Berhasil Diubah');
+            return redirect()->route('cms.news.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -113,7 +151,7 @@ class postController extends Controller
     {
         $post = Posts::findorfail($id);
         $post->delete();
-        alert()->success('Success', 'Your Post Bapenda News has been Deleted!');
-        return redirect()->route('cms.news.post.index');
+        alert()->success('Success', 'Berita Bapenda Berhasil Dihapus!');
+        return redirect()->route('cms.news.index');
     }
 }

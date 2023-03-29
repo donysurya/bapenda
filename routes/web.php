@@ -114,9 +114,9 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
         // Profil Bapenda
         Route::prefix('profile')->name('profile.')->group(function (){
-            // Visi
             Route::get('/', [App\Http\Controllers\cms\profileController::class, 'index'])->name('bapenda');
-
+            
+            // Visi
             Route::get('/vision', [App\Http\Controllers\cms\profileController::class, 'vision'])->name('vision');
             Route::prefix('vision')->name('vision.')->group(function (){
                 Route::get('/create', [App\Http\Controllers\cms\profileController::class, 'vision_create'])->name('create');
@@ -294,8 +294,9 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
         // Berita Bapenda
         Route::name('news.')->prefix('news')->group(function (){
+            Route::get('/', [App\Http\Controllers\cms\postController::class, 'index'])->name('index');
+
             Route::prefix('category')->name('category.')->group(function (){
-                Route::get('', [\App\Http\Controllers\cms\categoryController::class, 'index'])->name('index');
                 Route::get('/create', [\App\Http\Controllers\cms\categoryController::class, 'create'])->name('create');
                 Route::post('/store', [\App\Http\Controllers\cms\categoryController::class, 'store'])->name('store');
                 Route::get('/{id}', [\App\Http\Controllers\cms\categoryController::class, 'edit'])->name('edit');
@@ -303,7 +304,6 @@ Route::prefix('cms')->name('cms.')->group(function () {
                 Route::delete('/{id}', [\App\Http\Controllers\cms\categoryController::class, 'destroy'])->name('destroy');
             });
             Route::prefix('tags')->name('tags.')->group(function (){
-                Route::get('', [\App\Http\Controllers\cms\tagController::class, 'index'])->name('index');
                 Route::get('/create', [\App\Http\Controllers\cms\tagController::class, 'create'])->name('create');
                 Route::post('/store', [\App\Http\Controllers\cms\tagController::class, 'store'])->name('store');
                 Route::get('/{id}', [\App\Http\Controllers\cms\tagController::class, 'edit'])->name('edit');
@@ -311,11 +311,12 @@ Route::prefix('cms')->name('cms.')->group(function () {
                 Route::delete('/{id}', [\App\Http\Controllers\cms\tagController::class, 'destroy'])->name('destroy');
             });
             Route::prefix('post')->name('post.')->group(function (){
-                Route::get('', [\App\Http\Controllers\cms\postController::class, 'index'])->name('index');
                 Route::get('/create', [\App\Http\Controllers\cms\postController::class, 'create'])->name('create');
                 Route::post('/store', [\App\Http\Controllers\cms\postController::class, 'store'])->name('store');
                 Route::get('/{id}', [\App\Http\Controllers\cms\postController::class, 'edit'])->name('edit');
                 Route::put('/{id}', [\App\Http\Controllers\cms\postController::class, 'update'])->name('update');
+                Route::get('/{id}/image', [App\Http\Controllers\cms\postController::class, 'image'])->name('image');
+                Route::put('/{id}/image', [App\Http\Controllers\cms\postController::class, 'update_image'])->name('update.image');
                 Route::delete('/{id}', [\App\Http\Controllers\cms\postController::class, 'destroy'])->name('destroy');
             });
         });
