@@ -96,6 +96,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
         // Background
         Route::get('/background', [App\Http\Controllers\cms\backgroundController::class, 'index'])->name('background');
         Route::prefix('background')->name('background.')->group(function (){
+            Route::get('/create', [App\Http\Controllers\cms\backgroundController::class, 'create'])->name('create');
+            Route::post('/create', [App\Http\Controllers\cms\backgroundController::class, 'store'])->name('store');
             Route::get('{id}/edit', [App\Http\Controllers\cms\backgroundController::class, 'edit'])->name('edit');
             Route::put('{id}/edit', [App\Http\Controllers\cms\backgroundController::class, 'update'])->name('update');
             Route::delete('/{id}', [App\Http\Controllers\cms\backgroundController::class, 'destroy'])->name('destroy');
@@ -205,8 +207,9 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
         // Profil Bapenda
         Route::prefix('other')->name('other.')->group(function (){
+            Route::get('/', [App\Http\Controllers\cms\informationController::class, 'index'])->name('index');
+
             // Jenis Pelayanan
-            Route::get('/service', [App\Http\Controllers\cms\informationController::class, 'service'])->name('service');
             Route::prefix('service')->name('service.')->group(function (){
                 Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'service_create'])->name('create');
                 Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'service_store'])->name('store');
@@ -218,11 +221,10 @@ Route::prefix('cms')->name('cms.')->group(function () {
                 Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'service_destroy'])->name('destroy');
             });
 
-            Route::get('/flow', [App\Http\Controllers\cms\informationController::class, 'flow'])->name('flow');
+            // Alur Proses
             Route::prefix('flow')->name('flow.')->group(function (){
                 Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'flow_create'])->name('create');
                 Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'flow_store'])->name('store');
-                Route::get('/{id}', [App\Http\Controllers\cms\informationController::class, 'flow_show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'flow_edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'flow_update'])->name('update');
                 Route::get('{id}/image', [App\Http\Controllers\cms\informationController::class, 'flow_image'])->name('image');
@@ -231,11 +233,9 @@ Route::prefix('cms')->name('cms.')->group(function () {
             });
 
             // Pembayaran
-            Route::get('/payment', [App\Http\Controllers\cms\paymentController::class, 'index'])->name('payment');
             Route::prefix('payment')->name('payment.')->group(function (){
                 Route::get('/create', [App\Http\Controllers\cms\paymentController::class, 'create'])->name('create');
                 Route::post('/create', [App\Http\Controllers\cms\paymentController::class, 'store'])->name('store');
-                Route::get('/{id}', [App\Http\Controllers\cms\paymentController::class, 'show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\paymentController::class, 'edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\paymentController::class, 'update'])->name('update');
                 Route::get('{id}/image', [App\Http\Controllers\cms\paymentController::class, 'image'])->name('image');
@@ -248,7 +248,6 @@ Route::prefix('cms')->name('cms.')->group(function () {
             Route::prefix('portal')->name('portal.')->group(function (){
                 Route::get('/create', [App\Http\Controllers\cms\portalController::class, 'create'])->name('create');
                 Route::post('/create', [App\Http\Controllers\cms\portalController::class, 'store'])->name('store');
-                Route::get('/{id}', [App\Http\Controllers\cms\portalController::class, 'show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\portalController::class, 'edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\portalController::class, 'update'])->name('update');
                 Route::get('{id}/image', [App\Http\Controllers\cms\portalController::class, 'image'])->name('image');
@@ -261,18 +260,15 @@ Route::prefix('cms')->name('cms.')->group(function () {
             Route::prefix('video')->name('video.')->group(function (){
                 Route::get('/create', [App\Http\Controllers\cms\videoController::class, 'create'])->name('create');
                 Route::post('/create', [App\Http\Controllers\cms\videoController::class, 'store'])->name('store');
-                Route::get('/{id}', [App\Http\Controllers\cms\videoController::class, 'show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\videoController::class, 'edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\videoController::class, 'update'])->name('update');
                 Route::delete('/{id}', [App\Http\Controllers\cms\videoController::class, 'destroy'])->name('destroy');
             });
 
             // Infografis
-            Route::get('/infografis', [App\Http\Controllers\cms\infografisController::class, 'index'])->name('infografis');
             Route::prefix('infografis')->name('infografis.')->group(function (){
                 Route::get('/create', [App\Http\Controllers\cms\infografisController::class, 'create'])->name('create');
                 Route::post('/create', [App\Http\Controllers\cms\infografisController::class, 'store'])->name('store');
-                Route::get('/{id}', [App\Http\Controllers\cms\infografisController::class, 'show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\infografisController::class, 'edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\infografisController::class, 'update'])->name('update');
                 Route::get('{id}/image', [App\Http\Controllers\cms\infografisController::class, 'image'])->name('image');
@@ -285,7 +281,6 @@ Route::prefix('cms')->name('cms.')->group(function () {
             Route::prefix('faq')->name('faq.')->group(function (){
                 Route::get('/create', [App\Http\Controllers\cms\informationController::class, 'faq_create'])->name('create');
                 Route::post('/create', [App\Http\Controllers\cms\informationController::class, 'faq_store'])->name('store');
-                Route::get('/{id}', [App\Http\Controllers\cms\informationController::class, 'faq_show'])->name('show');
                 Route::get('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'faq_edit'])->name('edit');
                 Route::put('{id}/edit', [App\Http\Controllers\cms\informationController::class, 'faq_update'])->name('update');
                 Route::delete('/{id}', [App\Http\Controllers\cms\informationController::class, 'faq_destroy'])->name('destroy');
@@ -319,6 +314,13 @@ Route::prefix('cms')->name('cms.')->group(function () {
                 Route::put('/{id}/image', [App\Http\Controllers\cms\postController::class, 'update_image'])->name('update.image');
                 Route::delete('/{id}', [\App\Http\Controllers\cms\postController::class, 'destroy'])->name('destroy');
             });
+        });
+
+        // Setting
+        Route::name('setting.')->prefix('setting')->group(function (){
+            Route::get('/', [App\Http\Controllers\cms\settingController::class, 'index'])->name('index');
+            Route::put('/change-password', [App\Http\Controllers\cms\settingController::class, 'updatePassword'])->name('update-password');
+            Route::put('{id}/change-information', [App\Http\Controllers\cms\settingController::class, 'updateInformation'])->name('update-information');
         });
     });
 });

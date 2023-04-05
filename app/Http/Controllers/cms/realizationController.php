@@ -42,7 +42,7 @@ class realizationController extends Controller
                 'file' => $path,
             ]);
             DB::commit();
-            alert()->success('Success', 'Realization File successfully Created');
+            alert()->success('Success', 'Data Realisasi File Berhasil Ditambahkan');
             return redirect()->route('cms.realisasi');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -83,7 +83,7 @@ class realizationController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Realization File successfully updated');
+            alert()->success('Success', 'Data Realisasi File Berhasil Diubah');
             return redirect()->route('cms.realisasi');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -95,7 +95,7 @@ class realizationController extends Controller
     public function destroy($id)
     {
         Realization::where('id', $id)->delete();
-        alert()->success('Success', 'Your Realization File has been deleted!');
+        alert()->success('Success', 'Data Realisasi File Berhasil Dihapus!');
         return redirect()->route('cms.realisasi');
     }
 }

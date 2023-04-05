@@ -62,7 +62,7 @@ class publicationController extends Controller
                 'file' => $path,
             ]);
             DB::commit();
-            alert()->success('Success', 'Publikasi successfully Created');
+            alert()->success('Success', 'Data File Publikasi Berhasil Ditambahkan');
             return redirect()->route('cms.publikasi');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -105,7 +105,7 @@ class publicationController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Publikasi successfully updated');
+            alert()->success('Success', 'Data File Publikasi Berhasil Diubah');
             return redirect()->route('cms.publikasi');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -117,7 +117,7 @@ class publicationController extends Controller
     public function destroy($id)
     {
         Publication::where('id', $id)->delete();
-        alert()->success('Success', 'Your Publikasi has been deleted!');
+        alert()->success('Success', 'Data File Publikasi Berhasil Dihapus!');
         return redirect()->route('cms.publikasi');
     }
 }

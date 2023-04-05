@@ -30,7 +30,7 @@ class tagController extends Controller
                 'slug' => Str::slug($request->title),
             ]);
             DB::commit();
-            alert()->success('Success', 'Tags for Bapenda News successfully Added');
+            alert()->success('Success', 'Tag Berhasil Ditambahkan');
             return redirect()->route('cms.news.index');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -58,7 +58,7 @@ class tagController extends Controller
                 'slug' => Str::slug($request->title),
             ]);
             DB::commit();
-            alert()->success('Success', 'Tags for Bapenda News successfully Updated');
+            alert()->success('Success', 'Tag Berhasil Diubah');
             return redirect()->route('cms.news.index');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -71,7 +71,7 @@ class tagController extends Controller
     {
         $tags = Tags::findorfail($id);
         $tags->delete();
-        alert()->success('Success', 'Your Tags Bapenda News has been Deleted!');
+        alert()->success('Success', 'Tag Berhasil Dihapus!');
         return redirect()->route('cms.news.index');
     }
 }

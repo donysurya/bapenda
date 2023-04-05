@@ -130,13 +130,7 @@
                                 Berita
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="{{Route::is('cms.news.*') ? '' : 'collapse'}}" id="collapseNews" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link {{Route::is('cms.news.category.index') ? 'active' : ''}}" href="{{route('cms.news.category.index')}}"><i class="bi bi-columns-gap text-primary me-2"></i>Category</a>
-                                    <a class="nav-link {{Route::is('cms.news.tags.index') ? 'active' : ''}}" href="{{route('cms.news.tags.index')}}"><i class="bi bi-tags text-primary me-2"></i>Tags</a>
-                                    <a class="nav-link {{Route::is('cms.news.post.index') ? 'active' : ''}}" href="{{route('cms.news.post.index')}}"><i class="bi bi-file-earmark-richtext text-primary me-2"></i>Post Berita</a>
-                                </nav>
-                            </div>
+                            
                             <a class="nav-link {{ Route::is('cms.gallery') ? 'active' : '' }}" href="{{ route('cms.gallery') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-images text-primary"></i></div>
                                 Gallery

@@ -8,6 +8,7 @@ use App\Models\Pegawai;
 use App\Models\Uptb;
 use App\Models\Publication;
 use App\Models\Realization;
+use App\Models\Background;
 
 class homeController extends Controller
 {
@@ -16,6 +17,7 @@ class homeController extends Controller
         $uptb = Uptb::all();
         $publikasi = Publication::all();
         $realisasi = Realization::all();
-        return view('cms.home.index', compact('pegawai', 'uptb', 'publikasi', 'realisasi'));
+        $background = Background::paginate(5);
+        return view('cms.home.index', compact('pegawai', 'uptb', 'publikasi', 'realisasi', 'background'));
     }
 }

@@ -11,21 +11,16 @@ use Illuminate\Support\Facades\Storage;
 
 class infografisController extends Controller
 {
-    public function index() {
-        $infografis = Infografis::all();
-        return view('cms.infografis.index', compact('infografis'));
-    }
-
     public function create()
     {
-        return view('cms.infografis.create');
+        return view('cms.pages.infografis.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:700',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -39,8 +34,8 @@ class infografisController extends Controller
                 'image' => $path,
             ]);
             DB::commit();
-            alert()->success('Success', 'Infografis successfully Created');
-            return redirect()->route('cms.other.infografis');
+            alert()->success('Success', 'Infografis Berhasil Ditambahkan');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -51,13 +46,13 @@ class infografisController extends Controller
     public function show($id)
     {
         $infografis = Infografis::where('id', $id)->first();
-        return view('cms.infografis.show', compact('infografis'));
+        return view('cms.pages.infografis.show', compact('infografis'));
     }
 
     public function edit($id)
     {
         $infografis = Infografis::where('id', $id)->first();
-        return view('cms.infografis.edit', compact('infografis'));
+        return view('cms.pages.infografis.edit', compact('infografis'));
     }
 
     public function update(Request $request, $id)
@@ -74,8 +69,8 @@ class infografisController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Infografis successfully updated');
-            return redirect()->route('cms.other.infografis');
+            alert()->success('Success', 'Infografis Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -86,13 +81,13 @@ class infografisController extends Controller
     public function image($id)
     {
         $infografis = Infografis::where('id', $id)->first();
-        return view('cms.infografis.image', compact('infografis'));
+        return view('cms.pages.infografis.image', compact('infografis'));
     }
 
     public function update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:700',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -107,8 +102,8 @@ class infografisController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your infografis successfully updated');
-            return redirect()->route('cms.other.infografis');
+            alert()->success('Success', 'Gambar Infografis Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -119,7 +114,7 @@ class infografisController extends Controller
     public function destroy($id)
     {
         Infografis::where('id', $id)->delete();
-        alert()->success('Success', 'Your Infografis has been deleted!');
-        return redirect()->route('cms.other.infografis');
+        alert()->success('Success', 'Infografis Berhasil Dihapus!');
+        return redirect()->route('cms.other.index');
     }
 }

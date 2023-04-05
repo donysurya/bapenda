@@ -20,7 +20,7 @@ class homeController extends Controller
     public function index() {
         $video = Video::orderBy('created_at', 'desc')->first();
         $infografis = Infografis::take(4)->get();
-        $flow = Flow::orderBy('created_at', 'desc')->first();
+        $flow = Flow::all();
         $service = Service::all();
         $payment = Payment::all();
         $portal = Portal::take(5)->get();

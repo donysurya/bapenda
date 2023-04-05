@@ -11,21 +11,16 @@ use Illuminate\Support\Facades\Storage;
 
 class portalController extends Controller
 {
-    public function index() {
-        $portal = Portal::all();
-        return view('cms.portal.index', compact('portal'));
-    }
-
     public function create()
     {
-        return view('cms.portal.create');
+        return view('cms.pages.portal.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp,bmp|max:2000',
             'link' => 'required',
         ]);
 
@@ -41,8 +36,8 @@ class portalController extends Controller
                 'link' => $request->link,
             ]);
             DB::commit();
-            alert()->success('Success', 'Portal successfully Created');
-            return redirect()->route('cms.other.portal');
+            alert()->success('Success', 'Link Portal Berhasil Ditambahkan');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -50,16 +45,10 @@ class portalController extends Controller
         }
     }
 
-    public function show($id)
-    {
-        $portal = Portal::where('id', $id)->first();
-        return view('cms.portal.show', compact('portal'));
-    }
-
     public function edit($id)
     {
         $portal = Portal::where('id', $id)->first();
-        return view('cms.portal.edit', compact('portal'));
+        return view('cms.pages.portal.edit', compact('portal'));
     }
 
     public function update(Request $request, $id)
@@ -78,8 +67,8 @@ class portalController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Portal successfully updated');
-            return redirect()->route('cms.other.portal');
+            alert()->success('Success', 'Link Portal Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -90,13 +79,13 @@ class portalController extends Controller
     public function image($id)
     {
         $portal = Portal::where('id', $id)->first();
-        return view('cms.portal.image', compact('portal'));
+        return view('cms.pages.portal.image', compact('portal'));
     }
 
     public function update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp,bmp|max:2000',
         ]);
 
         try {
@@ -111,8 +100,8 @@ class portalController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Portal Logo successfully updated');
-            return redirect()->route('cms.other.portal');
+            alert()->success('Success', 'Logo Link Portal Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -123,7 +112,7 @@ class portalController extends Controller
     public function destroy($id)
     {
         Portal::where('id', $id)->delete();
-        alert()->success('Success', 'Your Portal has been deleted!');
-        return redirect()->route('cms.other.portal');
+        alert()->success('Success', 'Link Portal Berhasil Dihapus!');
+        return redirect()->route('cms.other.index');
     }
 }

@@ -166,55 +166,93 @@
         <div class="row mt-4">
             <div class="col-lg-7 mb-lg-0 mb-4">
                 <div class="card ">
-                    <div class="card-header pb-0 p-3">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="mb-2">Landing Page Background</h6>
+                    <div class="card-header p-3">
+                        <div class="row mb-0 align-items-center">
+                            <div class="col-6 d-flex align-items-center">
+                                <h6 class="mb-0 font-weight-bolder"><i class="fa fa-picture-o me-2"></i>Background Bapenda</h6>
+                            </div>
+                            <div class="col-6 text-end">
+                                <a class="btn bg-gradient-dark mb-0" href="{{ route('cms.background.create') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table align-items-center ">
-                            <tbody>
-                                <tr>
-                                    <td class="w-30">
-                                        <div class="d-flex px-2 py-1 align-items-center">
-                                            <div>
-                                                <div class="avatar avatar-sm me-3 mt-1 bg-gradient-info shadow-info text-center rounded-circle">
-                                                    <i class="fa fa-file-image-o text-lg opacity-10" aria-hidden="true"></i>
-                                                </div>
-                                            </div>
-                                            <div class="ms-4">
-                                                <p class="text-xs font-weight-bold mb-2">Background:</p>
-                                                <img src="{{ asset('argon/img/home.webp') }}" width="300" alt="Landing Page Background">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Action:</p>
-                                            <a class="btn btn-link text-dark px-2 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-notification"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                        </div>
-                                    </td>
-                                    <!-- Update Modal -->
-                                    <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <div class="py-3 text-center">
-                                                        <i class="fa fa-info-circle fa-3x text-warning"></i>
-                                                        <h4 class="text-gradient text-warning mt-4">Attention!</h4>
-                                                        <p>This feature can only be accessed through the developer, if you want to make changes to the background, please contact the developer to make changes.</p>
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <button type="button" class="btn btn-danger text-white ml-auto" data-bs-dismiss="modal"><i class="fa fa-close me-2"></i>Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="card-body pt-0 pb-3">
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-body px-0 py-3">
+                                    <div class="table-responsive p-0">
+                                        <table class="table align-items-center mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">No</th>
+                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ps-2">Background</th>
+                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Tanggal Upload</th>
+                                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse($background as $index => $item)
+                                                    <tr>
+                                                        <td class="align-middle text-center">
+                                                            <p class="text-md text-secondary mb-0">
+                                                                {{$index+1}}
+                                                            </p>
+                                                        </td>
+                                                        <td style="white-space:normal!important;" class="align-middle">
+                                                            <div class="px-2 py-1">
+                                                                <div class="text-center">
+                                                                    <img src="{{Storage::url($item->image)}}" alt="{{$item->name}}" width="120px">
+                                                                    <p class="text-xs text-secondary mt-2 mb-0">Updated by: {{ $item->admin->name ?? 'Administrator'}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="align-middle text-center">
+                                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->created_at }}</span>
+                                                        </td>
+                                                        <td class="align-middle text-center">
+                                                            <a class="btn btn-link text-dark px-2 mb-0" href="{{ route('cms.background.edit', ['id' => $item->id]) }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-background{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                        </td>
+
+                                                        <!-- Delete Modal -->
+                                                        <div class="modal fade" id="modal-delete-background{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-delete-background{{ $item->id }}" aria-hidden="true">
+                                                            <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <div class="py-3 text-center">
+                                                                            <i class="fa fa-exclamation-triangle fa-3x text-danger"></i>
+                                                                            <h4 class="text-gradient text-danger mt-4">Mohon diperhatikan!</h4>
+                                                                            <p>Apakah anda yakin ingin menghapus Background?</p>
+                                                                        </div>
+                                                                        <div class="text-center">
+                                                                            <form action="{{ route('cms.background.destroy', ['id' => $item->id]) }}" method="post">
+                                                                                @csrf
+                                                                                @method('delete')
+                                                                                <button type="submit" class="btn btn-primary"><i class="fa fa-trash me-2"></i>Hapus Data</button>
+                                                                            </form>
+                                                                            <button type="button" class="btn btn-danger text-white ml-auto" data-bs-dismiss="modal"><i class="fa fa-close me-2"></i>Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Delete Modal -->
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="4" class="text-center">
+                                                            <p class="text-sm text-secondary font-weight-bolder mb-0">- No data found -</p>
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <!-- End Update Modal -->
-                                </tr>
-                            </tbody>
-                        </table>
+                                </div>
+                            </div>
+                            <div class="mt-3"></div>
+                            {{ $background->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

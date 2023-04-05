@@ -11,21 +11,16 @@ use Illuminate\Support\Facades\Storage;
 
 class paymentController extends Controller
 {
-    public function index() {
-        $payment = Payment::all();
-        return view('cms.payment.index', compact('payment'));
-    }
-
     public function create()
     {
-        return view('cms.payment.create');
+        return view('cms.pages.payment.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
+            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:2000',
             'description' => 'required',
         ]);
 
@@ -41,8 +36,8 @@ class paymentController extends Controller
                 'description' => $request->description,
             ]);
             DB::commit();
-            alert()->success('Success', 'Payment successfully Created');
-            return redirect()->route('cms.other.payment');
+            alert()->success('Success', 'Jenis Pembayaran Berhasil Ditambahkan');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -53,13 +48,13 @@ class paymentController extends Controller
     public function show($id)
     {
         $payment = Payment::where('id', $id)->first();
-        return view('cms.payment.show', compact('payment'));
+        return view('cms.pages.payment.show', compact('payment'));
     }
 
     public function edit($id)
     {
         $payment = Payment::where('id', $id)->first();
-        return view('cms.payment.edit', compact('payment'));
+        return view('cms.pages.payment.edit', compact('payment'));
     }
 
     public function update(Request $request, $id)
@@ -78,8 +73,8 @@ class paymentController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Payment successfully updated');
-            return redirect()->route('cms.other.payment');
+            alert()->success('Success', 'Jenis Pembayaran Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -90,13 +85,13 @@ class paymentController extends Controller
     public function image($id)
     {
         $payment = Payment::where('id', $id)->first();
-        return view('cms.payment.image', compact('payment'));
+        return view('cms.pages.payment.image', compact('payment'));
     }
 
     public function update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
+            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,bmp|max:2000',
         ]);
 
         try {
@@ -111,8 +106,8 @@ class paymentController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Payment Logo successfully updated');
-            return redirect()->route('cms.other.payment');
+            alert()->success('Success', 'Logo Jenis Pembayaran Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -123,7 +118,7 @@ class paymentController extends Controller
     public function destroy($id)
     {
         Payment::where('id', $id)->delete();
-        alert()->success('Success', 'Your Payment Method has been deleted!');
-        return redirect()->route('cms.other.payment');
+        alert()->success('Success', 'Jenis Pembayaran Berhasil Dihapus!');
+        return redirect()->route('cms.other.index');
     }
 }

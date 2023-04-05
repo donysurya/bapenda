@@ -33,7 +33,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm" style="inline-size: 250px; overflow:hidden; text-overflow: ellipsis;">{!! $item->description !!}</h6>
+                                                    <h6 class="mb-0 text-sm">{!! Str::limit( strip_tags( $item->description ), 30 ) !!}</h6>
                                                     <p class="text-xs text-secondary mb-0">Updated by: {{ $item->admin->name ?? 'Administrator'}}</p>
                                                 </div>
                                             </div>

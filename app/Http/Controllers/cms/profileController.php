@@ -42,7 +42,7 @@ class profileController extends Controller
                 'description' => $request->description,
             ]);
             DB::commit();
-            alert()->success('Success', 'Vision successfully Created');
+            alert()->success('Success', 'Data Visi Bapenda Berhasil Ditambahkan');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -71,7 +71,7 @@ class profileController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Vision successfully updated');
+            alert()->success('Success', 'Data Visi Bapenda Berhasil Diubah');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -83,7 +83,7 @@ class profileController extends Controller
     public function vision_destroy($id)
     {
         Vision::where('id', $id)->delete();
-        alert()->success('Success', 'Your Vision has been deleted!');
+        alert()->success('Success', 'Data Visi Bapenda Berhasil Dihapus!');
         return redirect()->route('cms.profile.bapenda');
     }
 
@@ -105,7 +105,7 @@ class profileController extends Controller
                 'description' => $request->description,
             ]);
             DB::commit();
-            alert()->success('Success', 'mission successfully Created');
+            alert()->success('Success', 'Data Misi Bapenda Berhasil Ditambahkan');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -134,7 +134,7 @@ class profileController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your mission successfully updated');
+            alert()->success('Success', 'Data Misi Bapenda Berhasil Diubah');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -146,7 +146,7 @@ class profileController extends Controller
     public function mission_destroy($id)
     {
         Mission::where('id', $id)->delete();
-        alert()->success('Success', 'Your mission has been deleted!');
+        alert()->success('Success', 'Data Misi Bapenda Berhasil Dihapus!');
         return redirect()->route('cms.profile.bapenda');
     }
 
@@ -179,7 +179,7 @@ class profileController extends Controller
                 'description' => $request->description,
             ]);
             DB::commit();
-            alert()->success('Success', 'History successfully Created');
+            alert()->success('Success', 'Data Sejarah Bapenda Berhasil Ditambahkan');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -208,7 +208,7 @@ class profileController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your History successfully updated');
+            alert()->success('Success', 'Data Sejarah Bapenda Berhasil Diubah');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -241,7 +241,7 @@ class profileController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Banner History successfully updated');
+            alert()->success('Success', 'Data Gambar Sejarah Bapenda Berhasil Diubah');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -253,7 +253,7 @@ class profileController extends Controller
     public function sejarah_destroy($id)
     {
         History::where('id', $id)->delete();
-        alert()->success('Success', 'Your History has been deleted!');
+        alert()->success('Success', 'Data Sejarah Bapenda Berhasil Dihapus!');
         return redirect()->route('cms.profile.bapenda');
     }
 
@@ -290,7 +290,7 @@ class profileController extends Controller
                 'jobdesk' => $request->jobdesk,
             ]);
             DB::commit();
-            alert()->success('Success', 'Director successfully Created');
+            alert()->success('Success', 'Data Kepala Bapenda Berhasil Ditambahkan');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -323,7 +323,7 @@ class profileController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Director successfully updated');
+            alert()->success('Success', 'Data Kepala Bapenda Berhasil Diubah');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -356,7 +356,7 @@ class profileController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Director Picture successfully updated');
+            alert()->success('Success', 'Foto Kepala Bapenda Berhasil Diubah');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -368,7 +368,7 @@ class profileController extends Controller
     public function kepala_destroy($id)
     {
         Director::where('id', $id)->delete();
-        alert()->success('Success', 'Your Director has been deleted!');
+        alert()->success('Success', 'Data Kepala Bapenda Berhasil Dihapus!');
         return redirect()->route('cms.profile.bapenda');
     }
 
@@ -394,7 +394,7 @@ class profileController extends Controller
                 'image' => $path,
             ]);
             DB::commit();
-            alert()->success('Success', 'Organization Structure successfully Created');
+            alert()->success('Success', 'Struktur Organisasi Bapenda Berhasil Ditambahkan');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -427,7 +427,7 @@ class profileController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Organization Structure Picture successfully updated');
+            alert()->success('Success', 'Struktur Organisasi Bapenda Berhasil Diubah');
             return redirect()->route('cms.profile.bapenda');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -439,7 +439,7 @@ class profileController extends Controller
     public function struktur_destroy($id)
     {
         Structure::where('id', $id)->delete();
-        alert()->success('Success', 'Your Organization Structure has been deleted!');
+        alert()->success('Success', 'Struktur Organisasi Bapenda Berhasil Dihapus!');
         return redirect()->route('cms.profile.bapenda');
     }
 }

@@ -11,14 +11,9 @@ use Illuminate\Support\Facades\Storage;
 
 class videoController extends Controller
 {
-    public function index() {
-        $video = Video::all();
-        return view('cms.video.index', compact('video'));
-    }
-
     public function create()
     {
-        return view('cms.video.create');
+        return view('cms.pages.video.create');
     }
 
     public function store(Request $request)
@@ -36,8 +31,8 @@ class videoController extends Controller
                 'link' => $embed,
             ]);
             DB::commit();
-            alert()->success('Success', 'Video successfully Created');
-            return redirect()->route('cms.other.video');
+            alert()->success('Success', 'Youtube Embed Video Berhasil Ditambahkan');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -45,16 +40,10 @@ class videoController extends Controller
         }
     }
 
-    public function show($id)
-    {
-        $video = Video::where('id', $id)->first();
-        return view('cms.video.show', compact('video'));
-    }
-
     public function edit($id)
     {
         $video = Video::where('id', $id)->first();
-        return view('cms.video.edit', compact('video'));
+        return view('cms.pages.video.edit', compact('video'));
     }
 
     public function update(Request $request, $id)
@@ -66,14 +55,16 @@ class videoController extends Controller
 
         try {
             DB::beginTransaction();
+            $admin = auth()->guard('cms')->user()->id;
             $embed = "https://www.youtube.com/embed/".$request->link."?autoplay=1";
             Video::where('id', $id)->update([
                 'name' => $request->name,
                 'link' => $embed,
+                'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Video successfully updated');
-            return redirect()->route('cms.other.video');
+            alert()->success('Success', 'Youtube Embed Video Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -84,7 +75,7 @@ class videoController extends Controller
     public function destroy($id)
     {
         Video::where('id', $id)->delete();
-        alert()->success('Success', 'Your Video has been deleted!');
-        return redirect()->route('cms.other.video');
+        alert()->success('Success', 'Youtube Embed Video Berhasil Dihapus!');
+        return redirect()->route('cms.other.index');
     }
 }

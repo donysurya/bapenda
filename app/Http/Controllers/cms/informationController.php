@@ -7,22 +7,34 @@ use Illuminate\Http\Request;
 use App\Models\faq;
 use App\Models\Service;
 use App\Models\Flow;
+use App\Models\Payment;
+use App\Models\Infografis;
+use App\Models\Portal;
+use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class informationController extends Controller
 {
-    // FAQ 
-    public function faq()
+    // Landing Pages
+    public function index()
     {
-        $faq = faq::all();
-        return view('cms.faq.index', compact('faq'));
+        $payment = Payment::paginate(5);
+        $flow = Flow::paginate(5);
+        $service = Service::paginate(5);
+        $infografis = Infografis::paginate(5);
+        $faq = faq::paginate(5);
+        $portal = Portal::paginate(5);
+        $video = Video::paginate(5);
+
+        return view('cms.pages.index', compact('payment', 'flow', 'service', 'infografis', 'faq', 'portal', 'video'));
     }
 
+    // FAQ 
     public function faq_create()
     {
-        return view('cms.faq.create');
+        return view('cms.pages.faq.create');
     }
 
     public function faq_store(Request $request)
@@ -39,8 +51,8 @@ class informationController extends Controller
                 'content' => $request->content,
             ]);
             DB::commit();
-            alert()->success('Success', 'FAQ successfully Created');
-            return redirect()->route('cms.other.faq');
+            alert()->success('Success', 'FAQ Berhasil Ditambahkan');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -48,16 +60,10 @@ class informationController extends Controller
         }
     }
 
-    public function faq_show($id)
-    {
-        $faq = faq::where('id', $id)->first();
-        return view('cms.faq.show', compact('faq'));
-    }
-
     public function faq_edit($id)
     {
         $faq = faq::where('id', $id)->first();
-        return view('cms.faq.edit', compact('faq'));
+        return view('cms.pages.faq.edit', compact('faq'));
     }
 
     public function faq_update(Request $request, $id)
@@ -69,13 +75,15 @@ class informationController extends Controller
 
         try {
             DB::beginTransaction();
+            $admin = auth()->guard('cms')->user()->id;
             faq::where('id', $id)->update([
                 'title' => $request->title,
                 'content' => $request->content,
+                'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your FAQ successfully updated');
-            return redirect()->route('cms.other.faq');
+            alert()->success('Success', 'FAQ Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -86,26 +94,21 @@ class informationController extends Controller
     public function faq_destroy($id)
     {
         faq::where('id', $id)->delete();
-        alert()->success('Success', 'Your FAQ has been deleted!');
-        return redirect()->route('cms.other.faq');
+        alert()->success('Success', 'FAQ Berhasil Dihapus!');
+        return redirect()->route('cms.other.index');
     }
 
     // Jenis Pelayanan
-    public function service() {
-        $service = Service::all();
-        return view('cms.service.index', compact('service'));
-    }
-
     public function service_create()
     {
-        return view('cms.service.create');
+        return view('cms.pages.service.create');
     }
 
     public function service_store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
             'description' => 'required',
         ]);
 
@@ -121,8 +124,8 @@ class informationController extends Controller
                 'description' => $request->description,
             ]);
             DB::commit();
-            alert()->success('Success', 'Service successfully Created');
-            return redirect()->route('cms.other.service');
+            alert()->success('Success', 'Jenis Pelayanan Berhasil Ditambahkan');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -130,16 +133,10 @@ class informationController extends Controller
         }
     }
 
-    public function service_show($id)
-    {
-        $service = Service::where('id', $id)->first();
-        return view('cms.service.show', compact('service'));
-    }
-
     public function service_edit($id)
     {
         $service = Service::where('id', $id)->first();
-        return view('cms.service.edit', compact('service'));
+        return view('cms.pages.service.edit', compact('service'));
     }
 
     public function service_update(Request $request, $id)
@@ -158,8 +155,8 @@ class informationController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your service successfully updated');
-            return redirect()->route('cms.other.service');
+            alert()->success('Success', 'Jenis Layanan Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -170,13 +167,13 @@ class informationController extends Controller
     public function service_image($id)
     {
         $service = Service::where('id', $id)->first();
-        return view('cms.service.image', compact('service'));
+        return view('cms.pages.service.image', compact('service'));
     }
 
     public function service_update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -191,8 +188,8 @@ class informationController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Service Logo successfully updated');
-            return redirect()->route('cms.other.service');
+            alert()->success('Success', 'Logo Jenis Layanan Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -203,26 +200,21 @@ class informationController extends Controller
     public function service_destroy($id)
     {
         Service::where('id', $id)->delete();
-        alert()->success('Success', 'Your Service has been deleted!');
-        return redirect()->route('cms.other.service');
+        alert()->success('Success', 'Jenis Layanan Berhasil Dihapus!');
+        return redirect()->route('cms.other.index');
     }
 
     // Alur Proses
-    public function flow() {
-        $flow = Flow::all();
-        return view('cms.flow.index', compact('flow'));
-    }
-
     public function flow_create()
     {
-        return view('cms.flow.create');
+        return view('cms.pages.flow.create');
     }
 
     public function flow_store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
             'description' => 'required',
         ]);
 
@@ -238,8 +230,8 @@ class informationController extends Controller
                 'description' => $request->description,
             ]);
             DB::commit();
-            alert()->success('Success', 'flow successfully Created');
-            return redirect()->route('cms.other.flow');
+            alert()->success('Success', 'Alur Proses Berhasil Ditambahkan');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -247,16 +239,10 @@ class informationController extends Controller
         }
     }
 
-    public function flow_show($id)
-    {
-        $flow = Flow::where('id', $id)->first();
-        return view('cms.flow.show', compact('flow'));
-    }
-
     public function flow_edit($id)
     {
         $flow = Flow::where('id', $id)->first();
-        return view('cms.flow.edit', compact('flow'));
+        return view('cms.pages.flow.edit', compact('flow'));
     }
 
     public function flow_update(Request $request, $id)
@@ -275,8 +261,8 @@ class informationController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your process flow successfully updated');
-            return redirect()->route('cms.other.flow');
+            alert()->success('Success', 'Alur Proses Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -287,13 +273,13 @@ class informationController extends Controller
     public function flow_image($id)
     {
         $flow = Flow::where('id', $id)->first();
-        return view('cms.flow.image', compact('flow'));
+        return view('cms.pages.flow.image', compact('flow'));
     }
 
     public function flow_update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -308,8 +294,8 @@ class informationController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Process Flow Logo successfully updated');
-            return redirect()->route('cms.other.flow');
+            alert()->success('Success', 'Logo Alur Proses Berhasil Diubah');
+            return redirect()->route('cms.other.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
@@ -320,7 +306,7 @@ class informationController extends Controller
     public function flow_destroy($id)
     {
         Flow::where('id', $id)->delete();
-        alert()->success('Success', 'Your process flow has been deleted!');
-        return redirect()->route('cms.other.flow');
+        alert()->success('Success', 'Alur Proses Berhasil Dihapus!');
+        return redirect()->route('cms.other.index');
     }
 }

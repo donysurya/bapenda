@@ -54,7 +54,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input class="form-control @error('picture') is-invalid @enderror" type="file" name="picture" value="{{ old('picture') }}" placeholder="Upload Picture">
+                                                    <input class="form-control @error('picture') is-invalid @enderror" type="file" name="picture" value="{{ $post->image }}" placeholder="Upload Picture">
                                                     <label for="picture" class="form-control-label mt-1">Upload Gambar yang berkaitan dengan Berita (*jpg,jpeg,png,bmp,webp).<br><span class="text-danger"><i class="fa fa-info-circle me-2"></i>Maksimum Size: 2 MB.</span></label>
                                                     @error('picture')
                                                         <span class="invalid-feedback" role="alert">

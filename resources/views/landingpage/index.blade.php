@@ -169,13 +169,17 @@
         <section id="flow" class="p-4 py-5 bg-light" style="min-height:50vh!important;">
             <h2 class="fw-bold mb-4 text-uppercase text-welcome text-center">Alur Proses Pajak Online</h2>
             <div class="row my-4 justify-content-center">
-                <div class="col-md-10">
-                    @if(is_null($flow))
+                @forelse($flow as $index => $item)
+                    <div class="col-lg-3 col-md-6 col-12 text-center text-dark">
+                        <img src="{{Storage::url($item->image)}}" class="rounded w-25 mb-3" alt="{{$item->name}}">
+                        <h4 class="fw-bold">{{$item->name}}</h4>
+                        {!!$item->description!!}
+                    </div>
+                @empty
+                    <div class="col-md-10">
                         <img src="{{asset('img/flow.png')}}" alt="Alur Proses Bapenda" class="w-100">
-                    @else
-                        <img src="{{Storage::url($flow->image)}}" alt="{{$flow->name}}" class="w-100">
-                    @endif
-                </div>
+                    </div>
+                @endforelse
             </div>
         </section>
 
@@ -188,7 +192,7 @@
                     <div class="col-lg-3 col-md-6 col-12 text-center text-light">
                         <img src="{{Storage::url($item->image)}}" class="rounded w-25 mb-3" alt="{{$item->name}}">
                         <h4 class="fw-bold">{{$item->name}}</h4>
-                        <p class="fw-bold">{{$item->description}}</p>
+                        {!!$item->description!!}
                     </div>
                 @empty
                     <div class="col-lg-3 col-md-6 col-12 text-center text-light">

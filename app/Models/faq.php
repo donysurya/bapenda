@@ -13,5 +13,10 @@ class faq extends Model
     protected $fillable = [
         'title',
         'content',
+        'updated_by',
     ];
+
+    public function admin() {
+        return $this->belongsTo(Cms::class, 'updated_by');
+    }
 }

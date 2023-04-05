@@ -58,7 +58,7 @@ class uptbController extends Controller
                 'maps_uptb' => $path2,
             ]);
             DB::commit();
-            alert()->success('Success', 'Profile UPTB successfully Created');
+            alert()->success('Success', 'Data Profil UPTB Berhasil Ditambahkan');
             return redirect()->route('cms.uptb');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -103,7 +103,7 @@ class uptbController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Profile UPTB successfully updated');
+            alert()->success('Success', 'Data Profil UPTB Berhasil Diubah');
             return redirect()->route('cms.uptb');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -136,7 +136,7 @@ class uptbController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your UPTB Image successfully updated');
+            alert()->success('Success', 'Data Gambar Profil UPTB Berhasil Diubah');
             return redirect()->route('cms.uptb');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -169,7 +169,7 @@ class uptbController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your UPTB Maps successfully updated');
+            alert()->success('Success', 'Data Maps UPTB Berhasil Diubah');
             return redirect()->route('cms.uptb');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -181,7 +181,7 @@ class uptbController extends Controller
     public function destroy($id)
     {
         Uptb::where('id', $id)->delete();
-        alert()->success('Success', 'Your Profile UPTB has been deleted!');
+        alert()->success('Success', 'Data Profil UPTB Berhasil Dihapus!');
         return redirect()->route('cms.uptb');
     }
 }

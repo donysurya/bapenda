@@ -12,8 +12,11 @@ class Gallery extends Model
 
     protected $fillable = [
         'name',
-        'thumbnail',
         'image',
         'updated_by',
     ];
+
+    public function admin() {
+        return $this->belongsTo(Cms::class, 'updated_by');
+    }
 }

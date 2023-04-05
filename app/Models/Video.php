@@ -15,4 +15,8 @@ class Video extends Model
         'link',
         'updated_by',
     ];
+
+    public function admin() {
+        return $this->belongsTo(Cms::class, 'updated_by');
+    }
 }

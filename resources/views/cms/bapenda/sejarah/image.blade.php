@@ -54,7 +54,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" value="{{ $sejarah->file }}" placeholder="Upload File">
+                                                    <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" value="{{ $sejarah->image }}" placeholder="Upload File">
                                                     <label for="file" class="form-control-label mt-1">Upload Gambar Sejarah Bapenda (*jpg,jpeg,png,bmp,webp).<br><span class="text-danger"><i class="fa fa-info-circle me-2"></i>Maksimum Size: 2 MB.</span></label>
                                                     @error('file')
                                                         <span class="invalid-feedback" role="alert">

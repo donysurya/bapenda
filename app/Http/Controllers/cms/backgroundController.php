@@ -16,6 +16,36 @@ class backgroundController extends Controller
         return view('cms.background.index');
     }
 
+    public function create()
+    {
+        return view('cms.background.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $path = Storage::putFile(
+                'public/background',
+                $request->file('file'),
+            );
+            $background = Background::create([
+                'image' => $path,
+            ]);
+            DB::commit();
+            alert()->success('Success', 'Background Berhasil Ditambahkan');
+            return redirect()->route('cms.home');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
+            return back();
+        }
+    }
+
     public function edit($id)
     {
         $background = Background::where('id', $id)->first();
@@ -25,13 +55,13 @@ class backgroundController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:800',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
             DB::beginTransaction();
             $path = Storage::putFile(
-                'public/images',
+                'public/background',
                 $request->file('file'),
             );
             $admin = auth()->guard('cms')->user()->id;
@@ -40,7 +70,7 @@ class backgroundController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Background successfully updated');
+            alert()->success('Success', 'Background Berhasil Diubah');
             return redirect()->route('cms.home');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -52,7 +82,7 @@ class backgroundController extends Controller
     public function destroy($id)
     {
         Background::where('id', $id)->delete();
-        alert()->success('Success', 'Your Background has been deleted!');
+        alert()->success('Success', 'Background Berhasil Dihapus!');
         return redirect()->route('cms.home');
     }
 }

@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Storage;
 class galleryController extends Controller
 {
     public function index() {
-        $gallery = Gallery::all();
+        $name = $_GET['name'] ?? '';
+        $gallery = Gallery::when($name != '', function ($query) use ($name) {
+                            $query->where('name', 'LIKE', "%{$name}%");
+                        })->paginate(10);
         return view('cms.gallery.index', compact('gallery'));
     }
 
@@ -25,27 +28,21 @@ class galleryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:100',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:700',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
             DB::beginTransaction();
-            $thumb = Storage::putFile(
-                'public/gallery',
-                $request->file('thumbnail'),
-            );
             $path = Storage::putFile(
                 'public/gallery',
                 $request->file('file'),
             );
             $gallery = Gallery::create([
                 'name' => $request->name,
-                'thumbnail' => $thumb,
                 'image' => $path,
             ]);
             DB::commit();
-            alert()->success('Success', 'Gallery successfully Created');
+            alert()->success('Success', 'Foto Gallery Berhasil Ditambahkan');
             return redirect()->route('cms.gallery');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -80,7 +77,7 @@ class galleryController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your Gallery successfully updated');
+            alert()->success('Success', 'Foto Gallery Berhasil Diubah');
             return redirect()->route('cms.gallery');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -98,7 +95,7 @@ class galleryController extends Controller
     public function update_image(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:700',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp|max:2000',
         ]);
 
         try {
@@ -113,40 +110,7 @@ class galleryController extends Controller
                 'updated_by' => $admin,
             ]);
             DB::commit();
-            alert()->success('Success', 'Your gallery successfully updated');
-            return redirect()->route('cms.gallery');
-        } catch (\Exception $exception) {
-            DB::rollBack();
-            alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
-            return back();
-        }
-    }
-    
-    public function thumbnail($id)
-    {
-        $gallery = Gallery::where('id', $id)->first();
-        return view('cms.gallery.thumbnail', compact('gallery'));
-    }
-
-    public function update_thumbnail(Request $request, $id)
-    {
-        $request->validate([
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:100',
-        ]);
-
-        try {
-            DB::beginTransaction();
-            $path = Storage::putFile(
-                'public/gallery',
-                $request->file('thumbnail'),
-            );
-            $admin = auth()->guard('cms')->user()->id;
-            Gallery::where('id', $id)->update([
-                'thumbnail' => $path,
-                'updated_by' => $admin,
-            ]);
-            DB::commit();
-            alert()->success('Success', 'Your gallery successfully updated');
+            alert()->success('Success', 'Foto Galery Berhasil Diubah');
             return redirect()->route('cms.gallery');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -158,7 +122,7 @@ class galleryController extends Controller
     public function destroy($id)
     {
         Gallery::where('id', $id)->delete();
-        alert()->success('Success', 'Your gallery has been deleted!');
+        alert()->success('Success', 'Foto Gallery Berhasil Dihapus!');
         return redirect()->route('cms.gallery');
     }
 }

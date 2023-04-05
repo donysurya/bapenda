@@ -15,4 +15,8 @@ class History extends Model
         'description',
         'updated_by',
     ];
+
+    public function admin() {
+        return $this->belongsTo(Cms::class, 'updated_by');
+    }
 }

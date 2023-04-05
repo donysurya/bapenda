@@ -3,14 +3,6 @@
 @section('title', 'Profil Bapenda | Administrator')
 
 @push('css')
-    <style>
-        h6.text-sejarah {
-            inline-size: 250px; 
-            white-space:nowrap; 
-            overflow:hidden; 
-            text-overflow: ellipsis;
-        }
-    </style>
 @endpush
 
 @push('headscript')
