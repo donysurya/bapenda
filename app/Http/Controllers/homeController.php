@@ -29,11 +29,10 @@ class homeController extends Controller
         $bg = Background::where('active', '1')->first();
 
         // Berita
-        $post1 = Posts::orderBy('created_at', 'desc')->first();
-        $post2 = Posts::orderBy('created_at', 'desc')->take(4)->get();
+        $post = Posts::orderBy('created_at', 'desc')->take(3)->get();
 
         return view ('landingpage.index', 
-                        compact('video', 'post1', 'post2',
+                        compact('video', 'post',
                                 'infografis', 'flow',
                                 'service', 'payment', 
                                 'portal', 'publication', 

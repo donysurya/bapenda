@@ -18,8 +18,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
 
         <!-- My CSS -->
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/loader.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/main.css?v2') }}" />
+        <link rel="stylesheet" href="{{ asset('css/loader.css?v2') }}" />
 
         <!-- Another Custom Style -->
         @stack('css') 

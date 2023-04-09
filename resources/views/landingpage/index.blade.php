@@ -69,10 +69,10 @@
 
         <section id="news" class="px-4 bg-light py-5" style="min-height:50vh!important;">
             <h2 class="fw-bold mb-4 text-uppercase text-welcome text-center"><i class="bi bi-newspaper me-3"></i>Berita Bapenda</h2>
-            <div class="row gy-4 mt-4 mb-0 align-items-center px-lg-4 px-md-2 px-2">
-                @forelse($post2 as $index => $item)
-                    <div class="col-xl-4 col-md-3 col-10">
-                        <div class="card">
+            <div class="row gy-4 mt-4 mb-3 align-items-center px-lg-4 px-md-2 px-2 justify-content-center">
+                @forelse($post as $index => $item)
+                    <div class="col-xl-4 col-md-3 col-11">
+                        <div class="card shadow" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
                             <div class="card-img-top p-3 pb-0">
                                 <span class="badge bg-primary mb-2">{{$item->category->name}}</span>
                                 <img src="{{Storage::url($item->image)}}" class="w-100" alt="{{$item->title}}">
@@ -92,52 +92,9 @@
                     -
                 @endforelse
             </div>
-            {{--<div class="row gy-4 mt-4 mb-0 align-items-center px-lg-4 px-md-2 px-2">
-                @if(is_null($post1))
-                    <h4 class="fw-bold text-uppercase text-welcome text-center">
-                        - No data found -
-                    </h4>
-                @else
-                    <div class="col-lg-7 col-12">
-                        <div class="card shadow mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="{{Storage::url($post1->image)}}" class="img-fluid rounded-start h-100" alt="{{$post1->title}}">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title fw-bold mb-3">{{$post1->title}}</h5>
-                                        <p class="card-text">{{$post1->abstract}}<a href="{{route('news.show', ['slug' => $post1->slug])}}" class="text-deoration-none">[Selengkapnya]</a></p>
-                                        <p class="card-text"><small class="text-muted">{{ $post1->created_at->format('l, d M Y') }}</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="{{route('news.index')}}" class="text-decoration-none btn-news text-center d-lg-block d-none"><i class="bi bi-newspaper me-2"></i>Portal Berita</a>
-                    </div>
-                    <div class="col-lg-5 col-12 border-start border-danger mb-3">
-                        @forelse($post2 as $index => $item)
-                            <a href="{{route('news.show', ['slug' => $item->slug])}}" class="text-decoration-none">
-                                <div class="row mb-3">
-                                    <div class="col-3">
-                                        <img src="{{Storage::url($item->image)}}" class="border border-danger rounded p-2 w-100" alt="{{$item->title}}">
-                                    </div>
-                                    <div class="col-9 border-bottom border-danger ps-0">
-                                        <small class="mb-0">{{ $item->created_at->format('l, d M Y') }}</small>
-                                        <p class="fw-bold mb-0">{{$item->title}}</p>
-                                    </div>
-                                </div>
-                            </a>
-                        @empty
-                            -
-                        @endforelse
-                    </div>
-                @endif
-                
-                <div class="col-12 d-flex justify-content-center">
-                    <a href="{{ route('news.index') }}" class="text-decoration-none btn-news text-center d-lg-none d-block"><i class="bi bi-newspaper me-2"></i>Portal Berita</a>
-                </div>
-            </div>--}}
+            <p class="mt-5 text-center">
+                <a href="{{ route('news.index') }}" class="text-decoration-none btn btn-outline-danger shadow fw-bold text-center px-4 py-2"><i class="bi bi-newspaper me-2"></i>Berita Lainnya</a>
+            </p>
         </section>
 
         <section id="search" class="py-4" style="background:linear-gradient(to right, #d12219, #e88898);">
