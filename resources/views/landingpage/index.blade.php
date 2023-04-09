@@ -3,8 +3,24 @@
 @section('title', 'Bapenda | Pajak Online | Kabupaten Katingan - Kalimantan Tengah')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('css/home.css?v2') }}" />
+    <link rel="stylesheet" href="{{ asset('css/home.css?v3') }}" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    @if(is_null($bg))
+        <style>
+            .main::before {
+                background-image: url('/img/home.webp');
+                opacity: 0.5;
+            }
+        </style>
+    @else
+        <style>
+            .main::before {
+                background-image: url('{{Storage::url($bg->image)}}');
+                opacity: 0.5;
+            }
+        </style>
+    @endif
 @endpush
 
 @push('headscript')
@@ -54,6 +70,29 @@
         <section id="news" class="px-4 bg-light py-5" style="min-height:50vh!important;">
             <h2 class="fw-bold mb-4 text-uppercase text-welcome text-center"><i class="bi bi-newspaper me-3"></i>Berita Bapenda</h2>
             <div class="row gy-4 mt-4 mb-0 align-items-center px-lg-4 px-md-2 px-2">
+                @forelse($post2 as $index => $item)
+                    <div class="col-xl-4 col-md-3 col-10">
+                        <div class="card">
+                            <div class="card-img-top p-3 pb-0">
+                                <span class="badge bg-primary mb-2">{{$item->category->name}}</span>
+                                <img src="{{Storage::url($item->image)}}" class="w-100" alt="{{$item->title}}">
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-info mb-3">
+                                    {{ $item->created_at->format('l, d M Y') }}
+                                </span>
+                                <h6 class="card-title">
+                                    <a href="{{route('news.show', ['slug' => $item->slug])}}" class="text-decoration-none fw-bold">{{ $item->title }}</a>
+                                </h6>
+                                {!! Str::limit( strip_tags( $item->abstract ), 140 ) !!}
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    -
+                @endforelse
+            </div>
+            {{--<div class="row gy-4 mt-4 mb-0 align-items-center px-lg-4 px-md-2 px-2">
                 @if(is_null($post1))
                     <h4 class="fw-bold text-uppercase text-welcome text-center">
                         - No data found -
@@ -98,7 +137,7 @@
                 <div class="col-12 d-flex justify-content-center">
                     <a href="{{ route('news.index') }}" class="text-decoration-none btn-news text-center d-lg-none d-block"><i class="bi bi-newspaper me-2"></i>Portal Berita</a>
                 </div>
-            </div>
+            </div>--}}
         </section>
 
         <section id="search" class="py-4" style="background:linear-gradient(to right, #d12219, #e88898);">

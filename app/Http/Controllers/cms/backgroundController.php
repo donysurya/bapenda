@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class backgroundController extends Controller
 {
-    public function index()
-    {
-        return view('cms.background.index');
-    }
-
     public function create()
     {
         return view('cms.background.create');
@@ -35,6 +30,7 @@ class backgroundController extends Controller
             );
             $background = Background::create([
                 'image' => $path,
+                'active' => '0',
             ]);
             DB::commit();
             alert()->success('Success', 'Background Berhasil Ditambahkan');
@@ -84,5 +80,27 @@ class backgroundController extends Controller
         Background::where('id', $id)->delete();
         alert()->success('Success', 'Background Berhasil Dihapus!');
         return redirect()->route('cms.home');
+    }
+
+    public function setActive(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+            $admin = auth()->guard('cms')->user()->id;
+            Background::where('id', '!=', $id)->update([
+                'active' => '0',
+            ]);
+            Background::where('id', $id)->update([
+                'active' => '1',
+                'updated_by' => $admin,
+            ]);
+            DB::commit();
+            alert()->success('Success', 'Background Berhasil Diaktifkan');
+            return redirect()->route('cms.home');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            alert()->error('ooppss','theres something wrong. Error Code '. $exception->getCode());
+            return back();
+        }
     }
 }

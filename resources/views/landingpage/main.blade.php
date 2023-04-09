@@ -19,6 +19,7 @@
 
         <!-- My CSS -->
         <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/loader.css') }}" />
 
         <!-- Another Custom Style -->
         @stack('css') 
@@ -41,6 +42,14 @@
         <link rel="icon" type="image/png" href="{{ asset('img/logo_katingan.png') }}"/>
     </head>
     <body style="background:linear-gradient(to right, #d12219, #e88898);">
+
+        <!-- Preloader -->
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
+        
         <!-- Header -->
         <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
             <i class="bi bi-chevron-up"></i>
@@ -192,6 +201,9 @@
         <!-- JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+        
         <script>
             // Hide Navbar on scroll down
             var prevScrollpos = window.pageYOffset;

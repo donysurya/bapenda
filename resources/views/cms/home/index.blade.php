@@ -211,7 +211,12 @@
                                                         </td>
                                                         <td class="align-middle text-center">
                                                             <a class="btn btn-link text-dark px-2 mb-0" href="{{ route('cms.background.edit', ['id' => $item->id]) }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-background{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-background{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a><br>
+                                                            @if($item->active == '0')
+                                                                <a class="btn btn-link text-info text-gradient px-3 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-activeBackground{{ $item->id }}"><i class="fa fa-toggle-off me-2"></i>Aktifkan</a>
+                                                            @else
+                                                                <a class="btn btn-link text-success text-gradient px-3 mb-0" href="#"><i class="fa fa-toggle-on me-2"></i>Aktif</a>
+                                                            @endif
                                                         </td>
 
                                                         <!-- Delete Modal -->
@@ -237,6 +242,30 @@
                                                             </div>
                                                         </div>
                                                         <!-- End Delete Modal -->
+
+                                                        <!-- Set Active Modal -->
+                                                        <div class="modal fade" id="modal-activeBackground{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-activeBackground{{ $item->id }}" aria-hidden="true">
+                                                            <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <div class="py-3 text-center">
+                                                                            <i class="fa fa-info-circle fa-3x text-warning"></i>
+                                                                            <h4 class="text-gradient text-warning mt-4">Attention!</h4>
+                                                                            <p>Apakah anda ingin mengaktifkan background ini sebagai background utama pada halaman landing page Bapenda?</p>
+                                                                        </div>
+                                                                        <div class="text-center">
+                                                                            <form action="{{ route('cms.background.set-active', ['id' => $item->id]) }}" method="post">
+                                                                                @csrf
+                                                                                @method('put')
+                                                                                <button type="submit" class="btn btn-primary"><i class="fa fa-check me-2"></i>Aktifkan Background</button>
+                                                                            </form>
+                                                                            <button type="button" class="btn btn-danger text-white ml-auto" data-bs-dismiss="modal"><i class="fa fa-close me-2"></i>Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Set Active Modal -->
                                                     </tr>
                                                 @empty
                                                     <tr>
@@ -270,7 +299,7 @@
                                     </div>
                                     <div class="d-flex flex-column">
                                         <h6 class="mb-1 text-dark text-sm">Devices</h6>
-                                        <span class="text-xs">250 in stock, <span class="font-weight-bold">346+ sold</span></span>
+                                        <span class="text-xs"><span class="font-weight-bold">250 active users</span></span>
                                     </div>
                                 </div>
                                 <div class="d-flex">

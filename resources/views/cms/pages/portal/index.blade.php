@@ -36,7 +36,7 @@
                                         <td style="white-space:normal!important;" class="align-middle">
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <div class="avatar avatar-sm me-3 mt-1 bg-gradient-success shadow-success text-center rounded-circle">
+                                                    <div class="avatar avatar-sm me-3 mt-1 bg-gradient-secondary shadow-secondary text-center rounded-circle">
                                                         <i class="fas fa-user-circle text-lg opacity-10" aria-hidden="true"></i>
                                                     </div>
                                                 </div>

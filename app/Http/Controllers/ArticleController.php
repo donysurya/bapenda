@@ -14,7 +14,7 @@ class articleController extends Controller
         $category_widget = Category::all();
         $posts_widget = Posts::latest()->paginate(4);
         $tag = Tags::all();
-        $data = Posts::all();
+        $data = Posts::paginate(10);
 
         return view('landingpage.article.index', compact('data', 'category_widget', 'posts_widget', 'tag'));
     }

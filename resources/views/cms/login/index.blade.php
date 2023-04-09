@@ -61,8 +61,9 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="mb-3">
-                                                <input type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password" aria-label="Password" id="password">
+                                            <div class="input-group mb-3">
+                                                <input type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password" aria-label="Password" id="password" aria-describedby="passwordShow">
+                                                <span class="input-group-text border" id="passwordShow" data-bs-toggle="tooltip" data-bs-placement="top" title="Show Password"><a href="#" class="text-decoration-none" onclick="myFunction()"><i class="fa fa-eye"></i></a></span>
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -83,7 +84,7 @@
                                 <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg'); background-size: cover;">
                                     <span class="mask bg-gradient-primary opacity-6"></span>
                                     <h4 class="mt-5 text-white font-weight-bolder position-relative">"Administration / CMS Panel"</h4>
-                                    <p class="text-white position-relative">Merupakan bagian yang bertujuan untuk membantu melakukan pengelolaan terhadap konten-konten yang akan ditampilkan kepada para pengunjung website.</p>
+                                    <p class="text-white position-relative">Mengelola, Mengubah, dan Mempublikasikan konten Website</p>
                                 </div>
                             </div>
                         </div>
@@ -109,6 +110,17 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="{{ asset('argon/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
+
+        <script>
+            function myFunction() {
+                var x = document.getElementById("password");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
     </body>
 
 </html>

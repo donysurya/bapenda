@@ -26,6 +26,7 @@ class homeController extends Controller
         $portal = Portal::take(5)->get();
         $publication = Publication::take(3)->get();
         $faq = faq::all();
+        $bg = Background::where('active', '1')->first();
 
         // Berita
         $post1 = Posts::orderBy('created_at', 'desc')->first();
@@ -36,7 +37,7 @@ class homeController extends Controller
                                 'infografis', 'flow',
                                 'service', 'payment', 
                                 'portal', 'publication', 
-                                'faq')
+                                'faq', 'bg')
                     );
     }
 }

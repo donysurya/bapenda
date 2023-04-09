@@ -12,6 +12,7 @@ class Background extends Model
 
     protected $fillable = [
         'image',
+        'active',
         'updated_by',
     ];
 

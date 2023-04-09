@@ -17,7 +17,7 @@ class homeController extends Controller
         $uptb = Uptb::all();
         $publikasi = Publication::all();
         $realisasi = Realization::all();
-        $background = Background::paginate(5);
+        $background = Background::orderBy('active', 'DESC')->paginate(5);
         return view('cms.home.index', compact('pegawai', 'uptb', 'publikasi', 'realisasi', 'background'));
     }
 }

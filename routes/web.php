@@ -100,6 +100,7 @@ Route::prefix('cms')->name('cms.')->group(function () {
             Route::post('/create', [App\Http\Controllers\cms\backgroundController::class, 'store'])->name('store');
             Route::get('{id}/edit', [App\Http\Controllers\cms\backgroundController::class, 'edit'])->name('edit');
             Route::put('{id}/edit', [App\Http\Controllers\cms\backgroundController::class, 'update'])->name('update');
+            Route::put('{id}/setActive', [App\Http\Controllers\cms\backgroundController::class, 'setActive'])->name('set-active');
             Route::delete('/{id}', [App\Http\Controllers\cms\backgroundController::class, 'destroy'])->name('destroy');
         });
 
