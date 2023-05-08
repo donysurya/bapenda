@@ -132,6 +132,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {{ Route::is('cms.setting.address.index') ? 'active' : '' }}" href="{{ route('cms.setting.address.index') }}">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-map-marked-alt text-primary text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Informasi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link " href="{{ route('cms.logout') }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-power-off text-danger text-sm opacity-10"></i>

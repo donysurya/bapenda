@@ -322,6 +322,12 @@ Route::prefix('cms')->name('cms.')->group(function () {
             Route::get('/', [App\Http\Controllers\cms\settingController::class, 'index'])->name('index');
             Route::put('/change-password', [App\Http\Controllers\cms\settingController::class, 'updatePassword'])->name('update-password');
             Route::put('{id}/change-information', [App\Http\Controllers\cms\settingController::class, 'updateInformation'])->name('update-information');
+
+            Route::prefix('address')->name('address.')->group(function (){
+                Route::get('/', [\App\Http\Controllers\cms\AddressController::class, 'index'])->name('index');
+                Route::put('{id}/change-information', [\App\Http\Controllers\cms\AddressController::class, 'update'])->name('update');
+                Route::put('/change-hour', [\App\Http\Controllers\cms\AddressController::class, 'updateHours'])->name('updateHours');
+            });
         });
     });
 });

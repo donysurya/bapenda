@@ -164,16 +164,17 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <h4 class="mb-3 fw-bold"><i class="bi bi-info-circle me-2"></i>Informasi</h4>
-                                        <p class="fw-lighter mb-1"><i class="bi bi-geo-alt me-2"></i> Jl. Garuda Komplek Kantor Bupati</p>
-                                        <p class="fw-lighter mb-1"><i class="bi bi-geo-alt me-2" style="color:#ffffff!important;"></i> Kasongan, Kabupaten Katingan</p>
-                                        <p class="fw-lighter mb-1"><i class="bi bi-geo-alt me-2" style="color:#ffffff!important;"></i> Kalimantan Tengah 74413</p>
-                                        <p class="fw-lighter mb-1"><i class="bi bi-telephone me-2"></i> +625364043574</p>
-                                        <p class="fw-lighter mb-1"><i class="bi bi-envelope me-2"></i> bapenda@katingankab.go.id</p>
+                                        <p class="fw-lighter mb-1"><i class="bi bi-geo-alt me-2"></i> {{$address->alamat}}</p>
+                                        <p class="fw-lighter mb-1"><i class="bi bi-telephone me-2"></i> {{$address->no_telp}}</p>
+                                        <p class="fw-lighter mb-1"><i class="bi bi-envelope me-2"></i> {{$address->email}}</p>
                                     </div>
                                     <div class="col-lg-12">
                                         <h4 class="mb-3 fw-bold"><i class="bi bi-stopwatch me-2"></i>Jam Pelayanan</h4>
-                                        <p class="fw-lighter mb-1">Senin – Kamis &nbsp; : &nbsp;07.30 – 16.00 WIB</p>
-                                        <p class="fw-lighter mb-1">Jumat &nbsp; : &nbsp;07.30 – 11.30 WIB</p>
+                                        @forelse($officehours as $index => $item)   
+                                            <p class="fw-lighter mb-1">{{ $item->day }} &nbsp; : &nbsp;{{ $item->start_time }} – {{ $item->end_time }} WIB</p>
+                                        @empty
+                                            <p class="fw-lighter mb-1">Senin – Jumat &nbsp; : &nbsp;Tutup</p>
+                                        @endforelse
                                         <p class="fw-lighter mb-1">Sabtu – Minggu &nbsp; : &nbsp;Tutup</p>
                                     </div>
                                 </div>

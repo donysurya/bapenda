@@ -12,6 +12,8 @@ use App\Models\Service;
 use App\Models\Payment;
 use App\Models\Portal;
 use App\Models\Publication;
+use App\Models\address;
+use App\Models\OfficeHour;
 use App\Models\faq;
 use Carbon\Carbon;
 
@@ -27,6 +29,8 @@ class homeController extends Controller
         $publication = Publication::take(3)->get();
         $faq = faq::all();
         $bg = Background::where('active', '1')->first();
+        $address = address::where('id', 1)->first();
+        $officehours = OfficeHour::all();
 
         // Berita
         $post = Posts::orderBy('created_at', 'desc')->take(3)->get();
@@ -36,7 +40,7 @@ class homeController extends Controller
                                 'infografis', 'flow',
                                 'service', 'payment', 
                                 'portal', 'publication', 
-                                'faq', 'bg')
+                                'faq', 'bg', 'address', 'officehours')
                     );
     }
 }
