@@ -23,6 +23,7 @@ class informationController extends Controller
     {
         $infografis = Infografis::all();
         $address = address::where('id', 1)->first();
+        $officehours = OfficeHour::all();
 
         return view('landingpage.infografis.index', compact('infografis', 'address', 'officehours'));
     }
