@@ -46,7 +46,7 @@
                                     <a href="{{route('news.show', ['slug' => $item->slug])}}" class="stretched-link text-decoration-none mt-2">Continue reading</a>
                                 </div>
                                 <div class="col-auto d-none d-lg-block">
-                                    <img src="{{Storage::url($item->image)}}" alt="" width="350px" height="300px">
+                                    <img src="{{Storage::url($item->image)}}" alt="" width="350px" height="370px">
                                 </div>
                             </div>
                         </div>
