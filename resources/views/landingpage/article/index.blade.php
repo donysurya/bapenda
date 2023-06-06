@@ -30,51 +30,81 @@
             </div>
         </div>
         <div class="row gy-3 px-3">
-            <div class="col-lg-12 py-4 px-2 pt-0">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <h5 class="text-dark fw-bold my-2"><i class="bi bi-newspaper me-2"></i>Berita Bapenda Katingan</h5>
-                    </div>
-                    <div class="card-body py-4 px-2 pb-0">
-                        <h3 class="fw-bold text-uppercase text-center">Berita Bapenda Kabupaten Katingan</h3>
-                        <hr class="bg-secondary">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row mb-2">
-                                    @forelse($data as $index => $item)
-                                        <div class="col-md-6 p-2">
-                                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow h-md-250 position-relative">
-                                                <div class="col p-4 d-flex flex-column position-static">
-                                                    <strong class="d-inline-block mb-2 text-primary">
-                                                        {{ $item->category->name }}
-                                                    </strong>
-                                                    <h4 class="my-0 mb-3">{{$item->title}}</h4>
-                                                    <div class="mb-1 text-muted fw-bold">Creator: {{ $item->admin->name ?? 'Administrator'}}</div>
-                                                    <div class="mb-3 text-muted">{{ $item->created_at->format('l, d M Y') }}</div>
-                                                    <p class="card-text mb-auto text-start text-dark textShadow fw-normal">{!! Str::limit( strip_tags( $item->abstract ), 140 ) !!}</p>
-                                                    <a href="{{route('news.show', ['slug' => $item->slug])}}" class="stretched-link text-decoration-none mt-2">Continue reading</a>
-                                                </div>
-                                                <div class="col-auto d-none d-lg-block">
-                                                    <img src="{{Storage::url($item->image)}}" alt="" width="350px" height="100%">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @empty
-                                        - No Data Found -
-                                    @endforelse
+            <div class="col-lg-8">
+                <div class="row mb-2">
+                    @forelse($data as $index => $item)
+                        <div class="col-lg-12">
+                            <div class="row g-0 bg-light shadow rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <strong class="d-inline-block mb-2 text-danger">
+                                        {{ $item->category->name }}
+                                    </strong>
+                                    <h4 class="my-0 mb-3">{{$item->title}}</h4>
+                                    <div class="mb-1 text-muted fw-bold">Creator: {{ $item->admin->name ?? 'Administrator'}}</div>
+                                    <div class="mb-3 text-muted">{{ $item->created_at->format('l, d M Y') }}</div>
+                                    <p class="card-text mb-auto text-start text-dark textShadow fw-normal">{!! Str::limit( strip_tags( $item->abstract ), 140 ) !!}</p>
+                                    <a href="{{route('news.show', ['slug' => $item->slug])}}" class="stretched-link text-decoration-none mt-2">Continue reading</a>
                                 </div>
-                                {{ $data->links() }}
+                                <div class="col-auto d-none d-lg-block">
+                                    <img src="{{Storage::url($item->image)}}" alt="" width="350px" height="100%">
+                                </div>
                             </div>
-                        </div> 
-
+                        </div>
+                    @empty
+                        - No Data Found -
+                    @endforelse
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{ $data->links() }}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow mb-3">
+                    <div class="card-body">
+                        <h5 class="fw-light">Search Post</h5>
+                        <hr>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Pencarian Berita">
+                            <label for="floatingInput">Pencarian Berita</label>
+                        </div>
+                        <div class="input-group">
+                            <button type="button" class="btn btn-outline-danger w-100 py-2">Cari</button>
+                        </div>
                     </div>
-                    <div class="row justify-content-end p-4">
-                        <img src="{{ asset('img/logo.png') }}" alt="" class="footer_logo">
+                </div>
+                <div class="card shadow mb-3">
+                    <div class="card-body">
+                        <h5 class="fw-light">Recent Post</h5>
+                        <hr>
+                        @forelse($data as $index => $item)
+                            <div class="col-lg-12">
+                                <div class="row gy-3 align-items-center">
+                                    <div class="col-auto">
+                                        <img src="{{Storage::url($item->image)}}" alt="" class="p-2" width="130px" height="130px">
+                                    </div>
+                                    <div class="col p-4 d-flex flex-column position-static">
+                                        <h6 class="my-0 mb-2">{!! Str::limit( strip_tags( $item->title ), 50 ) !!}</h6>
+                                        <div class="mb-0 text-muted">{{ $item->created_at->format('l, d M Y') }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            - No Data Found -
+                        @endforelse
+                    </div>
+                </div>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="fw-light">Tags</h5>
+                        <hr>
+                        @forelse($tag as $index => $item)
+                            <span class="btn btn-outline-danger m-1">{{$item->name}}</span>
+                        @empty
+                            - No Data Found -
+                        @endforelse
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

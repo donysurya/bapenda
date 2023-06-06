@@ -16,7 +16,7 @@ class articleController extends Controller
         $category_widget = Category::all();
         $posts_widget = Posts::latest()->paginate(4);
         $tag = Tags::all();
-        $data = Posts::paginate(10);
+        $data = Posts::paginate(5);
         $address = address::where('id', 1)->first();
         $officehours = OfficeHour::all();
 
