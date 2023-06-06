@@ -17,10 +17,11 @@ class articleController extends Controller
         $posts_widget = Posts::latest()->paginate(4);
         $tag = Tags::all();
         $data = Posts::paginate(5);
+        $data2 = Posts::take(2)->get();
         $address = address::where('id', 1)->first();
         $officehours = OfficeHour::all();
 
-        return view('landingpage.article.index', compact('data', 'category_widget', 'posts_widget', 'tag', 'address', 'officehours'));
+        return view('landingpage.article.index', compact('data', 'data2', 'category_widget', 'posts_widget', 'tag', 'address', 'officehours'));
     }
 
     public function show($slug)

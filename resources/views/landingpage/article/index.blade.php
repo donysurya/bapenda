@@ -46,7 +46,7 @@
                                     <a href="{{route('news.show', ['slug' => $item->slug])}}" class="stretched-link text-decoration-none mt-2">Continue reading</a>
                                 </div>
                                 <div class="col-auto d-none d-lg-block">
-                                    <img src="{{Storage::url($item->image)}}" alt="" width="350px" height="100%">
+                                    <img src="{{Storage::url($item->image)}}" alt="" width="350px" height="330px">
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                     <div class="card-body">
                         <h5 class="fw-light">Recent Post</h5>
                         <hr>
-                        @forelse($data as $index => $item)
+                        @forelse($data2 as $index => $item)
                             <div class="col-lg-12">
                                 <div class="row gy-3 align-items-center">
                                     <div class="col-auto">
