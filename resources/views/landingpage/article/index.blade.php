@@ -46,7 +46,7 @@
                                     <a href="{{route('news.show', ['slug' => $item->slug])}}" class="stretched-link text-decoration-none mt-2">Continue reading</a>
                                 </div>
                                 <div class="col-auto d-none d-lg-block">
-                                    <img src="{{Storage::url($item->image)}}" alt="" width="350px" height="330px">
+                                    <img src="{{Storage::url($item->image)}}" alt="" width="350px" height="300px">
                                 </div>
                             </div>
                         </div>
@@ -77,17 +77,19 @@
                         <h5 class="fw-light">Recent Post</h5>
                         <hr>
                         @forelse($data2 as $index => $item)
-                            <div class="col-lg-12">
-                                <div class="row gy-3 align-items-center">
-                                    <div class="col-auto">
-                                        <img src="{{Storage::url($item->image)}}" alt="" class="p-2" width="130px" height="130px">
-                                    </div>
-                                    <div class="col p-4 d-flex flex-column position-static">
-                                        <h6 class="my-0 mb-2">{!! Str::limit( strip_tags( $item->title ), 50 ) !!}</h6>
-                                        <div class="mb-0 text-muted">{{ $item->created_at->format('l, d M Y') }}</div>
+                            <a href="{{route('news.show', ['slug' => $item->slug])}}" class="text-decoration-none">
+                                <div class="col-lg-12">
+                                    <div class="row gy-3 align-items-center">
+                                        <div class="col-auto">
+                                            <img src="{{Storage::url($item->image)}}" alt="" class="p-2" width="130px" height="130px">
+                                        </div>
+                                        <div class="col p-4 d-flex flex-column position-static">
+                                            <h6 class="my-0 mb-2">{!! Str::limit( strip_tags( $item->title ), 50 ) !!}</h6>
+                                            <div class="mb-0 text-muted">{{ $item->created_at->format('l, d M Y') }}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @empty
                             - No Data Found -
                         @endforelse
