@@ -46,11 +46,11 @@
     <body style="background:linear-gradient(to right, #d12219, #e88898);">
 
         <!-- Preloader -->
-        <div id="loader-wrapper">
+        {{--<div id="loader-wrapper">
             <div id="loader"></div>
             <div class="loader-section section-left"></div>
             <div class="loader-section section-right"></div>
-        </div>
+        </div>--}}
         
         <!-- Header -->
         <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">

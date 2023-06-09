@@ -4,6 +4,7 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/boxed-check.css') }}" />
 
     <style>
         .breadcrumb-item a {
@@ -51,7 +52,13 @@
                             </div>
                         </div>
                     @empty
-                        - No Data Found -
+                        <div class="col-lg-12">
+                            <div class="alert alert-light text-center" role="alert">
+                                <h6 class="text-danger mb-0">
+                                    Berita tidak ditemukan!
+                                </h6>
+                            </div>
+                        </div>
                     @endforelse
                 </div>
                 <div class="d-flex justify-content-center">
@@ -60,17 +67,19 @@
             </div>
             <div class="col-lg-4">
                 <div class="card shadow mb-3">
-                    <div class="card-body">
-                        <h5 class="fw-light">Search Post</h5>
-                        <hr>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Pencarian Berita">
-                            <label for="floatingInput">Pencarian Berita</label>
+                    <form method="get" action="">
+                        <div class="card-body">
+                            <h5 class="fw-light">Search Post</h5>
+                            <hr>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Pencarian Berita" name="search" value="{{$_GET['search'] ?? ''}}">
+                                <label for="floatingInput">Pencarian Berita</label>
+                            </div>
+                            <div class="input-group">
+                                <button type="submit" class="btn btn-outline-danger w-100 py-2">Cari</button>
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <button type="button" class="btn btn-outline-danger w-100 py-2">Cari</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="card shadow mb-3">
                     <div class="card-body">
@@ -96,15 +105,29 @@
                     </div>
                 </div>
                 <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="fw-light">Tags</h5>
-                        <hr>
-                        @forelse($tag as $index => $item)
-                            <span class="btn btn-outline-danger m-1">{{$item->name}}</span>
-                        @empty
-                            - No Data Found -
-                        @endforelse
-                    </div>
+                    <form method="get" action="">
+                        <div class="card-body">
+                            <h5 class="fw-light">Category</h5>
+                            <hr>
+                            {{--<input type="radio" name="category" id="category" value="{{$item->id}}" onchange="form.submit()"> {{$item->name}}--}}
+                            {{--<input type="button" class="btn btn-outline-danger m-1" name="category" value="{{$item->id}}" onchange="form.submit()">{{$item->name}}--}}
+
+                            <div class="overview-radio mb-3">
+                                <div class="row boxed-check-group boxed-check-success">
+                                    @forelse($category as $index => $item)
+                                        <div class="col-lg-auto gy-3">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="category" id="category" value="{{$item->name}}" onchange="form.submit()">
+                                                <div class="boxed-check-label">{{$item->name}}</div>
+                                            </label>
+                                        </div>
+                                    @empty
+                                        - No Data Found -
+                                    @endforelse
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

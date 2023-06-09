@@ -13,15 +13,22 @@ class articleController extends Controller
 {
     public function index()
     {
-        $category_widget = Category::all();
-        $posts_widget = Posts::latest()->paginate(4);
+        $category = Category::all();
         $tag = Tags::all();
-        $data = Posts::paginate(5);
         $data2 = Posts::take(2)->get();
         $address = address::where('id', 1)->first();
         $officehours = OfficeHour::all();
 
-        return view('landingpage.article.index', compact('data', 'data2', 'category_widget', 'posts_widget', 'tag', 'address', 'officehours'));
+        $search = $_GET['search'] ?? '';
+        $category_name = $_GET['category'] ?? '';
+
+        $cn = Category::where('name', $category_name)->first();
+
+        $data = Posts::where('category_id', $cn->id ?? '')->when($search != '', function ($query) use ($search) {
+                            $query->where('title', 'LIKE', "%{$search}%");
+                        })->paginate(5);
+
+        return view('landingpage.article.index', compact('data', 'data2', 'category', 'tag', 'address', 'officehours'));
     }
 
     public function show($slug)
