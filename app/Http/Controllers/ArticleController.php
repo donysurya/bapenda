@@ -22,9 +22,11 @@ class articleController extends Controller
         $search = $_GET['search'] ?? '';
         $category_name = $_GET['category'] ?? '';
 
-        $cn = Category::where('name', $category_name)->first();
+        $a = Category::where('name', $category_name)->first();
 
-        $data = Posts::when($search != '', function ($query) use ($search) {
+        $data = Posts::when($category_name != '', function ($query) use ($a) {
+                            $query->where('category_id', $a->id);
+                        })->when($search != '', function ($query) use ($search) {
                             $query->where('title', 'LIKE', "%{$search}%");
                         })->paginate(5);
 
