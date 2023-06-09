@@ -24,7 +24,7 @@ class articleController extends Controller
 
         $cn = Category::where('name', $category_name)->first();
 
-        $data = Posts::where('category_id', $cn->id ?? '')->when($search != '', function ($query) use ($search) {
+        $data = Posts::when($search != '', function ($query) use ($search) {
                             $query->where('title', 'LIKE', "%{$search}%");
                         })->paginate(5);
 
