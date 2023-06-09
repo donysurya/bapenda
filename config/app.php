@@ -182,7 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-        Jorenvh\Share\Providers\ShareServiceProvider::class,
+        // Jorenvh\Share\Providers\ShareServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -212,7 +212,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'Share' => Jorenvh\Share\ShareFacade::class,
+        // 'Share' => Jorenvh\Share\ShareFacade::class,
     ])->toArray(),
 
 ];
