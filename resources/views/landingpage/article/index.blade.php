@@ -109,9 +109,6 @@
                         <div class="card-body">
                             <h5 class="fw-light">Category</h5>
                             <hr>
-                            {{--<input type="radio" name="category" id="category" value="{{$item->id}}" onchange="form.submit()"> {{$item->name}}--}}
-                            {{--<input type="button" class="btn btn-outline-danger m-1" name="category" value="{{$item->id}}" onchange="form.submit()">{{$item->name}}--}}
-
                             <div class="overview-radio mb-3">
                                 <div class="row boxed-check-group boxed-check-success">
                                     @forelse($category as $index => $item)

@@ -39,9 +39,19 @@ class articleController extends Controller
         $posts_widget = Posts::latest()->paginate(4);
         $tag = Tags::all();
         $data = Posts::where('slug', $slug)->first();
+        $data2 = Posts::take(2)->get();
         $address = address::where('id', 1)->first();
         $officehours = OfficeHour::all();
 
-        return view('landingpage.article.show', compact('data', 'category_widget', 'posts_widget', 'tag', 'address', 'officehours'));
+        $shareComponent = \Share::page(
+            route('news.show', ['slug' => $slug]),
+            $data->title,
+        )
+        ->facebook()
+        ->twitter()
+        ->telegram()
+        ->whatsapp();
+
+        return view('landingpage.article.show', compact('shareComponent', 'data', 'data2', 'category_widget', 'posts_widget', 'tag', 'address', 'officehours'));
     }
 }
