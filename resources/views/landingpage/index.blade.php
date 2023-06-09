@@ -75,7 +75,7 @@
                         <div class="card shadow" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
                             <div class="card-img-top p-3 pb-0">
                                 <span class="badge bg-primary mb-2">{{$item->category->name}}</span>
-                                <img src="{{Storage::url($item->image)}}" class="w-100" alt="{{$item->title}}">
+                                <img src="{{Storage::url($item->image)}}" class="w-100" height="350px" alt="{{$item->title}}">
                             </div>
                             <div class="card-body">
                                 <span class="badge bg-info mb-3">
