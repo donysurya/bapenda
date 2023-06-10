@@ -100,9 +100,9 @@
         <section id="search" class="py-4" style="background:linear-gradient(to right, #d12219, #e88898);">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-md-12 px-4">
-                    <form action="{{route('news.index')}}">
+                    <form method="get" action="{{route('news.index')}}">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Ketik untuk mencari berita .." name="keyword">
+                            <input type="text" class="form-control" placeholder="Ketik untuk mencari berita .." name="search" value="{{$_GET['search'] ?? ''}}">
                             <div class="input-group-append">
                                 <button class="btn btn-light" type="submit"><span class="bi bi-search"></span></button>
                             </div>
