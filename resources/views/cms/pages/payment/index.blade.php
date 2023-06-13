@@ -56,7 +56,8 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             <a class="btn btn-link text-dark px-2 mb-0" href="{{ route('cms.other.payment.edit', ['id' => $item->id]) }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-payment{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                            <a class="btn btn-link text-primary px-2 mb-0" href="{{ route('cms.other.payment.show', ['id' => $item->id]) }}"><i class="fas fa-eye text-dark me-2" aria-hidden="true"></i>View</a>
+                                            <a class="btn btn-link text-danger text-gradient px-2 mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-payment{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
                                         </td>
 
                                         <!-- Delete Modal -->

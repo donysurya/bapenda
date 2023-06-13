@@ -51,6 +51,9 @@ Route::prefix('about')->name('about.')->group(function (){
 // Download
 Route::get('/download', [\App\Http\Controllers\publicationController::class, 'index'])->name('download');
 
+// Payment
+Route::get('/payment/{id}', [\App\Http\Controllers\paymentController::class, 'index'])->name('payment');
+
 // Infografis
 Route::get('/infografis', [\App\Http\Controllers\informationController::class, 'infografis'])->name('infografis');
 
@@ -242,6 +245,17 @@ Route::prefix('cms')->name('cms.')->group(function () {
                 Route::get('{id}/image', [App\Http\Controllers\cms\paymentController::class, 'image'])->name('image');
                 Route::put('{id}/image', [App\Http\Controllers\cms\paymentController::class, 'update_image'])->name('update.image');
                 Route::delete('/{id}', [App\Http\Controllers\cms\paymentController::class, 'destroy'])->name('destroy');
+                
+                Route::get('/detail/{id}', [App\Http\Controllers\cms\paymentController::class, 'show'])->name('show');
+                Route::prefix('detail')->name('detail.')->group(function (){
+                    Route::get('{id}/create', [App\Http\Controllers\cms\paymentController::class, 'detail_create'])->name('create');
+                    Route::post('{id}/create', [App\Http\Controllers\cms\paymentController::class, 'detail_store'])->name('store');
+                    Route::get('{id}/edit/{detail}', [App\Http\Controllers\cms\paymentController::class, 'detail_edit'])->name('edit');
+                    Route::put('{id}/edit/{detail}', [App\Http\Controllers\cms\paymentController::class, 'detail_update'])->name('update');
+                    Route::get('{id}/image/{detail}', [App\Http\Controllers\cms\paymentController::class, 'detail_image'])->name('image');
+                    Route::put('{id}/image/{detail}', [App\Http\Controllers\cms\paymentController::class, 'detail_update_image'])->name('update.image');
+                    Route::delete('/{id}', [App\Http\Controllers\cms\paymentController::class, 'detail_destroy'])->name('destroy');
+                });
             });
 
             // Portal

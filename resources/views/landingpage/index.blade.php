@@ -233,18 +233,18 @@
                 <div class="row gy-4 my-4 align-items-center justify-content-center">
                     @forelse($payment as $index => $item)
                         <div class="col-lg-3 col-md-6 col-12 text-center">
-                            <a href="#!" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <a href="{{ route('payment', ['id' => $item->id]) }}" class="text-decoration-none">
                                 <img src="{{Storage::url($item->image)}}" class="rounded w-50 mb-3" alt="{{$item->name}}">
                             </a>
                         </div>
                     @empty
                         <div class="col-lg-3 col-md-6 col-12 text-center">
-                            <a href="#!" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <a href="#!" class="text-decoration-none">
                                 <img src="{{ asset('img/payment/bank_kalteng.png') }}" class="rounded w-75 mb-3" alt="...">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12 text-center">
-                            <a href="#!" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <a href="#!" class="text-decoration-none">
                                 <img src="{{ asset('img/payment/kantor-pos.png') }}" class="rounded w-50 mb-3" alt="...">
                             </a>
                         </div>
@@ -254,7 +254,7 @@
                     </div>
 
                     <!-- Modal Pembayaran -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    {{--<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered">
                             <div class="modal-content" style="background: #19234f !important;">
                                 <div class="modal-body mb-4">
@@ -283,7 +283,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
         </section>

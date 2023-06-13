@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Payment extends Model
+class PaymentDetail extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name',
+        'payment_id',
         'image',
         'description',
         'updated_by',
@@ -21,7 +21,7 @@ class Payment extends Model
         return $this->belongsTo(Cms::class, 'updated_by');
     }
 
-    public function PaymentDetail() {
-        return $this->hasMany(PaymentDetail::class);
+    public function Payment() {
+        return $this->belongsTo(Payment::class);
     }
 }

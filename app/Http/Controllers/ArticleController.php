@@ -15,7 +15,7 @@ class articleController extends Controller
     {
         $category = Category::all();
         $tag = Tags::all();
-        $data2 = Posts::take(2)->get();
+        $data2 = Posts::orderBy('created_at', 'DESC')->take(2)->get();
         $address = address::where('id', 1)->first();
         $officehours = OfficeHour::all();
 
@@ -28,7 +28,7 @@ class articleController extends Controller
                             $query->where('category_id', $a->id);
                         })->when($search != '', function ($query) use ($search) {
                             $query->where('title', 'LIKE', "%{$search}%");
-                        })->paginate(5);
+                        })->orderBy('created_at', 'DESC')->paginate(5);
 
         return view('landingpage.article.index', compact('data', 'data2', 'category', 'tag', 'address', 'officehours'));
     }
@@ -39,7 +39,7 @@ class articleController extends Controller
         $posts_widget = Posts::latest()->paginate(4);
         $tag = Tags::all();
         $data = Posts::where('slug', $slug)->first();
-        $data2 = Posts::take(2)->get();
+        $data2 = Posts::orderBy('created_at', 'DESC')->take(2)->get();
         $address = address::where('id', 1)->first();
         $officehours = OfficeHour::all();
 

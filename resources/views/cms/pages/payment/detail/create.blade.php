@@ -1,6 +1,6 @@
 @extends('cms.layouts.main')
 
-@section('title', 'Informasi Pembayaran | Edit Informasi Pembayaran | Administrator')
+@section('title', 'Instruksi Pembayaran | Buat Instruksi Pembayaran | Administrator')
 
 @push('css')
 @endpush
@@ -13,9 +13,10 @@
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{ route('cms.home') }}">Home</a></li>
             <li class="breadcrumb-item text-sm text-white"><a class="opacity-5 text-white" href="{{ route('cms.other.index') }}">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Edit Data</li>
+            <li class="breadcrumb-item text-sm text-white"><a class="opacity-5 text-white" href="{{ route('cms.other.payment.show', ['id' => $id]) }}">Pembayaran</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tambah Data</li>
         </ol>
-        <h6 class="font-weight-bolder text-white mb-0"><i class="fa fa-credit-card me-2"></i>Edit Pembayaran</h6>
+        <h6 class="font-weight-bolder text-white mb-0"><i class="fa fa-credit-card me-2"></i>Instruksi Pembayaran</h6>
     </nav>
 @endsection
 
@@ -27,10 +28,10 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-6 d-flex align-items-center">
-                                <h6 class="mb-0 font-weight-bolder">Edit Informasi Pembayaran</h6>
+                                <h6 class="mb-0 font-weight-bolder">Tambah Instruksi</h6>
                             </div>
                             <div class="col-6 text-end">
-                                <a class="btn bg-gradient-danger mb-0" href="{{ route('cms.other.index') }}"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Kembali</a>
+                                <a class="btn bg-gradient-danger mb-0" href="{{ route('cms.other.payment.show', ['id' => $id]) }}"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Kembali</a>
                             </div>
                         </div>
                     </div>
@@ -39,7 +40,7 @@
                             <div class="card px-0">
                                 <div class="card-header pb-0 px-3">
                                     <div class="d-flex align-items-center">
-                                        <p class="mb-0"><i class="fa fa-edit me-2"></i>Edit Data Informasi Pembayaran</p>
+                                        <p class="mb-0"><i class="fa fa-plus me-2"></i>Buat Instruksi</p>
                                     </div>
                                 </div>
                                 <div class="card-body pt-3 px-3 pb-2">
@@ -48,15 +49,14 @@
                                             <strong>{{ session()->get('error') }}</strong>
                                         </div>
                                     @endif
-                                    <form action="{{ route('cms.other.payment.update', ['id' => $payment->id]) }}" method="post">
+                                    <form action="{{ route('cms.other.payment.detail.store', ['id' => $id]) }}" method="post" enctype="multipart/form-data">
                                         @csrf
-                                        @method('PUT')
                                         <div class="row align-items-center">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input class="form-control @error('name') is-invalid @enderror" value="{{ $payment->name }}" name="name" type="text" placeholder="Nama Channel Pembayaran">
-                                                    <label for="name" class="form-control-label mt-1">Deskripsikan nama metode pembayaran.<br>Contoh: Bank Kalteng, Kantor Pos, dll.</label>
-                                                    @error('name')
+                                                    <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" value="{{ old('file') }}" placeholder="Upload File">
+                                                    <label for="file" class="form-control-label mt-1">Upload gambar instruksi pembayaran (*jpg,jpeg,png,bmp,webp).<br><span class="text-danger"><i class="fa fa-info-circle me-2"></i>Maksimum Size: 2 MB.</span></label>
+                                                    @error('file')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -65,8 +65,8 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <textarea name="description" class="ckeditor form-control @error('description') is-invalid @enderror" id="desc" aria-describedby="descriptionHelp">{{ $payment->description }}</textarea>
-                                                    <label for="description" class="form-control-label">Deskripsikan bagaimana cara melakukan pembayaran.</label>
+                                                    <textarea name="description" class="ckeditor form-control @error('description') is-invalid @enderror" id="desc" aria-describedby="descriptionHelp">{{ old('description') }}</textarea>
+                                                    <label for="description" class="form-control-label">Deskripsikan instruksi dalam melakukan pembayaran berdasarkan gambar instruksi.</label>
                                                     @error('description')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -75,7 +75,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <button type="submit" class="btn btn-primary btn-md ms-auto"><i class="fa fa-edit me-2"></i>Edit Data</button>
+                                                <button type="submit" class="btn btn-primary btn-md ms-auto"><i class="fa fa-plus me-2"></i>Tambah Data</button>
                                             </div>
                                         </div>
                                     </form>
