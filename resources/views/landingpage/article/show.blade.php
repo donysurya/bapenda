@@ -28,7 +28,7 @@
             text-decoration:none;
         }
 
-        div#social-links {
+        /* div#social-links {
             margin: 0 auto;
             max-width: auto;
         }
@@ -46,12 +46,9 @@
 
         div#social-links ul li a {
             padding: 10px;
-            /* border: 1px solid #ccc; */
             margin: 1px;
             font-size: 35px;
-            /* color: #222; */
-            /* background-color: #ccc; */
-        } 
+        }  */
     </style>
 @endpush
 
@@ -98,13 +95,13 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="card shadow mb-3">
+                {{--<div class="card shadow mb-3">
                     <div class="card-body">
                         <h5 class="fw-light">Share Post</h5>
                         <hr>
                         {!! $shareComponent !!}
                     </div>
-                </div>
+                </div>--}}
                 <div class="card shadow mb-3">
                     <form method="get" action="{{route('news.index')}}">
                         <div class="card-body">
