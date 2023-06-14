@@ -134,9 +134,9 @@
                 </div>
                 <div class="col-lg-4 col-md-12 col-12 text-center">
                     <p class="mb-2 fw-bold">Follow Us</p>
-                    <a href="#!" class="rounded m-1"><i class="bi bi-facebook fa-2x"></i></a>
-                    <a href="#!" class="rounded m-1"><i class="bi bi-instagram fa-2x"></i></a>
-                    <a href="#!" class="rounded m-1"><i class="bi bi-twitter fa-2x"></i></a>
+                    <a href="#!" target="_blank" rel="noopener noreferrer" class="rounded m-1"><i class="bi bi-facebook fa-2x"></i></a>
+                    <a href="https://www.instagram.com/bapenda.katingan/" target="_blank" rel="noopener noreferrer" class="rounded m-1"><i class="bi bi-instagram fa-2x"></i></a>
+                    <a href="#!" target="_blank" rel="noopener noreferrer" class="rounded m-1"><i class="bi bi-twitter fa-2x"></i></a>
                 </div>
             </div>
             <div class="row">
