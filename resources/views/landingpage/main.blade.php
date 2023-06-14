@@ -186,7 +186,10 @@
                                     <div class="col-lg-12">
                                         <h4 class="mb-3 fw-bold"><i class="bi bi-pin-map me-2"></i>Lokasi</h4>
                                         <div id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3" style="max-width: 100%; position: relative; clear: both; max-height: 355px; text-align: left;">
-                                            <div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3"><iframe height="355" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.6686722968475!2d113.3967201147399!3d-1.880893698628665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dfce36fe704534b%3A0xf0874504cf1f7cb7!2sKanTor%20Bupati!5e0!3m2!1sid!2sid!4v1667834258611!5m2!1sid!2sid" style="max-width: 100%; width: 100%; border: none; padding: 0px; margin: 0px; height: 355px;"></iframe></div>
+                                            <div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3">
+                                                <iframe height="355" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3987.670917506185!2d113.3984684!3d-1.8799111!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dfce347eaed5de1%3A0x6f0429a75d729f34!2sBadan%20Pendapatan%20Daerah%20Kabupaten%20Katingan!5e0!3m2!1sid!2sid!4v1686716015136!5m2!1sid!2sid" style="max-width: 100%; width: 100%; border: none; padding: 0px; margin: 0px; height: 355px;">
+                                                </iframe>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
