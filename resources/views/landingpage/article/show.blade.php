@@ -95,13 +95,29 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                {{--<div class="card shadow mb-3">
+                <div class="card shadow mb-3">
                     <div class="card-body">
                         <h5 class="fw-light">Share Post</h5>
                         <hr>
-                        {!! $shareComponent !!}
+                        <div class="row justify-content-center">
+                            <div class="col-lg-2 col-md-2 col-2 text-center">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('news.show', ['slug' => $data->slug]) }}" target="_blank" rel="noopener noreferrer" class="m-2">
+                                    <i class="fa-brands fa-facebook fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 text-center">
+                                <a href="https://twitter.com/intent/tweet?text={{ $data->title }}&url={{ route('news.show', ['slug' => $data->slug]) }}" target="_blank" rel="noopener noreferrer" class="m-2">
+                                    <i class="fa-brands fa-twitter fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 text-center">
+                                <a href="https://wa.me/?text={{ $data->title }}%20{{ route('news.show', ['slug' => $data->slug]) }}" target="_blank" rel="noopener noreferrer" class="m-2">
+                                    <i class="fa-brands fa-whatsapp fa-2x"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>--}}
+                </div>
                 <div class="card shadow mb-3">
                     <form method="get" action="{{route('news.index')}}">
                         <div class="card-body">
