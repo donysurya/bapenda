@@ -43,15 +43,15 @@ class articleController extends Controller
         $address = address::where('id', 1)->first();
         $officehours = OfficeHour::all();
 
-        // $shareComponent = \Share::page(
-        //     route('news.show', ['slug' => $slug]),
-        //     $data->title,
-        // )
-        // ->facebook()
-        // ->twitter()
-        // ->telegram()
-        // ->whatsapp();
+        $shareComponent = \Share::page(
+            route('news.show', ['slug' => $slug]),
+            $data->title,
+        )
+        ->facebook()
+        ->twitter()
+        ->telegram()
+        ->whatsapp();
 
-        return view('landingpage.article.show', compact('data', 'data2', 'category_widget', 'posts_widget', 'tag', 'address', 'officehours'));
+        return view('landingpage.article.show', compact('shareComponent', 'data', 'data2', 'category_widget', 'posts_widget', 'tag', 'address', 'officehours'));
     }
 }
