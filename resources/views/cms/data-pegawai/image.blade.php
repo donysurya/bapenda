@@ -80,7 +80,7 @@
                                                     <div class="imgPreview"> </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" id="images" value="{{ $pegawai->file }}" placeholder="Upload File">
+                                                    <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" id="images" value="{{ $pegawai->image }}" placeholder="Upload File">
                                                     <label for="file" class="form-control-label mt-1">Upload Foto Pegawai (*jpg,jpeg,png,bmp,webp).<br><span class="text-danger"><i class="fa fa-info-circle me-2"></i>Maksimum Size: 2 MB.</span></label>
                                                     @error('file')
                                                         <span class="invalid-feedback" role="alert">

@@ -3,9 +3,16 @@
 @section('title', 'Sejarah Bapenda | Buat Sejarah Bapenda | Administrator')
 
 @push('css')
+    <style>
+        .imgPreview img {
+            padding: 8px;
+            max-width: 150px;
+        } 
+    </style>
 @endpush
 
 @push('headscript')
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 @endpush
 
 @section('breadcrumb')
@@ -63,8 +70,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
+                                                <div class="form-group mb-1">
+                                                    <div class="imgPreview"> </div>
+                                                </div>
                                                 <div class="form-group">
-                                                    <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" value="{{ old('file') }}" placeholder="Upload File">
+                                                    <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" id="images" value="{{ old('file') }}" placeholder="Upload File">
                                                     <label for="file" class="form-control-label mt-1">Upload Gambar Sejarah Bapenda (*jpg,jpeg,png,bmp,webp).<br><span class="text-danger"><i class="fa fa-info-circle me-2"></i>Maksimum Size: 2 MB.</span></label>
                                                     @error('file')
                                                         <span class="invalid-feedback" role="alert">
@@ -98,5 +108,25 @@
         $(document).ready(function () {
             $('.ckeditor').ckeditor();
         });
+    </script>
+
+    <script>
+        $(function() {
+            var imgPreview = function(input, imgPreviewPlaceholder) {
+                if (input.files) {
+                    var filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+            $('#images').on('change', function() {
+                imgPreview(this, 'div.imgPreview');
+            });
+        });    
     </script>
 @endpush

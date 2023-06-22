@@ -36,10 +36,26 @@
                     </div>
                     <div class="card-body pt-0 pb-3">
                         <div class="row">
+                            <div class="card px-0 mb-3">
+                                <div class="card-header pb-0 px-3">
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0"><i class="fa fa-images me-2"></i>Gambar Sejarah</p>
+                                    </div>
+                                </div>
+                                <div class="card-body pt-3 px-3 pb-2">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <img src="{{Storage::url($sejarah->image)}}" alt="{{$sejarah->name}}" width="240px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card px-0">
                                 <div class="card-header pb-0 px-3">
                                     <div class="d-flex align-items-center">
-                                        <p class="mb-0"><i class="fa fa-edit me-2"></i>Edit Gambar Profil UPTB</p>
+                                        <p class="mb-0"><i class="fa fa-edit me-2"></i>Edit Gambar Sejarah</p>
                                     </div>
                                 </div>
                                 <div class="card-body pt-3 px-3 pb-2">
@@ -53,8 +69,11 @@
                                         @method('PUT')
                                         <div class="row align-items-center">
                                             <div class="col-md-12">
+                                                <div class="form-group mb-1">
+                                                    <div class="imgPreview"> </div>
+                                                </div>
                                                 <div class="form-group">
-                                                    <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" value="{{ $sejarah->image }}" placeholder="Upload File">
+                                                    <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" id="images" value="{{ $sejarah->image }}" placeholder="Upload File">
                                                     <label for="file" class="form-control-label mt-1">Upload Gambar Sejarah Bapenda (*jpg,jpeg,png,bmp,webp).<br><span class="text-danger"><i class="fa fa-info-circle me-2"></i>Maksimum Size: 2 MB.</span></label>
                                                     @error('file')
                                                         <span class="invalid-feedback" role="alert">
@@ -83,4 +102,23 @@
 @endsection
 
 @push('bottomscript')
+    <script>
+        $(function() {
+            var imgPreview = function(input, imgPreviewPlaceholder) {
+                if (input.files) {
+                    var filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+            $('#images').on('change', function() {
+                imgPreview(this, 'div.imgPreview');
+            });
+        });    
+    </script>
 @endpush
