@@ -60,7 +60,7 @@
                                             </p>
                                         </td>
                                         <td style="white-space:normal!important;" class="align-middle">
-                                            <div class="d-flex px-2 py-1">
+                                            <div class="d-flex px-2 py-1 align-items-center">
                                                 <div>
                                                     <div class="avatar avatar-sm me-3 mt-1 bg-gradient-info shadow-info text-center rounded-circle">
                                                         <i class="fa fa-newspaper-o text-lg opacity-10" aria-hidden="true"></i>
